@@ -1,0 +1,85 @@
+*{
+    text-decoration: none;
+    list-style: none;
+}
+
+/* TODO MENU */
+
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hea-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+ul li {
+    padding: 0px 4.3px;
+}
+
+.hea-div li {
+    padding: 0px 1.6px;
+}
+
+.logo a {
+    color: #D90DA2;
+    padding-right: 59rem;
+}
+
+.logo a:hover {
+    color: #06ADBF;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #BF303C;
+    text-decoration: underline;
+}
+
+.hea-div li button {
+    background-color: #06ADBF;
+    border-radius: 30px;
+    font-size: 15px;
+    color: white;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+}
+
+li button a {
+    color: white;
+}
+
+
+
+/*TODO MENU DE REGISTRASESE */ 
+.iniciar{
+    display: flex;
+}
+
+.iniciar li button {
+    background-color: #06ADBF;
+    border-radius: 30px;
+    font-size: 15px;
+    color: white;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+}
+
+.iniciar li button a {
+    text-decoration: none;
+    color: white;
+}
+.iniciar li button a:hover {
+    color: black;
+}
+
+
+/*TODO MENU DE REGISTRARSE*/ 

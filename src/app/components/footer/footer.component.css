@@ -1,0 +1,146 @@
+/*TODO SEPARADOR DIV */
+
+.separadordvi {
+    min-height: 3rem;
+}
+
+
+/* TODO_ PIE DE PAGINA */
+footer {
+    /* background-color: aqua; */
+    justify-content: space-between;
+    align-items: center;
+    padding: 1px 90px;
+    display: flex;
+    flex-direction: column;
+    /* max-width: auto; */
+}
+
+.s-footer {
+    display: flex;
+}
+
+.a-footer {
+    margin-left: 50rem;
+}
+
+.a-footer:hover {
+    color: aqua;
+}
+
+p>.separador {
+    display: none;
+}
+
+/* El salto de línea que se muestra en móviles */
+br {
+    display: block;
+}
+
+/* Media query para pantallas medianas y grandes */
+@media (min-width: 768px) {
+    p .separador {
+        display: inline;
+    }
+
+    br {
+        display: none;
+    }
+}
+
+
+
+/*TODO ICONO */
+
+
+/* From Uiverse.io by Artahs */
+ul {
+    list-style: none;
+}
+
+.icono-social {
+    margin-left: 50rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icono-social .icon-content {
+    margin: 0 10px;
+    position: relative;
+}
+
+.icono-social .icon-content .tooltip {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.icono-social .icon-content:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    top: -50px;
+}
+
+.icono-social .icon-content a {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #4d4d4d;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+.icono-social .icon-content a:hover {
+    box-shadow: 3px 2px 45px 0px rgb(0 0 0 / 12%);
+}
+
+.icono-social .icon-content a svg {
+    /* position: relative; */
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+}
+
+.icono-social .icon-content a:hover {
+    color: white;
+}
+
+.icono-social .icon-content a .filled {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: #000;
+    transition: all 0.3s ease-in-out;
+}
+
+.icono-social .icon-content a:hover .filled {
+    height: 100%;
+}
+
+.icono-social .icon-content a[data-social="github"] .filled,
+.icono-social .icon-content a[data-social="github"]~.tooltip {
+    background: linear-gradient(45deg,
+            #bf303c,
+            #000,
+            #d9306e,
+            #d90da2,
+            #0b4359,
+            #06adbf);
+}

@@ -1,0 +1,20 @@
+<div class="ca">
+    <p>En este espacio podras organizar tu contenido multimedia</p>
+    <button class="empezar"><a [routerLink]="['/login']">EMPEZAR AHORA</a></button>
+</div>
+
+<div class="centro">
+    <div class="nov-container">
+        <img [src]="currentImg" [alt]="categorias">
+        <div class="textoNov">
+            <p class="novale">
+                Descubre las nuevas novedades de: <span>{{currentCtg}}</span>
+            </p>
+            <p class="nov">
+                Se acabo tener que tener cincuenta cosas donde registrar
+                nuestro contenido multimedia.
+            </p>
+            <button class="vercalendario"><a [routerLink]="['/novedades']">Ver novedades</a></button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+* {
+    text-decoration: none;
+}
+.ca {
+    text-align: center;
+    font-size: 3rem;
+    padding: auto;
+    margin: auto;
+}
+.empezar {
+    background-color: #0b4359;
+    /* border-radius: 5%; */
+    margin-bottom: 3rem;
+}
+.empezar a {
+    color: white;
+    font-size: 3rem;
+}
+
+span {
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+.nov {
+    font-size: 2rem;
+}
+.novale {
+    font-size: 2rem;
+    text-align: center;
+    /* padding: 30px; */
+}
+.nov-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+    max-width: 900px;
+    margin: auto;
+    margin-bottom: 2rem;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50p;
+    background-color: rgba(241, 241, 241, 0.862);
+}
+img {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 150px;
+    height: auto;
+    border-radius: 10px;
+}
+button {
+    padding-left: 4px;
+}
+.vercalendario {
+    background-color: #0b4359;
+}
+.vercalendario a {
+    color: white;
+    font-size: 2rem;
+}
+.vercalendario a:hover {
+    color: #06adbf;
+    font-size: 2rem;
+}
+.empezar a:hover {
+    color: black;
+}
+
+.centro {
+    align-items: center;
+}

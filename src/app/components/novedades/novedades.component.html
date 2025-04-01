@@ -1,0 +1,53 @@
+<div class="head">
+    <h1>COMUNIDAD</h1>
+    <div class="InputContainer">
+        <input placeholder="Buscar..." id="input" class="input" name="text" type="text" (input)="buscar($event)">
+    </div>
+</div>
+
+
+<div class="calendar-seccion">
+    <h3>Calendario de estrenos</h3>
+    <div class="filtro">
+        <button *ngFor="let filtro of filtros" (click)="toggleFilter(filtro)" [class.active]="currentFilter === filtro">
+            {{filtro}}
+        </button>
+    </div>
+    <div class="plataformas" *ngIf="isVideogameFilter">
+        <button *ngFor="let plataforma of plataformas" (click)="filtrarPorPlataforma(plataforma)"
+            class="plataforma-btn">
+            {{plataforma}}
+        </button>
+    </div>
+
+    <!-- todo LIBROS -->
+    <div class="releases-carousel">
+        <div class="carousel-items">
+            <div class="release-item" *ngFor="let release of currentReleases">
+                <div class="release-card">
+                    <img [src]="release.imageUrl" [alt]="release.title" class="release-image">
+                    <div class="release-info">
+                        <h3 class="release-title">{{ release.title }}</h3>
+                        <p class="release-date">
+                            {{ release.releaseDate | date:'MMM d, yyyy':'':'es' }}
+                        </p>
+                        <p *ngIf="release.authors" class="release-authors">
+                            Por {{ release.authors.join(', ') }}
+                        </p>
+                        <p *ngIf="release.platform" class="release-platform">
+                            {{ release.platform }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="separdadordiv"></div>
+
+<div class="comu">
+    <h2>Dudas & Blog</h2>
+    <!-- TODO AÑADIR LOS BLOGS & DUDAS (ALMACENADOS EN LA BASE DE DATOS) -->
+</div>
