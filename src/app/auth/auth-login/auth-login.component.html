@@ -6,16 +6,17 @@
         <h1>Iniciar Sesion</h1>
     </div>
     <div class="div3">
-        <form class="form">
+        <form class="form" [formGroup]="form" (ngSubmit)="submit()">
             <!-- TODO EMAIL -->
             <span class="input-span">
                 <label for="email" class="label">Email</label>
-                <input type="email" name="email" id="email" />
+                <input type="email" name="email" id="email" formControlName="email" />
             </span>
             <!-- TODO CONTRASEÑA -->
             <span class="input-span">
                 <label for="password" class="label">Contraseña</label>
-                <input [type]="showPass ? 'text':'password'" name="password" id="password" class="pass"/>
+                <input [type]="showPass ? 'text':'password'" name="password" id="password" class="pass"
+                    formControlName="password" />
                 <button type="button" class="ver-pass" (click)="togglePass()">
                     <i class="fas" [class.fa-eye]="!showPass" [class.fa-eye-slash]="showPass">👁️</i>
                 </button>
