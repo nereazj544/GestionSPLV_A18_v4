@@ -5,15 +5,31 @@ import { HOMEComponent } from './components/home/home.component';
 import { NovedadesComponent } from './components/novedades/novedades.component';
 import { AuthLoginComponent } from './auth/auth-login/auth-login.component';
 import { AuthSingUpComponent } from './auth/auth-sing-up/auth-sing-up.component';
+import { AdminComponent } from './dashboard/perfil/admin/admin.component';
+import { UserComponent } from './dashboard/perfil/user/user.component';
+import { DefaultComponent } from './dashboard/perfil/default/default.component';
+import { ProveedorComponent } from './dashboard/perfil/proveedor/proveedor.component';
 
 export const routes: Routes = [
+    //{ path: '', component:  },
 
+    // TODO: RUTAS DE LA APLICACION
     { path: 'home', component: HOMEComponent },
     { path: 'novedades', component: NovedadesComponent },
+
+    // TODO: RUTAS DE AUTENTICACION
     { path: 'login', component: AuthLoginComponent },
     { path: 'signup', component: AuthSingUpComponent },
     
-
+    
+    //TODO: RUTAS DE PERFILES
+    { path: 'perfil/admin', component:  AdminComponent},
+    { path: 'perfil/user', component:  UserComponent},
+    { path: 'perfil/proveedor', component:  ProveedorComponent},
+    { path: 'perfil/default', component:  DefaultComponent}, // default route for authenticated users
+    
+    
+    // TODO: RUTAS DE ERROR
     { path: '**', component: ErrorComponent },
 
 ];
