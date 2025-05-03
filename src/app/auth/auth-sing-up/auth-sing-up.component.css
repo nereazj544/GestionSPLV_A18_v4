@@ -1,0 +1,152 @@
+* {
+    text-decoration: none;
+}
+
+
+.parent {
+    margin-top: 3rem;
+    margin-left: 16rem;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.div1 {
+    grid-row: span 5 / span 5;
+}
+
+.div1 img {
+    max-width: 20rem;
+    padding-right: 3rem;
+    padding-left: 3rem;
+}
+
+.div2 {
+    grid-column: span 2 / span 2;
+}
+
+.div3 {
+    grid-column: span 2 / span 2;
+    grid-row: span 3 / span 3;
+    grid-column-start: 2;
+    grid-row-start: 2;
+}
+
+/* TODO formulario */
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 300px;
+}
+
+.form .input-span {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form input[type="email"],
+.form input[type="password"], .pass {
+    border-radius: 0.5rem;
+    padding: 1rem 0.75rem;
+    width: 100%;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #ea87d05e;
+    outline: 2px solid black;
+}
+
+.form input[type="email"]:focus,
+.form input[type="password"]:focus, .pass:focus {
+    outline: 2px solid black;
+}
+
+
+.label {
+    align-self: flex-start;
+    color: black;
+    font-weight: 600;
+}
+
+.form .submit {
+    padding: 1rem 0.75rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 3rem;
+    background-color: #06ADBF;
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: all 300ms;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.form .submit:hover {
+    background-color: #0B4359;
+    color: white;
+}
+
+.span {
+    text-decoration: none;
+    color: white;
+}
+
+.span a {
+    color: black;
+}
+
+/* TODO VER CONTRASEÑA */
+
+.ver-pass{
+    /* padding: 1rem 0.75rem; */
+    display: block;
+    align-items: center;
+    background-color: #ea87d05e;
+
+}
+.ver-pass:hover{
+    background-color: #0B4359;
+    /* border-radius: 0.5rem; */
+    /* width: 100%; */
+    /* border: none; */
+    /* gap: 0.5rem; */
+    /* outline: 2px solid black; */
+}
+
+
+/*TODO Media query para dispositivos móviles */
+@media screen and (max-width: 768px) {
+    .parent {
+        margin: 2rem;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 1rem;
+    }
+
+    .div1 {
+        display: none;
+        /* Oculta la imagen en móviles */
+    }
+
+    .div2,
+    .div3 {
+        grid-column: 1;
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .form {
+        max-width: 100%;
+    }
+}

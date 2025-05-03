@@ -1,3 +1,14 @@
+/**
+ * @fileoverview Configuración del entorno para la aplicación Angular.
+ * Contiene las variables necesarias para la conexión con Supabase.
+ */
+
+/**
+ * @constant {Object} environment
+ * @property {boolean} production - Indica si la aplicación está en modo de producción.
+ * @property {string} supabaseUrl - URL de la instancia de Supabase utilizada por la aplicación.
+ * @property {string} supabaseKey - Clave de acceso para la instancia de Supabase.
+ */
 export const environment = {
     production: true,
     supabaseUrl: 'https://tstpedxohgaopfyialvw.supabase.co',

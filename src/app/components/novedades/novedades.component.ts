@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReleasesService } from '../../service/release.service';
+import { ReleasesService } from '../../shared/service/APIs/GoogleBooks/release.service';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-novedades',
