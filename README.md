@@ -1,3 +1,8 @@
+# Errores
+Cuando sale un error al arrancar lo que hay que hacer es: Borrar .angular, npm i y npm start
+
+---
+
 # GestionSPLVA18V4
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.16.
