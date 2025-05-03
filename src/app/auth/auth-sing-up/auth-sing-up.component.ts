@@ -1,26 +1,73 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../data/access/auth.service';
+import { ProfileService } from '../../shared/service/supabase/profile.service';
+import { UserService } from '../../shared/service/supabase/user.service';
+import { RouterLink } from '@angular/router';
+
+interface SignUpForm {
+  email: FormControl<null | string>;
+  password: FormControl<null | string>;
+}
 
 @Component({
   selector: 'app-auth-sing-up',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './auth-sing-up.component.html',
-  styleUrl: './auth-sing-up.component.css'
+  styleUrls: ['./auth-sing-up.component.css']
 })
 export class AuthSingUpComponent implements OnDestroy, OnInit {
 
-  //TODO REGISTRO
-  email: string = '';
-  password: string = '';
-  role: 'admin' | 'proveedor' | 'user' = 'user';
+  //TODO ===  FORMULARIO ===
+
+  private _formBuilder = inject(FormBuilder);
+  private _authServide = inject(AuthService);
+  private _profileService = inject(ProfileService);
+
+
+  form = this._formBuilder.group({
+    email: this._formBuilder.control(null, [Validators.required, Validators.email]),
+    password: this._formBuilder.control(null, [Validators.required]),
+    role: this._formBuilder.control('user', [Validators.required]),
+  })
+
+  async submit() {
+    if (this.form.invalid) return;
+
+    const { email, password, role } = this.form.value;
+
+    // 1. Registrar en Supabase Auth
+    const { data, error } = await this._authServide.signUp({
+      email: email ?? '',
+      password: password ?? '',
+    });
+
+    if (error || !data.user) {
+      console.error('Error al registrar usuario', error);
+      return;
+    }
+
+    // 2. Insertar perfil con el rol elegido desde el formulario
+    const { error: insertError } = await this._authServide.insertProfile({
+      id: data.user.id,
+      email: email ?? '',
+      role: role ?? 'user',
+    });
+
+    if (insertError) {
+      console.error('Error insertando perfil:', insertError);
+    } else {
+      console.log('Usuario y perfil creados correctamente con rol:', role);
+      this._profileService.redirectToProfileBasedOnRole(); // Redirigir según el rol
+    }
+  }
 
 
 
 
 
-
-
-
+  // TODO ===  IMAGINES & MOSTRAR CONTRASEÑA ===
   // TODO MOSTRAR CONTRASEÑA
   showPass = false;
 
