@@ -9,7 +9,7 @@
                 </li>
                 <span class="separador"> | </span><br class="salto-linea">
                 <li>
-                    <button><a [routerLink]="['/res']" (click)="onRegistroinClick()">Registrarse</a></button>
+                    <button><a [routerLink]="['/signup']" (click)="onRegistroinClick()">Registrarse</a></button>
                 </li>
             </div>
 
@@ -17,12 +17,12 @@
             <div class="iniciar" *ngIf="isRegistroPage">
                 <li>¿Ya tienes cuenta?</li>
                 <li>
-                    <button><a [routerLink]="['login']" (click)="onLonginClick()">Iniciar Sesion</a></button>
+                    <button><a [routerLink]="['/login']" (click)="onLonginClick()">Iniciar Sesion</a></button>
                 </li>
             </div>
             <!-- TODO PARA REGISTRARSE -->
             <div class="resgistrarse" *ngIf="isLoginPage">
-                <li><a [routerLink]="['res']">¿No tienes cuenta?</a></li>
+                <li><a [routerLink]="['/signup']">¿No tienes cuenta?</a></li>
             </div>
         </ul>
     </nav>

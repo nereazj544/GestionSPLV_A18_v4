@@ -25,7 +25,7 @@ export class HeaderComponent {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.isLoginPage = this.router.url === ('/login');
-        this.isRegistroPage = this.router.url === ('/res');
+        this.isRegistroPage = this.router.url === ('/signup');
       }
     })
   }
