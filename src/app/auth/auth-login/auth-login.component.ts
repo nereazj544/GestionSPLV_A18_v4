@@ -1,13 +1,73 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../data/access/auth.service';
+import { ProfileService } from '../../shared/service/supabase/profile.service';
+import { UserService } from '../../shared/service/supabase/user.service';
+import { Router, RouterLink } from '@angular/router';
+
+interface LoginForm {
+  email: FormControl<null | string>;
+  password: FormControl<null | string>;
+}
 
 @Component({
   selector: 'app-auth-login',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './auth-login.component.html',
-  styleUrl: './auth-login.component.css'
+  styleUrls: ['./auth-login.component.css']
 })
 export class AuthLoginComponent implements OnDestroy, OnInit {
+
+  //TODO ===  FORMULARIO ===
+  private _formBuilder = inject(FormBuilder);
+  private _authServide = inject(AuthService);
+  private _profileService = inject(ProfileService);
+  private _userService = inject(UserService);
+
+  form = this._formBuilder.group({
+    email: this._formBuilder.control(null, [Validators.required, Validators.email]),
+    password: this._formBuilder.control(null, [Validators.required]),
+    role: this._formBuilder.control('user', [Validators.required]),
+  })
+
+  async submit() {
+    if (this.form.invalid) return;
+
+    const { email, password } = this.form.value;
+
+    const { data, error } = await this._authServide.loginIn({
+      email: email ?? '',
+      password: password ?? '',
+    });
+
+    if (error || !data.session) {
+      console.error('Error al iniciar sesión', error);
+      return;
+    }
+
+    const userId = data.user.id;
+
+    // Obtener el perfil del usuario desde 'profiles'
+    const { data: profileData, error: profileError } = await this._authServide.supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', userId)
+      .single();
+
+    if (profileError) {
+      console.error('No se pudo obtener el perfil:', profileError);
+      return;
+    }
+
+    console.log('Usuario logueado con rol:', profileData.role);
+    this._userService.setUserRole({ rol: profileData.role });
+    this._profileService.redirectToProfileBasedOnRole(); // Redirigir según el rol
+  }
+
+
+  // TODO ===  IMAGINES & MOSTRAR CONTRASEÑA ===
+
   // TODO MOSTRAR CONTRASEÑA
   showPass = false;
 
