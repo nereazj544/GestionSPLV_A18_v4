@@ -74,5 +74,5 @@ git colone https://github.com/nereazj544/GestionSPLV_A18_v4.git
 [notion-bage]: https://img.shields.io/badge/Notion-007ACC?style=for-the-badge&logo=notion&logoColor=white&color=grey 
 [notion-url]: https://www.notion.com/es-es/help
 
-[github-bage]: https://img.shields.io/badge/Github-007ACC?style=for-the-badge&logo=github&logoColor=white&color=grey 
+[github-bage]: https://img.shields.io/badge/Github-007ACC?style=for-the-badge&logo=github&logoColor=white&color=22aed7 
 [github-url]: https://docs.github.com/es
