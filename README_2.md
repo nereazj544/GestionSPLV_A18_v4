@@ -43,3 +43,16 @@ git colone https://github.com/nereazj544/GestionSPLV_A18_v4.git
 
 2. 
 
+# 🛠️ Tecnologías Utilizadas
+
+
+[![Typescript][typescript-badge]][typescript-url] - JavaScript with syntax for types.
+
+[![Supabase][supabase-bage][supabase-url]
+
+
+[typescript-url]: https://www.typescriptlang.org/
+[typescript-badge]: https://img.shields.io/badge/Typescript-007ACC?style=for-the-badge&logo=typescript&logoColor=white&color=blue
+
+[supabase-bage]: https://img.shields.io/badge/Subapase-007ACC?style=for-the-badge&logo=supabase&logoColor=white&color=green
+[supabase-url]: https://www.supabase.com/docs
