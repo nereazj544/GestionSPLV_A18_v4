@@ -45,12 +45,14 @@ git colone https://github.com/nereazj544/GestionSPLV_A18_v4.git
 
 # 🛠️ Tecnologías Utilizadas
 
-
-[![Typescript][typescript-badge]][typescript-url] 
-
-[![Supabase][supabase-bage]][supabase-url]
-
 [![Angular][angular-bage]][angular-url]
+[![Typescript][typescript-badge]][typescript-url] 
+[![Supabase][supabase-bage]][supabase-url]
+[![Figma][figma-bage]][figma-url]
+[![Notion][notion-bage]][notion-url]
+[![GitHub][github-bage]][github-url]
+
+
 
 
 
@@ -65,3 +67,12 @@ git colone https://github.com/nereazj544/GestionSPLV_A18_v4.git
 
 [angular-bage]: https://img.shields.io/badge/Angular-007ACC?style=for-the-badge&logo=angular&logoColor=white&color=b822d7
 [angular-url]: https://v18.angular.dev/
+
+[figma-bage]: https://img.shields.io/badge/Figma-007ACC?style=for-the-badge&logo=figma&logoColor=white&color=FF5733 
+[figma-url]: https://www.figma.com/
+
+[notion-bage]: https://img.shields.io/badge/Notion-007ACC?style=for-the-badge&logo=notion&logoColor=white&color=grey 
+[notion-url]: https://www.notion.com/es-es/help
+
+[github-bage]: https://img.shields.io/badge/Github-007ACC?style=for-the-badge&logo=github&logoColor=white&color=grey 
+[github-url]: https://docs.github.com/es
