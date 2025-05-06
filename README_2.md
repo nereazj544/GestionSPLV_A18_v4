@@ -51,6 +51,7 @@ git colone https://github.com/nereazj544/GestionSPLV_A18_v4.git
 [![Figma][figma-bage]][figma-url]
 [![Notion][notion-bage]][notion-url]
 [![GitHub][github-bage]][github-url]
+[![Power Point][powerpoint-bage]][powerpoint-url]
 
 
 
@@ -76,3 +77,6 @@ git colone https://github.com/nereazj544/GestionSPLV_A18_v4.git
 
 [github-bage]: https://img.shields.io/badge/Github-007ACC?style=for-the-badge&logo=github&logoColor=white&color=22aed7 
 [github-url]: https://docs.github.com/es
+
+[powerpoint-bage]: https://img.shields.io/badge/Powerpoint-007ACC?style=for-the-badge&logo=microsoftpowerpoint&logoColor=white&color=d76c22
+[powerpoint-url]: https://www.microsoft.com/es-es/microsoft-365/powerpoint
