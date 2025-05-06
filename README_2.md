@@ -63,5 +63,5 @@ git colone https://github.com/nereazj544/GestionSPLV_A18_v4.git
 [supabase-bage]: https://img.shields.io/badge/Subapase-007ACC?style=for-the-badge&logo=supabase&logoColor=white&color=green
 [supabase-url]: https://www.supabase.com/docs
 
-[angular-bage]: https://img.shields.io/badge/Angular-007ACC?style=for-the-badge&logo=angular&logoColor=white&color=purpel
-[angular-url]: https://www.supabase.com/docs
+[angular-bage]: https://img.shields.io/badge/Angular-007ACC?style=for-the-badge&logo=angular&logoColor=white&color=b822d7
+[angular-url]: https://v18.angular.dev/
