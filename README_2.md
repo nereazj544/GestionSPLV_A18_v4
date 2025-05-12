@@ -9,39 +9,16 @@
 
 <details open="true">
   
-1. [📌 Descripcion General](#-descripción-general)
-2. [⚙️ Instalación](#️-instalación)
+1. [🛠️ Tecnologías Utilizadas](#️-tecnologías-utilizadas)
+2. [📌 Descripcion General](#-descripción-general)
+4. [💻 Lista de comandos](#-ˏˋ--lista-de-comandos-ˊˎ-)
+3. [⚙️ Instalación](#️-instalación)
     - [Prerequisitos](#prerequisitos)
-    - [💻 Lista de comandos](#-ˏˋ--lista-de-comandos-ˊˎ-)
-3. [🛠️ Tecnologías Utilizadas](#️-tecnologías-utilizadas)
-  
+5.  
       
 </details>
 
 <br>
-
-# 📌 Decripción General
-
-# ⚙ Instalación
-
-<br>
-
-## Prerequisitos
-
-```sh
-npm install
-# o
-npm i
-```
-
----
-
-1. Clona el repositorio
-```sh
-git colone https://github.com/nereazj544/GestionSPLV_A18_v4.git
-```
-
-2. 
 
 # 🛠️ Tecnologías Utilizadas
 
@@ -52,6 +29,74 @@ git colone https://github.com/nereazj544/GestionSPLV_A18_v4.git
 [![Notion][notion-bage]][notion-url]
 [![GitHub][github-bage]][github-url]
 [![Power Point][powerpoint-bage]][powerpoint-url]
+
+
+
+<br>
+
+# 📌 Decripción General
+
+🚀Proyecto final de FP grado superior desarrollo de aplicaciones multiplataforma (DAM).
+
+Nombre del proyecto: **Gestion P.S.L.V** (_Gestion de Peliculas, Series, Libros y Videos_)
+
+Donde se gestionan los datos multimedia de los usuarios que se registran en la aplicación.
+
+La aplicación está desarrollada en **Angular** y **Typescript**, y utiliza **Supabase** como base de datos.
+
+
+<br>
+
+# 💻 Lista de comandos
+
+|     | Comando          | Acción                                        |
+| :-- | :--------------- | :-------------------------------------------- |
+| ⚙️  | `npm start` o `ng serve` | Lanza un servidor de desarrollo local en  `localhost:4200`.  |
+| ⚙️  |  |  |
+
+
+
+
+<br>
+
+# ⚙ Instalación
+
+<br>
+
+### Prerequisitos
+
+Descargar e instalar [Node.js](https://nodejs.org/es/) y Angular CLI-18 en tu ordenador.
+
+```sh
+npm install
+# o
+npm i
+```
+
+---
+
+### Instalacion
+
+1. Clona el repositorio
+```sh
+git clone https://github.com/nereazj544/GestionSPLV_A18_v4.git
+```
+
+2. Instala las dependencias
+```sh
+npm install
+# o
+npm i
+```
+
+3. Inicia el servidor de desarrollo
+```sh
+ng serve
+# O
+npm start
+```
+
+
 
 
 
