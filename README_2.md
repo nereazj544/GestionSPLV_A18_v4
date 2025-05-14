@@ -111,6 +111,61 @@ npm start
 
 
 
+# ⚠️ Errores
+
+Si sale este error: ``_An unhandled exception occurred: EBUSY: resource busy or locked, rmdir 'node_modules'._``
+Para solucionarlo, hay que eliminar la carpeta `.angular` y despues ejecutar el siguiente comando:
+
+```sh
+npm start
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ---
 
 
