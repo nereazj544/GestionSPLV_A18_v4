@@ -51,8 +51,9 @@ La aplicación está desarrollada en **Angular** y **Typescript**, y utiliza **S
 
 |     | Comando          | Acción                                        |
 | :-- | :--------------- | :-------------------------------------------- |
+| ⚙️  | `npm install` | Instala las dependencias del proyecto. |
+| ⚙️  | `npm install @supabase/supabase-js` | Instala el cliente de Supabase. |
 | ⚙️  | `npm start` o `ng serve` | Lanza un servidor de desarrollo local en  `localhost:4200`.  |
-| ⚙️  |  |  |
 
 
 
@@ -73,7 +74,15 @@ npm install
 npm i
 ```
 
----
+```sh
+npm install -g @angular/cli@18
+```
+
+```sh
+npm install @supabase/supabase-js
+```
+
+
 
 ### Instalacion
 
