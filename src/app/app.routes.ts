@@ -30,8 +30,8 @@ export const routes: Routes = [
     { path: 'perfil/proveedor', component:  ProveedorComponent},
     { path: 'perfil/default', component:  DefaultComponent}, // default route for authenticated users
 
-    { path: 'dashboard/settings/perfilsetting', component:  PerfilsettingComponent},
-    { path: 'dashboard/settings/blogsetting', component:  BlogsettingComponent},
+    { path: 'settings/perfilsetting', component:  PerfilsettingComponent},
+    { path: 'settings/blogsetting', component:  BlogsettingComponent},
     
 
 
