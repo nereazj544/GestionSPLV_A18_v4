@@ -50,4 +50,12 @@
 <div class="comu">
     <h2>Dudas & Blog</h2>
     <!-- TODO AÑADIR LOS BLOGS & DUDAS (ALMACENADOS EN LA BASE DE DATOS) -->
+    <div class="blogs">
+        <div class="no-blog" *ngIf="!blogs || blogs.length ==0">
+            <p>No hay blogs disponibles</p>
+        </div>
+
+        <div class="hay-blog"></div>
+    </div>
+
 </div>

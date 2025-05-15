@@ -1,23 +1,21 @@
 <div class="container">
     <div class="header">
-        <h2>Mi Perfil</h2>
+        <h2>Perfil: {{username}}</h2>
 
     </div>
 
     <div class="cover-photo">
-        <img src="https://i.pinimg.com/736x/11/ce/e5/11cee5b47bd0e2f5f91507da9f774050.jpg" alt="img_banner"
-            class="img_banner">
+        <img [src]="banner" alt="img_banner" class="img_banner">
     </div>
     <div class="perfil">
         <div class="profile-photo">
-            <img src="https://i.pinimg.com/736x/4f/8b/a9/4f8ba9dcdd3d3bea564c89e904498419.jpg" alt="img_profile"
-                class="img_profile">
+            <img [src]="imagen_perfil" alt="img_profile" class="img_profile">
         </div>
 
         <!-- TODO ESTE BOTON SOLO LO PUEDE VER EL PROPIETARIO DE LA CUENTA -->
         <div class="button">
             <button>
-                <a [routerLink]="['/setting/setting-perfil']">
+                <a [routerLink]="['/dashboard/settings/blogsetting']">
 
                     Edita tu perfil
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -49,21 +47,15 @@
             <div class="texto">
 
                 <!--INFORMACION QUE ESCRIBA EL USUARIO -->
-                <p class="presentacion">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi quisquam odit a, sapiente veniam,
-                    repellendus necessitatibus suscipit aperiam odio rerum dignissimos quo dolorem mollitia harum
-                    quaerat in nesciunt eaque. Voluptates.
-                    <!-- {{ user?.user_metadata.presentacion }} -->
-                </p>
-                <!-- 
-                    <p>Nombre de usuario: {{ user?.user_metadata.user_name }}</p>
-                    <p>Ubicación: {{ user?.user_metadata.location }}</p>
-                -->
+                <p class="presentacion">Presentacion: {{ presentacion || 'Este usuario aún no ha escrito una
+                    presentación.' }}           </p>
+                <p>Nombre de usuario: {{ username || 'No ha puesto nombre de usuario'}}</p>
+                <p>Ubicación: {{ location || 'Desconocida' }}</p>
             </div>
         </div>
     </div>
 
-    
+
     <!-- TODO USER & PROVEEDOR -->
 
 

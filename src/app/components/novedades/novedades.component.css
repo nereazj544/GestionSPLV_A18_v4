@@ -123,10 +123,25 @@
     padding: 15px;
 }
 
-/*TODO */
+/*TODO SEPARADOR */
 .separdadordiv{
     margin: 90px;
+    border: 1px solid #d90da37f;
+    
 }
+
+
+
+/* TODO BLOGS Y DUDAS */
 .comu h2{
     margin: 50px;
 }
+
+
+.blogs{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+

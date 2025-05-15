@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ReleasesService } from '../../shared/service/APIs/GoogleBooks/release.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { ShowService } from '../../shared/service/supabase/show.service';
+import { firstValueFrom } from 'rxjs';
+import { SupabaseService } from '../../shared/service/supabase/data/supabase.service';
 @Component({
   selector: 'app-novedades',
   standalone: true,
   templateUrl: './novedades.component.html',
   styleUrls: ['./novedades.component.css'],
-  imports:[CommonModule]
+  imports:[CommonModule, RouterLink]
 })
 export class NovedadesComponent implements OnInit {
   libros: any[] = [];
@@ -21,10 +25,14 @@ export class NovedadesComponent implements OnInit {
   currentFilter: string = 'Libros';
   currentReleases: any[] = [];
 
-  constructor(private releasesService: ReleasesService) { }
+  constructor(private releasesService: ReleasesService,
+    private showService: ShowService,
+    private supabaseService: SupabaseService
+  ) { }
 
   ngOnInit(): void {
     this.updateReleases();
+    this.cargarBlog();
   }
 
 
@@ -45,6 +53,7 @@ export class NovedadesComponent implements OnInit {
     console.log('Filtrando por plataforma:', plataforma);
   }
 
+  // TODO API - FILTO
   // Buscar libros al escribir en el input
   async buscar(event: any) {
     this.searchText = event.target.value;
@@ -75,4 +84,33 @@ export class NovedadesComponent implements OnInit {
       
     }
   }
+
+  //TODO MOSTRAR BLOGS
+  blogs:any[] = [];
+
+  async cargarBlog() {
+    try {
+    const userId = await this.supabaseService.getCurrentUserId();
+    if (!userId) {
+      throw new Error('Usuario no autenticado');
+    }
+    
+    const blogsObservable = this.supabaseService.getBlogbyIdAutor(userId);
+    const result = await firstValueFrom(blogsObservable);
+    
+    if (result.error) {
+      throw result.error;
+    }
+    
+    this.blogs = result.data;
+    console.log('Blogs cargados exitosamente:', this.blogs);
+  } catch (error) {
+    console.error('Error al cargar blogs:', error);
+  }
+}
+
+
+
+
+
 }

@@ -16,16 +16,16 @@ export class ProfileService {
 
         switch (role?.toLowerCase()) {
             case 'admin':
-                this.router.navigate(['/perfil/admin']);
+                this.router.navigate(['perfil/admin']);
                 break;
             case 'proveedor':
-                this.router.navigate(['/perfil/provider']);
+                this.router.navigate(['perfil/provider']);
                 break;
             case 'user':
-                this.router.navigate(['/perfil/user']);
+                this.router.navigate(['perfil/user']);
                 break;
             default:
-                this.router.navigate(['/perfil/default']);
+                this.router.navigate(['perfil/default']);
                 break;
         }
     }

@@ -1,6 +1,6 @@
 <div class="container">
     <div class="header">
-        <h2>Mi Perfil: ADMIN</h2>
+        <h2>Perfil: {{username}}</h2>
         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="icon icon-tabler icons-tabler-outline icon-tabler-settings-check">
@@ -13,19 +13,17 @@
     </div>
 
     <div class="cover-photo">
-        <img src="https://i.pinimg.com/736x/11/ce/e5/11cee5b47bd0e2f5f91507da9f774050.jpg" alt="img_banner"
-            class="img_banner">
+        <img [src]="banner" alt="img_banner" class="img_banner">
     </div>
     <div class="perfil">
         <div class="profile-photo">
-            <img src="https://i.pinimg.com/736x/36/32/39/363239ad815ea1bc2c059cfcd124437d.jpg" alt="img_profile"
-                class="img_profile">
+            <img [src]="imagen_perfil" alt="img_profile" class="img_profile">
         </div>
 
         <!-- TODO ESTE BOTON SOLO LO PUEDE VER EL PROPIETARIO DE LA CUENTA -->
         <div class="button">
             <button>
-                <a [routerLink]="['/setting/setting-perfil']">
+                <a [routerLink]="['/dashboard/settings/blogsetting']">
 
                     Edita tu perfil
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -57,16 +55,10 @@
             <div class="texto">
 
                 <!--INFORMACION QUE ESCRIBA EL USUARIO -->
-                <p class="presentacion">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi quisquam odit a, sapiente veniam,
-                    repellendus necessitatibus suscipit aperiam odio rerum dignissimos quo dolorem mollitia harum
-                    quaerat in nesciunt eaque. Voluptates.
-                    <!-- {{ user?.user_metadata.presentacion }} -->
-                </p>
-                <!-- 
-                    <p>Nombre de usuario: {{ user?.user_metadata.user_name }}</p>
-                    <p>Ubicación: {{ user?.user_metadata.location }}</p>
-                -->
+                <p class="presentacion">Presentacion: {{ presentacion || 'Este usuario aún no ha escrito una
+                    presentación.' }} </p>
+                <p>Nombre de usuario: {{ username || 'No ha puesto nombre de usuario'}}</p>
+                <p>Ubicación: {{ location || 'Desconocida' }}</p>
             </div>
         </div>
     </div>
@@ -78,10 +70,15 @@
             <h3>Dudas & Blogs</h3>
             <p class="text-center">¿Tienes dudas? ¡Consulta tus dudas aqui!</p>
             <!--TODO Linea que se repite segun tenga creados los blogs del admin, aparte de que si detecta que no tiene blogs, mostrar un mensaje -->
-            <div class="container-blog">
-                <p class="tituloblog">TITULO</p>
-                <p class="descripcion">Contenido del blog</p>
-                <button class="btn-view-btn"><a [routerLink]="['/dashboard/blogviews']" class="btn-view">Ir al blog</a></button>
+            <div class="no-blogs" *ngIf="!blogs || blogs.length ==0">
+                <p class="text-center">Este administrador no ha creado ningun blog</p>
+            </div>
+
+            <div class="container-blog" *ngFor="let item of blogs">
+                <p class="tituloblog">{{item.titulo}}</p>
+                <p class="descripcion">{{item.descripcion}}</p>
+                <button class="btn-view-btn"><a [routerLink]="['/dashboard/blogviews']" class="btn-view">Ir al
+                        blog</a></button>
             </div>
             <div class="text-new-blog">
 

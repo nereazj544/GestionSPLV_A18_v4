@@ -9,6 +9,8 @@ import { AdminComponent } from './dashboard/perfil/admin/admin.component';
 import { UserComponent } from './dashboard/perfil/user/user.component';
 import { DefaultComponent } from './dashboard/perfil/default/default.component';
 import { ProveedorComponent } from './dashboard/perfil/proveedor/proveedor.component';
+import { PerfilsettingComponent } from './dashboard/settings/perfilsetting/perfilsetting.component';
+import { BlogsettingComponent } from './dashboard/settings/blogsetting/blogsetting.component';
 
 export const routes: Routes = [
     //{ path: '', component:  },
@@ -27,8 +29,13 @@ export const routes: Routes = [
     { path: 'perfil/user', component:  UserComponent},
     { path: 'perfil/proveedor', component:  ProveedorComponent},
     { path: 'perfil/default', component:  DefaultComponent}, // default route for authenticated users
+
+    { path: 'dashboard/settings/perfilsetting', component:  PerfilsettingComponent},
+    { path: 'dashboard/settings/blogsetting', component:  BlogsettingComponent},
     
-    
+
+
+
     // TODO: RUTAS DE ERROR
     { path: '**', component: ErrorComponent },
 
