@@ -1,1 +1,57 @@
-<p>perfilsetting works!</p>
+<div class="containtgeneral">
+
+    <div class="container">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+            <div class="edit-controls">
+                <h2>EDITA TU PERFIL</h2>
+                <button type="submit">Guardar Cambios</button>
+                <button type="button" (click)="cancelar()">Cancelar</button>
+            </div>
+            <div class="cover-photo">
+                <button type="button" class="camera-button" (click)="CoverPhoto()">
+                    <img [src]="bannerImageUrl" alt="bannerImageUrl" class="img_b_p">
+                    <img src="https://i.pinimg.com/736x/ab/6c/fd/ab6cfd8d520455a5152c702375dab93c.jpg" alt="camara">
+
+                </button>
+                <div class="profile-photo">
+                    <button type="button" class="camera-button" (click)="ProfilePhoto()">
+                        <img [src]="profileImageUrl" alt="perfilImageUrl" class="img_b_p">
+                        <img src="https://i.pinimg.com/736x/ab/6c/fd/ab6cfd8d520455a5152c702375dab93c.jpg" alt="camara">
+                    </button>
+
+                </div>
+
+            </div>
+
+            <p class="form-note">La información que introduzcas aquí será visible para otros usuarios.</p>
+
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="user">Nombre de Usuario *</label>
+                    <input id="user" class="form-control" name="username" required formControlName="username">
+                    <div *ngIf="profileForm.get('username')?.errors?.['required'] && profileForm.get('username')?.touched"
+                        class="error-message">
+                        El nombre de usuario es requerido
+                    </div>
+                </div>
+                <label for="gender">Género *</label>
+                <select id="gender" class="form-control" name="gender" formControlName="gender">
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="No binario">No binario</option>
+                    <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="info">Info</label>
+                <textarea id="info" class="form-control" name="info" formControlName="presentacion"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="location">Ubicación</label>
+                <input type="text" id="location" class="form-control" name="location" formControlName="location">
+            </div>
+        </form>
+    </div>
+</div>
