@@ -1,1 +1,53 @@
-<p>blogsetting works!</p>
+<div class="form-container">
+    <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="titulo">Título*</label>
+            <input type="text" id="titulo" name="titulo" formControlName="titulo" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tipo">Tipo*</label>
+            <select id="tipo" name="tipo" formControlName="tipo" required>
+                <option value="duda">Duda</option>
+                <option value="blog">Blog</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Comentarios*</label>
+            <select name="comentarios" formControlName="comentarios" required>
+                <option value="true">Sí</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="creado">Creado por: </label>
+            <img src="{{ imagen_perfil }}" alt="Imagen de perfil">
+            <input type="text" id="creado" name="creado" [value]="username" readonly>
+
+
+        </div>
+        <div class="form-group">
+            <label for="fechaCreacion">Fecha y hora de creación *</label>
+            <div class="fechahora">
+
+                <input type="date" id="fechaCreacion" name="fechaCreacion" class="fecha" formControlName="fechaCreacion" required>
+                <input type="time" id="fechaCreacion" name="fechaCreacion" class="hora" formControlName="horaCreacion" required>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Pequeña descripcion *</label>
+            <input type="text" id="descripcion" name="descripcion" required formControlName="descripcion">
+
+        </div>
+
+        <div class="form-group">
+            <label for="contenido">Contenido *</label>
+            <textarea id="contenido" name="contenido" required formControlName="contenido"></textarea>
+        </div>
+
+        <button type="submit">Guardar</button>
+    </form>
+</div>
