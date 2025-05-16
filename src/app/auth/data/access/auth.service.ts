@@ -7,7 +7,7 @@ import { SignInWithPasswordCredentials, SignUpWithPasswordCredentials } from "@s
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-    private _supabaseClient = inject(SupabaseService).supabaseServiceClient; 
+    private _supabaseClient = inject(SupabaseService).supabaseClient; 
     signUp(credentials: SignUpWithPasswordCredentials) {
         return this._supabaseClient.auth.signUp(credentials);
     }

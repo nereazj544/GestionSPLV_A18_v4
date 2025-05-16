@@ -5,7 +5,7 @@ import { SupabaseService } from "./data/supabase.service";
 
 @Injectable({ providedIn: 'root' })
 export class ShowService {
-    private _supabaseClient = inject(SupabaseService).supabaseServiceClient;
+    private _supabaseClient = inject(SupabaseService).supabaseClient;
 
     //Obtiene el perfil de usuario por ID
     getUserProfileById(id: string){
