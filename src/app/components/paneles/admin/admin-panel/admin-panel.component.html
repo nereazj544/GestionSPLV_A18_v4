@@ -1,1 +1,83 @@
-<p>admin-panel works!</p>
+<div class="admin-panel">
+
+    <h2>PANEL DE ADMINISTRADOR</h2>
+    <p class="admin-description">Contenido del panel de administrador</p>
+
+    <div class="admin-sections">
+        <div class="admin-section communication">
+            <h3>COMUNICACION CON USUARIOS</h3>
+            <div class="messages-section">
+                <h4>Mensajes de usuarios</h4>
+                <p class="section-description">Revisa, responde y gestiona todos los mensajes del sitio</p>
+                <div class="status-bar">
+                    <div class="status-item">
+                        <span>Todos</span>
+                    </div>
+
+                </div>
+                <p class="no-content">NO HAY COMENTARIO AÚN</p>
+            </div>
+
+            <div class="comments-section">
+                <h4>Comentarios</h4>
+                <p class="section-description">Revisa, responde y gestiona todos los comentarios del sitio</p>
+                <div class="status-bar">
+                    <div class="status-item">
+                        <span>Todos</span>
+                    </div>
+
+                </div>
+                <p class="no-content">NO HAY COMENTARIO AÚN</p>
+            </div>
+        </div>
+
+        <div class="admin-section blog">
+            <div class="blog-session-header">
+                <h3>BLOG</h3>
+                <p class="blog-link"><a class="blog-link" [routerLink]="['/settings/blogsetting']">Crear nuevo
+                        blog</a></p>
+
+            </div>
+            <div class="blog-section">
+                <div class="pages-header">
+                    <h4>Paginas</h4>
+                    <div class="filter">
+                        Filtrar por:
+                        <select (change)="onFilter($event)">
+                            <option value="all">Todos</option>
+                            <option value="blog">Blog</option>
+                            <option value="duda">Duda</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="blog-content">
+                    <div class="no-blogs" *ngIf="!blogs || blogs.length ==0">
+                        <p class="text-center">No se han creado blogs</p>
+                    </div>
+                    <div class="blog-title" *ngFor="let blog of filteredBlogs">
+                        <h5>{{ blog.titulo }}</h5>
+                        <p>{{ blog.descripcion }}</p>
+                        <div class="auth-blog">
+                            <p>Autor: {{ blog.profiles.username }}</p>
+                            <img [src]="blog.profiles.imagen_perfil" alt="imagen del administrador" class="admin-image">
+
+                        </div>
+                        <p>{{ blog.creado_en | date: 'short' }}</p>
+                        <p class="blog-status" [ngClass]="{
+                            'blog': blog.tipo == 'blog',
+                            'duda': blog.tipo == 'duda'
+                        }">Tag: #{{ blog.tipo }}</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-section users">
+            <h3>AÑADIR USER</h3>
+            <ul>
+                <li><a [routerLink]="['/components/paneles/admin/panel-add-user']">Añadir nuevo usuario</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

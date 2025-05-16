@@ -96,6 +96,21 @@ export class SupabaseService {
         );
     }
 
+
+    getBlogsWithUserInfo(){
+        return from(this.supabaseClient
+            .from('blogs')
+            .select(`
+                *,
+                profiles (
+                    username,
+                    imagen_perfil
+                )
+            `)
+            .order('creado_en', { ascending: true })
+        );
+    }
+
     getBlogbyIdAutor(id: string) {
         return from(this.supabaseClient
             .from('blogs')
