@@ -117,3 +117,6 @@ li button a {
     display: block;
 }
 
+.dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}

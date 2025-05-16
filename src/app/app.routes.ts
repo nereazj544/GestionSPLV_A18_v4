@@ -11,6 +11,7 @@ import { DefaultComponent } from './dashboard/perfil/default/default.component';
 import { ProveedorComponent } from './dashboard/perfil/proveedor/proveedor.component';
 import { PerfilsettingComponent } from './dashboard/settings/perfilsetting/perfilsetting.component';
 import { BlogsettingComponent } from './dashboard/settings/blogsetting/blogsetting.component';
+import { AdminPanelComponent } from './components/paneles/admin/admin-panel/admin-panel.component';
 
 export const routes: Routes = [
     //{ path: '', component:  },
@@ -36,9 +37,12 @@ export const routes: Routes = [
     { path: 'perfil/user', component:  UserComponent},
     { path: 'perfil/proveedor', component:  ProveedorComponent},
 
+
+    // TODO: RUTAS DE SETTINGS
     { path: 'settings/perfilsetting', component:  PerfilsettingComponent},
     { path: 'settings/blogsetting', component:  BlogsettingComponent},
-    
+    { path: 'components/paneles/admin/admin-panel', component:  AdminPanelComponent},
+
 
 
 
