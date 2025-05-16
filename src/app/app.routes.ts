@@ -13,6 +13,7 @@ import { PerfilsettingComponent } from './dashboard/settings/perfilsetting/perfi
 import { BlogsettingComponent } from './dashboard/settings/blogsetting/blogsetting.component';
 import { AdminPanelComponent } from './components/paneles/admin/admin-panel/admin-panel.component';
 import { PanelAddUserComponent } from './components/paneles/admin/panel-add-user/panel-add-user.component';
+import { PanelProveedorComponent } from './components/paneles/proveedor/panel-proveedor/panel-proveedor.component';
 
 export const routes: Routes = [
     //{ path: '', component:  },
@@ -43,6 +44,7 @@ export const routes: Routes = [
     { path: 'settings/perfilsetting', component:  PerfilsettingComponent},
     { path: 'settings/blogsetting', component:  BlogsettingComponent},
     { path: 'components/paneles/admin/admin-panel', component:  AdminPanelComponent},
+    { path: 'components/paneles/proveedor/panel-proveedor', component:  PanelProveedorComponent},
     { path: 'components/paneles/admin/panel-add-user', component:  PanelAddUserComponent},
 
 
