@@ -2,6 +2,8 @@
     <nav>
         <ul>
             <li class="logo"><a [routerLink]="['/home']" (click)="onHomeClick()">Gestiona tus P.S.L.V</a></li>
+
+            <!-- TODO NO HAY LOGIN -->
             <div class="hea-div" *ngIf="!isLoginPage && !isRegistroPage">
                 <li><a [routerLink]="['/novedades']">Nuevos Lanzamientos</a></li>
                 <li>
@@ -12,6 +14,11 @@
                     <button><a [routerLink]="['/signup']" (click)="onRegistroinClick()">Registrarse</a></button>
                 </li>
             </div>
+
+            <!-- TODO HAY LOGIN -->
+         
+
+
 
             <!-- TODO INICIAR SESION -->
             <div class="iniciar" *ngIf="isRegistroPage">
