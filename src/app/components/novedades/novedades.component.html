@@ -56,9 +56,10 @@
         </div>
 
 
-        <div class="blog" *ngFor="let blog of blogs">
-            <h3>{{ blog.titulo }}</h3>
-            <p>{{ blog.contenido }}</p>
+        <div class="blog" *ngFor="let item of blogs">
+            <h3>{{ item.titulo }}</h3>
+            <p>{{ item.contenido }}</p>
+            <p>Tag: #{{ item.tipo }}</p>
         </div>
 
     </div>
