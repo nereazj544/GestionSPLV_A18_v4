@@ -20,8 +20,8 @@ export class AuthService {
         return this._supabaseClient.auth.signOut();
     }
 
-    insertProfile(profile: { id: string; email: string; role: string }) {
-        return this._supabaseClient.from('profiles').insert([profile]);
+    insertProfile(profiles: { id: string; email: string; role: string }) {
+        return this._supabaseClient.from('profiles').insert([profiles]);
     }
 
 

@@ -1,19 +1,21 @@
 <div class="container">
     <div class="header">
-        <h2>Mi Perfil: PROVEEDOR</h2>
-        <svg  xmlns="http://www.w3.org/2000/svg"  width="50"  height="50"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-shopping-cart"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 2a1 1 0 0 1 .993 .883l.007 .117v1.068l13.071 .935a1 1 0 0 1 .929 1.024l-.01 .114l-1 7a1 1 0 0 1 -.877 .853l-.113 .006h-12v2h10a3 3 0 1 1 -2.995 3.176l-.005 -.176l.005 -.176c.017 -.288 .074 -.564 .166 -.824h-5.342a3 3 0 1 1 -5.824 1.176l-.005 -.176l.005 -.176a3.002 3.002 0 0 1 1.995 -2.654v-12.17h-1a1 1 0 0 1 -.993 -.883l-.007 -.117a1 1 0 0 1 .883 -.993l.117 -.007h2zm0 16a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm11 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z" /></svg>
+        <h2>Perfil: {{username}}</h2>
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="currentColor"
+            class="icon icon-tabler icons-tabler-filled icon-tabler-shopping-cart">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+                d="M6 2a1 1 0 0 1 .993 .883l.007 .117v1.068l13.071 .935a1 1 0 0 1 .929 1.024l-.01 .114l-1 7a1 1 0 0 1 -.877 .853l-.113 .006h-12v2h10a3 3 0 1 1 -2.995 3.176l-.005 -.176l.005 -.176c.017 -.288 .074 -.564 .166 -.824h-5.342a3 3 0 1 1 -5.824 1.176l-.005 -.176l.005 -.176a3.002 3.002 0 0 1 1.995 -2.654v-12.17h-1a1 1 0 0 1 -.993 -.883l-.007 -.117a1 1 0 0 1 .883 -.993l.117 -.007h2zm0 16a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm11 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z" />
+        </svg>
     </div>
 
     <div class="cover-photo">
-        <img src="https://i.pinimg.com/736x/11/ce/e5/11cee5b47bd0e2f5f91507da9f774050.jpg" alt="img_banner"
-            class="img_banner">
+        <img [src]="banner" alt="img_banner" class="img_banner">
     </div>
     <div class="perfil">
         <div class="profile-photo">
-            <img src="https://i.pinimg.com/736x/97/43/bf/9743bf8ea7f4541f29d6dfc1de972490.jpg" alt="img_profile"
-                class="img_profile">
+            <img [src]="imagen_perfil" alt="img_profile" class="img_profile">
         </div>
-
         <!-- TODO ESTE BOTON SOLO LO PUEDE VER EL PROPIETARIO DE LA CUENTA -->
         <div class="button">
             <button>
@@ -49,38 +51,20 @@
             <div class="texto">
 
                 <!--INFORMACION QUE ESCRIBA EL USUARIO -->
-                <p class="presentacion">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi quisquam odit a, sapiente veniam,
-                    repellendus necessitatibus suscipit aperiam odio rerum dignissimos quo dolorem mollitia harum
-                    quaerat in nesciunt eaque. Voluptates.
-                    <!-- {{ user?.user_metadata.presentacion }} -->
-                </p>
-                <!-- 
-                    <p>Nombre de usuario: {{ user?.user_metadata.user_name }}</p>
-                    <p>Ubicación: {{ user?.user_metadata.location }}</p>
-                -->
+
+                <!--INFORMACION QUE ESCRIBA EL USUARIO -->
+
+                <p class="presentacion">Presentacion: {{ presentacion || 'Este proveedor aún no ha escrito una
+                    presentación.' }}</p>
+                <p>Nombre de usuario: {{ username || 'No ha puesto nombre de usuario'}}</p>
+                <p>Ubicación: {{ location || 'Desconocida' }}</p>
+
             </div>
         </div>
     </div>
 
     <!-- proveedor sesion -->
 
-    <div class="session_mul">
-        <div class="blogs">
-            <h3>Dudas & Blogs</h3>
-            <p class="text-center">¿Tienes dudas? ¡Consulta tus dudas aqui!</p>
-            <!--TODO Linea que se repite segun tenga creados los blogs del admin, aparte de que si detecta que no tiene blogs, mostrar un mensaje -->
-            <div class="container-blog">
-                <p class="tituloblog">TITULO</p>
-                <p class="descripcion">Contenido del blog</p>
-                <button class="btn-view-btn"><a [routerLink]="['/dashboard/blogviews']" class="btn-view">Ir al blog</a></button>
-            </div>
-            <div class="text-new-blog">
 
-                <a [routerLink]="['/dashboard/blogsettings']" class="btn-new">Nuevos blogs</a>
-            </div>
-            <!-- Añadir visibilidad, esto solo lo pueden ver los admins -->
-        </div>
-    </div>
 
 </div>

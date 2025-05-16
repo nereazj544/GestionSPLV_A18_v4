@@ -21,7 +21,7 @@ export class AuthSingUpComponent implements OnDestroy, OnInit {
 
   //TODO ===  FORMULARIO ===
 
-  private _formBuilder = inject(FormBuilder);
+ private _formBuilder = inject(FormBuilder);
   private _authServide = inject(AuthService);
   private _profileService = inject(ProfileService);
 
@@ -34,33 +34,39 @@ export class AuthSingUpComponent implements OnDestroy, OnInit {
 
   async submit() {
     if (this.form.invalid) return;
-
+  
     const { email, password, role } = this.form.value;
-
+  
     // 1. Registrar en Supabase Auth
     const { data, error } = await this._authServide.signUp({
       email: email ?? '',
       password: password ?? '',
     });
-
+  
     if (error || !data.user) {
       console.error('Error al registrar usuario', error);
       return;
     }
-
+  
     // 2. Insertar perfil con el rol elegido desde el formulario
     const { error: insertError } = await this._authServide.insertProfile({
       id: data.user.id,
       email: email ?? '',
       role: role ?? 'user',
     });
-
+  
     if (insertError) {
       console.error('Error insertando perfil:', insertError);
-    } else {
-      console.log('Usuario y perfil creados correctamente con rol:', role);
-      this._profileService.redirectToProfileBasedOnRole(); // Redirigir según el rol
-    }
+      return;
+    } 
+
+    const usuario ={
+      id: data.user.id,
+      email: email ?? '',
+      role: role ?? 'user',
+    };
+    this._profileService['userService'].setUsuario(usuario);
+    this._profileService.redirectToProfileBasedOnRole();
   }
 
 

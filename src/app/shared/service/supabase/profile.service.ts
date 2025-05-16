@@ -19,7 +19,7 @@ export class ProfileService {
                 this.router.navigate(['perfil/admin']);
                 break;
             case 'proveedor':
-                this.router.navigate(['perfil/provider']);
+                this.router.navigate(['perfil/proveedor']);
                 break;
             case 'user':
                 this.router.navigate(['perfil/user']);
