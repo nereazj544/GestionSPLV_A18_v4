@@ -55,7 +55,12 @@
             <p>No hay blogs disponibles</p>
         </div>
 
-        <div class="hay-blog"></div>
+        <div class="hay-blog" *ngIf="blogs && blogs.length > 0">
+            <div class="blog" *ngFor="let blog of blogs">
+                <h3>{{ blog.title }}</h3>
+                <p>{{ blog.content }}</p>
+            </div>
+        </div>
     </div>
 
 </div>
