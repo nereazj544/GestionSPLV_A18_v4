@@ -30,6 +30,12 @@ export const routes: Routes = [
     { path: 'perfil/proveedor', component:  ProveedorComponent},
     { path: 'perfil/default', component:  DefaultComponent}, // default route for authenticated users
 
+
+    // TODO: RUTAS PARA PERFILES USERNAME
+    { path: 'perfil/admin/:username', component:  AdminComponent},
+    { path: 'perfil/user', component:  UserComponent},
+    { path: 'perfil/proveedor', component:  ProveedorComponent},
+
     { path: 'settings/perfilsetting', component:  PerfilsettingComponent},
     { path: 'settings/blogsetting', component:  BlogsettingComponent},
     

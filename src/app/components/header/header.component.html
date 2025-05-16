@@ -6,17 +6,49 @@
             <!-- TODO NO HAY LOGIN -->
             <div class="hea-div" *ngIf="!isLoginPage && !isRegistroPage">
                 <li><a [routerLink]="['/novedades']">Nuevos Lanzamientos</a></li>
-                <li>
-                    <button><a [routerLink]="['/login']" (click)="onLonginClick()">Iniciar Sesion</a></button>
-                </li>
-                <span class="separador"> | </span><br class="salto-linea">
-                <li>
-                    <button><a [routerLink]="['/signup']" (click)="onRegistroinClick()">Registrarse</a></button>
-                </li>
+                <div class="hea-div" *ngIf="!isLoggedIn">
+
+                    <li>
+                        <button><a [routerLink]="['/login']" (click)="onLonginClick()">Iniciar Sesion</a></button>
+                    </li>
+                    <span class="separador"> | </span><br class="salto-linea">
+                    <li>
+                        <button><a [routerLink]="['/signup']" (click)="onRegistroinClick()">Registrarse</a></button>
+                    </li>
+                </div>
             </div>
 
             <!-- TODO HAY LOGIN -->
+            <div class="hea-div" *ngIf="isLoggedIn">
+                <!-- TODO: SOLO USUARIOS -->
+                <div class="view-user" *ngIf="role === 'user'">
+                    <a [routerLink]="">Mi Biblioteca</a>
+                </div>
 
+
+                <!-- TODO: SOLO PROVEEDORES -->
+                <div class="view-pro" *ngIf="role === 'proveedor'">
+                    <a [routerLink]="['dashboard/paneles/panelproveedor']">Panel Proveedor</a>
+                </div>
+
+
+                <!-- TODO: SOLO ADMIN -->
+                <div class="view-admin" *ngIf="role === 'admin'">
+                    <a [routerLink]="['dashboard/paneles/paneladmin']">Panel Administrador</a>
+
+                </div>
+
+                <!-- TODO: Visiblidad para todos los usuarios -->
+                <div class="profile-dropdown">
+                    <button class="profile-button" (click)="toggleDropdown()">
+                        Mi perfil
+                    </button>
+                    <div class="dropdown-menu" *ngIf="isDropdownOpen">
+                        <a [routerLink]="['/perfil', role, username]">Ver mi perfil</a>
+                        <a (click)="cerrarSesion()">Cerrar sesión</a>
+                    </div>
+                </div>
+            </div>
 
 
 
