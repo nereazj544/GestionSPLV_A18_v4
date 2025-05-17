@@ -135,7 +135,7 @@ export class SupabaseService {
 
     async insertComentario(comentarioData: any) {
         const { data, error } = await this.supabaseClient
-            .from('comentarios')
+            .from('comentarios_blogs')
             .insert([comentarioData])
             .select();
 
@@ -146,7 +146,7 @@ export class SupabaseService {
     // Obtener comentarios por blog (con info del autor)
     getComentariosPorBlog(blogId: string) {
         return from(this.supabaseClient
-            .from('comentarios')
+            .from('comentarios_blogs')
             .select(`
             *,
             profiles (
@@ -157,5 +157,27 @@ export class SupabaseService {
             .eq('blog_id', blogId)
             .order('creado_en', { ascending: false })
         );
+    }
+
+    getRespuestasPorComentario(comentarioId: number) {
+        return from(this.supabaseClient
+            .from('respuestas_comentarios')
+            .select(`
+      *,
+      profiles (
+        username,
+        imagen_perfil
+      )
+    `)
+            .eq('comentario_id', comentarioId)
+            .order('creado_en', { ascending: true }));
+    }
+
+    // Insertar una respuesta (desde cuenta admin)
+    insertRespuesta(respuesta: any) {
+        return from(this.supabaseClient
+            .from('respuestas_comentarios')
+            .insert([respuesta])
+            .select());
     }
 }
