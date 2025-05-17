@@ -14,6 +14,7 @@ import { BlogsettingComponent } from './dashboard/settings/blogsetting/blogsetti
 import { AdminPanelComponent } from './components/paneles/admin/admin-panel/admin-panel.component';
 import { PanelAddUserComponent } from './components/paneles/admin/panel-add-user/panel-add-user.component';
 import { PanelProveedorComponent } from './components/paneles/proveedor/panel-proveedor/panel-proveedor.component';
+import { BlogviewsComponent } from './dashboard/blogs/blogviews/blogviews.component';
 
 export const routes: Routes = [
     //{ path: '', component:  },
@@ -25,28 +26,30 @@ export const routes: Routes = [
     // TODO: RUTAS DE AUTENTICACION
     { path: 'login', component: AuthLoginComponent },
     { path: 'signup', component: AuthSingUpComponent },
-    
-    
+
+
     //TODO: RUTAS DE PERFILES
-    { path: 'perfil/admin', component:  AdminComponent},
-    { path: 'perfil/user', component:  UserComponent},
-    { path: 'perfil/proveedor', component:  ProveedorComponent},
-    { path: 'perfil/default', component:  DefaultComponent}, // default route for authenticated users
+    { path: 'perfil/admin', component: AdminComponent },
+    { path: 'perfil/user', component: UserComponent },
+    { path: 'perfil/proveedor', component: ProveedorComponent },
+    { path: 'perfil/default', component: DefaultComponent }, // default route for authenticated users
 
 
     // TODO: RUTAS PARA PERFILES USERNAME
-    { path: 'perfil/admin/:username', component:  AdminComponent},
-    { path: 'perfil/user/:username', component:  UserComponent},
-    { path: 'perfil/proveedor/:username', component:  ProveedorComponent},
-    
-    
+    { path: 'perfil/admin/:username', component: AdminComponent },
+    { path: 'perfil/user/:username', component: UserComponent },
+    { path: 'perfil/proveedor/:username', component: ProveedorComponent },
+
+
 
     // TODO: RUTAS DE SETTINGS
-    { path: 'settings/perfilsetting', component:  PerfilsettingComponent},
-    { path: 'settings/blogsetting', component:  BlogsettingComponent},
-    { path: 'components/paneles/admin/admin-panel', component:  AdminPanelComponent},
-    { path: 'components/paneles/proveedor/panel-proveedor', component:  PanelProveedorComponent},
-    { path: 'components/paneles/admin/panel-add-user', component:  PanelAddUserComponent},
+    { path: 'settings/perfilsetting', component: PerfilsettingComponent },
+    { path: 'settings/blogsetting', component: BlogsettingComponent },
+    { path: 'components/paneles/admin/admin-panel', component: AdminPanelComponent },
+    { path: 'components/paneles/proveedor/panel-proveedor', component: PanelProveedorComponent },
+    { path: 'components/paneles/admin/panel-add-user', component: PanelAddUserComponent },
+
+    { path: 'dashboard/blogs/blogviews/:id', component: BlogviewsComponent },
 
 
 

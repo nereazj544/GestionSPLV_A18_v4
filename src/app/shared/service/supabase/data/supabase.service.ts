@@ -97,7 +97,7 @@ export class SupabaseService {
     }
 
 
-    getBlogsWithUserInfo(){
+    getBlogsWithUserInfo() {
         return from(this.supabaseClient
             .from('blogs')
             .select(`
@@ -130,5 +130,32 @@ export class SupabaseService {
             console.error('Error al cerrar sesión:', error);
             return { success: false, error };
         }
+    }
+
+
+    async insertComentario(comentarioData: any) {
+        const { data, error } = await this.supabaseClient
+            .from('comentarios')
+            .insert([comentarioData])
+            .select();
+
+        if (error) throw error;
+        return data;
+    }
+
+    // Obtener comentarios por blog (con info del autor)
+    getComentariosPorBlog(blogId: string) {
+        return from(this.supabaseClient
+            .from('comentarios')
+            .select(`
+            *,
+            profiles (
+                username,
+                imagen_perfil
+            )
+        `)
+            .eq('blog_id', blogId)
+            .order('creado_en', { ascending: false })
+        );
     }
 }

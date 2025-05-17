@@ -1,1 +1,37 @@
-<p>blogviews works!</p>
+<div class="blog-card">
+    <header class="blog-header">
+        <div>
+            <h1 class="blog-title">{{ blogTitle }}</h1>
+            <small>{{ blogTimestamp | date: 'short' }}</small>
+        </div>
+        <div class="blog-meta">
+            <span>Autor: {{username}} </span>
+            <div class="author-avatar">
+                <img [src]="imagen_perfil" alt="">
+            </div>
+        </div>
+    </header>
+<div class="separador"></div>
+    <div class="blog-content">
+        <h2>Contendio</h2>
+        <pre>{{ blogContent }}</pre>
+    </div>
+
+    <!-- <section class="comments-section">
+        <h3 class="comments-title">COMENTARIOS</h3>
+
+        <div class="comment" *ngFor="let comment of comments">
+            <div class="comment-avatar"></div>
+            <div>
+                <strong>{{ comment.author }}</strong>
+                <p class="comment-content">{{ comment.text }}</p>
+            </div>
+        </div>
+
+        <div class="new-comment">
+            <h4>Nuevo Comentario</h4>
+            <textarea class="comment-input" rows="4" [(ngModel)]="newComment"></textarea>
+            <button class="submit-button" (click)="addComment()">enviar</button>
+        </div>
+    </section> -->
+</div>
