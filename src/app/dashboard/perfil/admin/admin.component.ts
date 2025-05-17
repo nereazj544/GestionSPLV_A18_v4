@@ -23,6 +23,12 @@ export class AdminComponent implements OnInit {
 
   blogs: any[] = [];
 
+  isOwnProfile: boolean = false;
+  isAdmin: boolean = false;
+  currentUser: any = null;
+
+
+
   constructor(
     private showService: ShowService,
     private supabaseService: SupabaseService
@@ -47,6 +53,8 @@ export class AdminComponent implements OnInit {
     this.presentacion = data.presentacion;
     this.genero = data.genero;
     this.location = data.location;
+
+    
   }
   async cargarBlog() {
     try {

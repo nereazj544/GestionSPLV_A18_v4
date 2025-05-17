@@ -38,7 +38,8 @@ export const routes: Routes = [
     { path: 'perfil/admin/:username', component:  AdminComponent},
     { path: 'perfil/user/:username', component:  UserComponent},
     { path: 'perfil/proveedor/:username', component:  ProveedorComponent},
-
+    
+    
 
     // TODO: RUTAS DE SETTINGS
     { path: 'settings/perfilsetting', component:  PerfilsettingComponent},
