@@ -10,9 +10,12 @@ import { SupabaseService } from '../../shared/service/supabase/data/supabase.ser
   standalone: true,
   templateUrl: './novedades.component.html',
   styleUrls: ['./novedades.component.css'],
-  imports:[CommonModule, RouterLink]
+  imports: [CommonModule, RouterLink]
 })
 export class NovedadesComponent implements OnInit {
+  role: string | null = null;
+  username: string | null = null;
+
   libros: any[] = [];
 
   isVideogameFilter: boolean = false;
@@ -21,7 +24,8 @@ export class NovedadesComponent implements OnInit {
 
   searchText: string = '';
   selectedPlatarforma = '';
-
+  filteredBlogs: any[] = [];
+  selectedFilter: string = 'all';
   currentFilter: string = 'Libros';
   currentReleases: any[] = [];
 
@@ -32,7 +36,7 @@ export class NovedadesComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateReleases();
-    this.cargarBlog();
+    this.cargarBlog(); //Cargar blogs al iniciar
   }
 
 
@@ -81,36 +85,44 @@ export class NovedadesComponent implements OnInit {
       );
     } catch (error) {
       console.error('Error updating releases:', error);
-      
+
     }
   }
 
   //TODO MOSTRAR BLOGS
-  blogs:any[] = [];
+  blogs: any[] = [];
 
   async cargarBlog() {
     try {
-    const userId = await this.supabaseService.getCurrentUserId();
-    if (!userId) {
-      throw new Error('Usuario no autenticado');
+      const { data, error } = await firstValueFrom(this.supabaseService.getBlogsWithUserInfo());
+      if (error) {
+        console.error('Error fetching blogs:', error);
+        alert('Error fetching blogs');
+        return;
+      }
+      this.blogs = data;
+      this.filteredBlogs = this.blogs; // Initialize filteredBlogs with all blogs
+      console.log('Blogs fetched successfully:', this.blogs);
+    } catch (error) {
+      console.error('Error fetching blogs:', error);
+      alert('Error fetching blogs');
     }
-    
-    const blogsObservable = this.supabaseService.getBlogbyIdAutor(userId);
-    const result = await firstValueFrom(blogsObservable);
-    
-    if (result.error) {
-      throw result.error;
-    }
-    
-    this.blogs = result.data;
-    console.log('Blogs cargados exitosamente:', this.blogs);
-  } catch (error) {
-    console.error('Error al cargar blogs:', error);
   }
-}
 
+  onFilter(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    const filterValue = target.value;
+    this.filterBlogs(filterValue);
+  }
 
-
+  filterBlogs(filterValue: string) {
+    this.selectedFilter = filterValue;
+    if (filterValue === 'all') {
+      this.filteredBlogs = this.blogs;
+    } else {
+      this.filteredBlogs = this.blogs.filter(blog => blog.tipo === filterValue);
+    }
+  }
 
 
 }

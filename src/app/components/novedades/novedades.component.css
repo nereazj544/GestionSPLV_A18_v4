@@ -124,24 +124,124 @@
 }
 
 /*TODO SEPARADOR */
-.separdadordiv{
+.separdadordiv {
     margin: 90px;
     border: 1px solid #d90da37f;
-    
+
 }
 
 
 
 /* TODO BLOGS Y DUDAS */
-.comu h2{
+.comu h2 {
     margin: 50px;
 }
 
 
-.blogs{
+.blogs {
     display: flex;
-    gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 1rem;
+    background-color: antiquewhite;
 }
 
+.blogs h3 {
+    text-align: center;
+    border-bottom: 1px solid black;
+    padding-bottom: 4px;
+}
+
+.blogs .text-center {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-style: italic;
+}
+
+.blogs .container-blog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 20px;
+    /* background-color: white; */
+    padding: 20px;
+
+}
+
+.blogs .container-blog button {
+    color: black;
+}
+
+.blogs .container-blog .tituloblog {
+    font-size: 20px;
+    font-weight: bold;
+    color: #BF303C;
+    margin: 0;
+    padding: 0;
+}
+
+
+.btn-view-btn {
+    background-color: #D90DA2;
+    border: solid 1px #D90DA2;
+    border-radius: 8px;
+    margin-left: 40rem;
+}
+
+.btn-view-btn .btn-view {
+    color: black;
+    font-size: large;
+    font-weight: bold;
+}
+
+.btn-view-btn .btn-view:hover {
+    color: white;
+
+}
+
+.text-new-blog {
+    text-align: end;
+    margin: 0;
+    padding: 0;
+    font-size: large;
+    font-weight: bold;
+}
+
+.btn-view {
+    color: #BF303C;
+}
+
+.btn-view:hover {
+    color: black;
+}
+
+.descripcion {
+    /* font-size: 14px; */
+    color: #333;
+    margin: 10px 0;
+}
+
+.tag {
+    color: rgb(62, 104, 104);
+    font-weight: bolder;
+}
+
+
+
+.auth-blog {
+    display: flex;
+    flex-direction: row;
+}
+
+.auth-blog .admin-image {
+    padding: 3px;
+    width: 30px;
+    height: auto;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
