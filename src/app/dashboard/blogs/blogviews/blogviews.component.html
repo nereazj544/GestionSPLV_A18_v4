@@ -5,33 +5,41 @@
             <small>{{ blogTimestamp | date: 'short' }}</small>
         </div>
         <div class="blog-meta">
-            <span>Autor: {{username}} </span>
+            <span>Autor: {{ username }}</span>
             <div class="author-avatar">
                 <img [src]="imagen_perfil" alt="">
             </div>
         </div>
     </header>
-<div class="separador"></div>
+
+    <div class="separador"></div>
+
     <div class="blog-content">
-        <h2>Contendio</h2>
+        <h2>Contenido</h2>
         <pre>{{ blogContent }}</pre>
     </div>
 
-    <!-- <section class="comments-section">
+    <section class="comments-section">
         <h3 class="comments-title">COMENTARIOS</h3>
 
         <div class="comment" *ngFor="let comment of comments">
-            <div class="comment-avatar"></div>
+            <div class="comment-avatar">
+                <img *ngIf="comment.avatar" [src]="comment.avatar" alt="">
+            </div>
             <div>
                 <strong>{{ comment.author }}</strong>
                 <p class="comment-content">{{ comment.text }}</p>
             </div>
         </div>
 
-        <div class="new-comment">
+        <div class="new-comment" *ngIf="comentariosPermitidos">
             <h4>Nuevo Comentario</h4>
             <textarea class="comment-input" rows="4" [(ngModel)]="newComment"></textarea>
-            <button class="submit-button" (click)="addComment()">enviar</button>
+            <button class="submit-button" (click)="addComment()">Enviar</button>
         </div>
-    </section> -->
+    </section>
+    
+    <section *ngIf="!comentariosPermitidos" class="new-comments">
+        <p>Este blog no permite comentarios.</p>
+    </section>
 </div>

@@ -68,6 +68,10 @@ export class SupabaseService {
         if (error || !data.user) return null;
         return data.user.id;
     }
+    async _getCurrentUserId(): Promise<{ data: { user: any } | null, error: any }> {
+        return await this.supabaseClient.auth.getUser();
+    }
+
 
     //insert blog
     async insertBlog(blogData: any) {
