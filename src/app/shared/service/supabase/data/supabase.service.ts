@@ -92,6 +92,43 @@ export class SupabaseService {
         return data;
     }
 
+    async insertContenido(contenidoData: any) {
+        // 1. Insertar contenido principal
+        const { data, error } = await this.supabaseClient
+            .from('contenidos')
+            .insert([{
+                tipo: contenidoData.tipo,
+                disponibilidad: contenidoData.disponibilidad,
+                titulo: contenidoData.titulo,
+                descripcion: contenidoData.descripcion,
+                imagen_url: contenidoData.imagen_url,
+                proveedor_id: contenidoData.proveedor_id,
+                permite_comentarios: contenidoData.permite_comentarios ?? true,
+                creado_en: contenidoData.creado_en ?? new Date().toISOString()
+            }])
+            .select()
+            .single();
+
+        if (error) throw error;
+
+        // 2. Insertar géneros asociados (si existen)
+        if (contenidoData.generos && Array.isArray(contenidoData.generos)) {
+            // data.id será el id del contenido recién creado
+            for (const generoId of contenidoData.generos) {
+                const { error: generoError } = await this.supabaseClient
+                    .from('contenido_generos')
+                    .insert([{
+                        contenido_id: data.id,
+                        genero_id: generoId
+                    }]);
+                if (generoError) throw generoError;
+            }
+        }
+
+        return data;
+    }
+
+
     getBlogs() {
         return from(this.supabaseClient
             .from('blogs')
