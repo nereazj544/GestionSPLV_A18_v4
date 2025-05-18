@@ -25,13 +25,10 @@
             <label for="creado">Creado por: </label>
             <img src="{{ imagen_perfil }}" alt="Imagen de perfil">
             <input type="text" id="creado" name="creado" [value]="username" readonly>
-
-
         </div>
         <div class="form-group">
             <label for="fechaCreacion">Fecha y hora de creación *</label>
             <div class="fechahora">
-
                 <input type="date" id="fechaCreacion" name="fechaCreacion" class="fecha" formControlName="fechaCreacion" required>
                 <input type="time" id="fechaCreacion" name="fechaCreacion" class="hora" formControlName="horaCreacion" required>
             </div>

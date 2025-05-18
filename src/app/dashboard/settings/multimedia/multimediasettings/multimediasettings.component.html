@@ -1,49 +1,117 @@
 <div class="form-container">
-  <form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" [formGroup]="multiFrom">
+    <!-- Autor -->
     <div class="form-group">
       <label for="creado">Creado por: </label>
       <img [src]="imagen_perfil" alt="Imagen de perfil">
-      <input type="text" id="creado" name="creado" [value]="username" readonly>
+      <input
+        type="text"
+        id="creado"
+        name="creado"
+        [value]="username"
+        readonly
+      >
     </div>
+
+    <!-- Título -->
     <div class="form-group">
       <label>Título*</label>
-      <input type="text" [(ngModel)]="formData.title" name="title" class="form-input" required>
+      <input
+        type="text"
+        formControlName="titulo"
+        name="titulo"
+        class="form-input"
+        required
+      >
     </div>
+
+    <!-- Tipo multimedia -->
     <div class="form-group">
       <label>Tipo multimedia*</label>
-      <select [(ngModel)]="formData.mediaType" name="mediaType" class="form-input" required>
+      <select
+        formControlName="tipo"
+        name="tipo"
+        class="form-input"
+        required
+      >
+        name="mediaType"
+        class="form-input"
+        required
+      >
+        <option value="" disabled selected>Selecciona una opción</option>
         <option value="Pelicula">Pelicula</option>
         <option value="Videojuego">Videojuego</option>
         <option value="Serie">Serie</option>
         <option value="Libro">Libro</option>
       </select>
     </div>
+
+    <!-- Géneros -->
     <div class="form-group">
       <label>Géneros*</label>
       <small>Puedes seleccionar hasta 5 géneros</small>
-      <select multiple [(ngModel)]="formData.generos" name="generos" class="form-input" (change)="onGeneroChange($event)">
-        <option *ngFor="let genero of generosDisponibles" [ngValue]="genero.id">{{ genero.nombre }}</option>
+      <select
+        multiple
+        formControlName="generos"
+        name="generos"
+        class="form-input"
+        (change)="onGeneroChange($event)"
+        required
+      >
+        <option
+          *ngFor="let genero of generosDisponibles"
+          [ngValue]="genero.id"
+        >
+          {{ genero.nombre }}
+        </option>
       </select>
     </div>
+
+    <!-- Comentarios -->
     <div class="form-group">
       <label>Comentarios*</label>
-      <select [(ngModel)]="formData.comments" name="comments" class="form-input" required>
-        <option value="yes">si</option>
-        <option value="no">no</option>
+      <select
+        formControlName="comentarios"
+        name="comentarios"
+        class="form-input"
+        required
+      >
+        <option value="yes">Sí</option>
+        <option value="no">No</option>
       </select>
     </div>
+
+    <!-- Fecha de creación -->
     <div class="form-group">
       <label>Creado</label>
-      <input type="text" [(ngModel)]="formData.created" name="created" class="form-input" readonly>
+      <div class="fechahora">
+
+                <input type="date" id="fechaCreacion" name="fechaCreacion" class="fecha" formControlName="fechaCreacion" required>
+                <input type="time" id="fechaCreacion" name="fechaCreacion" class="hora" formControlName="horaCreacion" required>
+            </div>
     </div>
+
+    <!-- URL IMG -->
     <div class="form-group">
       <label>URL IMG</label>
-      <input type="text" [(ngModel)]="formData.urlImg" name="urlImg" class="form-input">
+      <input
+        type="text"
+        formControlName="urlImg"
+        name="urlImg"
+        class="form-input"
+      >
     </div>
+
+    <!-- Contenido -->
     <div class="form-group content-area">
       <label>Contenido</label>
-      <textarea [(ngModel)]="formData.content" name="content" class="form-textarea"></textarea>
+      <textarea
+        formControlName="content"
+        name="content"
+        class="form-textarea"
+      ></textarea>
     </div>
+
     <button type="submit" class="submit-button">guardar</button>
   </form>
 </div>
