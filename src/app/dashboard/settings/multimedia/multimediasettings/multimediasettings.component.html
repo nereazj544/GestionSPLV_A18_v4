@@ -4,40 +4,23 @@
     <div class="form-group">
       <label for="creado">Creado por: </label>
       <img [src]="imagen_perfil" alt="Imagen de perfil">
-      <input
-        type="text"
-        id="creado"
-        name="creado"
-        [value]="username"
-        readonly
-      >
+      <input type="text" id="creado" name="creado" [value]="username" readonly>
     </div>
 
     <!-- Título -->
     <div class="form-group">
       <label>Título*</label>
-      <input
-        type="text"
-        formControlName="titulo"
-        name="titulo"
-        class="form-input"
-        required
-      >
+      <input type="text" formControlName="titulo" name="titulo" class="form-input" required>
     </div>
 
     <!-- Tipo multimedia -->
     <div class="form-group">
       <label>Tipo multimedia*</label>
-      <select
-        formControlName="tipo"
-        name="tipo"
-        class="form-input"
-        required
-      >
+      <select formControlName="tipo" name="tipo" class="form-input" required>
         name="mediaType"
         class="form-input"
         required
-      >
+        >
         <option value="" disabled selected>Selecciona una opción</option>
         <option value="Pelicula">Pelicula</option>
         <option value="Videojuego">Videojuego</option>
@@ -50,18 +33,9 @@
     <div class="form-group">
       <label>Géneros*</label>
       <small>Puedes seleccionar hasta 5 géneros</small>
-      <select
-        multiple
-        formControlName="generos"
-        name="generos"
-        class="form-input"
-        (change)="onGeneroChange($event)"
-        required
-      >
-        <option
-          *ngFor="let genero of generosDisponibles"
-          [ngValue]="genero.id"
-        >
+      <select multiple formControlName="generos" name="generos" class="form-input" (change)="onGeneroChange($event)"
+        required>
+        <option *ngFor="let genero of generosDisponibles" [ngValue]="genero.id">
           {{ genero.nombre }}
         </option>
       </select>
@@ -70,12 +44,7 @@
     <!-- Comentarios -->
     <div class="form-group">
       <label>Comentarios*</label>
-      <select
-        formControlName="comentarios"
-        name="comentarios"
-        class="form-input"
-        required
-      >
+      <select formControlName="comentarios" name="comentarios" class="form-input" required>
         <option value="yes">Sí</option>
         <option value="no">No</option>
       </select>
@@ -86,30 +55,22 @@
       <label>Creado</label>
       <div class="fechahora">
 
-                <input type="date" id="fechaCreacion" name="fechaCreacion" class="fecha" formControlName="fechaCreacion" required>
-                <input type="time" id="fechaCreacion" name="fechaCreacion" class="hora" formControlName="horaCreacion" required>
-            </div>
+        <input type="date" id="fechaCreacion" name="fechaCreacion" class="fecha" formControlName="fechaCreacion"
+          required>
+        <input type="time" id="fechaCreacion" name="fechaCreacion" class="hora" formControlName="horaCreacion" required>
+      </div>
     </div>
 
     <!-- URL IMG -->
     <div class="form-group">
       <label>URL IMG</label>
-      <input
-        type="text"
-        formControlName="urlImg"
-        name="urlImg"
-        class="form-input"
-      >
+      <input type="text" formControlName="urlImg" name="urlImg" class="form-input">
     </div>
 
     <!-- Contenido -->
     <div class="form-group content-area">
       <label>Contenido</label>
-      <textarea
-        formControlName="content"
-        name="content"
-        class="form-textarea"
-      ></textarea>
+      <textarea formControlName="content" name="content" class="form-textarea"></textarea>
     </div>
 
     <button type="submit" class="submit-button">guardar</button>
