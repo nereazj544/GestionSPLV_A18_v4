@@ -1,1 +1,22 @@
-<p>multimedia works!</p>
+<h1>Multimedia</h1>
+
+<nav>
+    <ul class="nav-tabs">
+        <li *ngFor="let tab of tabs" class="nav-item" [class.active]="activeTab === tab" (click)="setActiveTab(tab)">
+            {{tab}}
+        </li>
+    </ul>
+</nav>
+
+<div class="content-area">
+    <div class="media-card">
+        <div class="media-image"></div>
+        <div class="media-info">
+            <div>
+                <strong>Título del [{{activeTab}}]:</strong>
+                <p>EL JUEGO DEL CALAMAR 2</p>
+            </div>
+            <a href="#" class="more-info">Más Inforacion</a>
+        </div>
+    </div>
+</div>
