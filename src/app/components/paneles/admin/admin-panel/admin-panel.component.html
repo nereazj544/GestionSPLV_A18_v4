@@ -6,18 +6,6 @@
     <div class="admin-sections">
         <div class="admin-section communication">
             <h3>COMUNICACION CON USUARIOS</h3>
-            <div class="messages-section">
-                <h4>Mensajes de usuarios</h4>
-                <p class="section-description">Revisa, responde y gestiona todos los mensajes del sitio</p>
-                <div class="status-bar">
-                    <div class="status-item">
-                        <span>Todos</span>
-                    </div>
-
-                </div>
-                <p class="no-content">NO HAY COMENTARIO AÚN</p>
-            </div>
-
             <div class="comments-section">
                 <h4>Comentarios</h4>
                 <p class="section-description">Revisa, responde y gestiona todos los comentarios del sitio</p>
@@ -27,7 +15,27 @@
                     </div>
 
                 </div>
-                <p class="no-content">NO HAY COMENTARIO AÚN</p>
+                <div *ngIf="comentarios.length > 0; else noComentarios">
+                    <div class="admin-comment" *ngFor="let c of comentarios">
+                        <div class="comment-header">
+                            <img [src]="c.avatar" alt="avatar" class="avatar" />
+                            <strong>{{ c.usuario }}</strong>
+                            <span class="fecha">{{ c.creado_en | date:'short' }}</span>
+                        </div>
+                        <p class="contenido">{{ c.contenido }}</p>
+                        <div *ngIf="c.tieneRespuesta" class="respuesta">
+                            <p><strong>Respuesta:</strong> {{ c.respuesta }}</p>
+                        </div>
+                        <div *ngIf="!c.tieneRespuesta" class="sin-respuesta">
+                            <em>No tiene respuesta aún.</em>
+                        </div>
+                    </div>
+                </div>
+
+                <ng-template #noComentarios>
+                    <p class="no-content">NO HAY COMENTARIO AÚN</p>
+                </ng-template>
+
             </div>
         </div>
 

@@ -16,7 +16,7 @@ export class AdminPanelComponent {
   blogs: any[] = [];
   filteredBlogs: any[] = [];
   selectedFilter: string = 'all';
-
+  comentarios: any[] = [];
 
 
 
@@ -28,6 +28,7 @@ export class AdminPanelComponent {
 
   ngOnInit() {
     this.cargarBlog();
+    this.cargarComentarios();
   }
 
   async cargarBlog() {
@@ -62,5 +63,42 @@ export class AdminPanelComponent {
     }
   }
 
+async cargarComentarios() {
+  try {
+    const { data, error } = await this.supabase.supabaseClient
+      .from('comentarios_blog')
+      .select(`
+        id,
+        contenido,
+        creado_en,
+        blog_id,
+        profiles (
+          username,
+          imagen_perfil
+        ),
+        respuestas_comentarios (
+          contenido
+        )
+      `)
+      .order('creado_en', { ascending: false });
+
+    if (error) {
+      console.error('Error cargando comentarios:', error);
+      return;
+    }
+
+    this.comentarios = data.map((c: any) => ({
+      id: c.id,
+      contenido: c.contenido,
+      creado_en: c.creado_en,
+      usuario: c.profiles?.username,
+      avatar: c.profiles?.imagen_perfil,
+      tieneRespuesta: c.respuestas_comentarios?.length > 0,
+      respuesta: c.respuestas_comentarios?.[0]?.contenido ?? null
+    }));
+  } catch (error) {
+    console.error('Error cargando comentarios:', error);
+  }
+}
 
 }
