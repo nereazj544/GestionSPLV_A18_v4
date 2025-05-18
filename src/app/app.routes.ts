@@ -19,6 +19,7 @@ import { BlogviewsComponent } from './dashboard/blogs/blogviews/blogviews.compon
 
 import { MultimediaviewsComponent } from './dashboard/multimedia/multimediaviews/multimediaviews.component';
 import { MultimediasettingsComponent } from './dashboard/settings/multimedia/multimediasettings/multimediasettings.component';
+import { MultimediaComponent } from './components/multimedia/multimedia.component';
 
 export const routes: Routes = [
     //{ path: '', component:  },
@@ -26,6 +27,7 @@ export const routes: Routes = [
     // TODO: RUTAS DE LA APLICACION
     { path: 'home', component: HOMEComponent },
     { path: 'novedades', component: NovedadesComponent },
+    { path: 'multimedia', component: MultimediaComponent },
 
     // TODO: RUTAS DE AUTENTICACION
     { path: 'login', component: AuthLoginComponent },
@@ -48,16 +50,19 @@ export const routes: Routes = [
 
     // TODO: RUTAS DE SETTINGS
     { path: 'settings/perfilsetting', component: PerfilsettingComponent },
-    { path: 'components/paneles/admin/admin-panel', component: AdminPanelComponent },
-    { path: 'components/paneles/proveedor/panel-proveedor', component: PanelProveedorComponent },
-    { path: 'components/paneles/admin/panel-add-user', component: PanelAddUserComponent },
-    
     { path: 'settings/blogsetting', component: BlogsettingComponent },
     { path: 'settings/multimediasettings/multimediasettings', component: MultimediasettingsComponent },
     
+    // TODO: MOSTRAR CONTENIDO 
     { path: 'dashboard/blogs/blogviews/:id', component: BlogviewsComponent },
     { path: 'dashboard/multimedia/multimediaviews/:id', component: MultimediaviewsComponent },
+    
+    // TODO: Paneles de desarrollo
+    { path: 'components/paneles/admin/admin-panel', component: AdminPanelComponent },
+    { path: 'components/paneles/proveedor/panel-proveedor', component: PanelProveedorComponent },
+    { path: 'components/paneles/admin/panel-add-user', component: PanelAddUserComponent },
 
+    
 
 
 
