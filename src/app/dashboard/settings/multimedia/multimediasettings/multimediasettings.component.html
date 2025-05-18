@@ -1,6 +1,11 @@
 <div class="form-container">
     <form (ngSubmit)="onSubmit()">
         <div class="form-group">
+            <label for="creado">Creado por: </label>
+            <img src="{{ imagen_perfil }}" alt="Imagen de perfil">
+            <input type="text" id="creado" name="creado" [value]="username" readonly>
+        </div>
+        <div class="form-group">
             <label>Título*</label>
             <input type="text" [(ngModel)]="formData.title" name="title" class="form-input">
         </div>
@@ -11,15 +16,22 @@
                 <option value="Pelicula">Pelicula</option>
                 <option value="Videojuego">Videojuego</option>
                 <option value="Serie">Serie</option>
-                <option value="Libros">Libros</option>
+                <option value="Libro">Libro</option>
             </select>
         </div>
+        <div class="form-group">
+            <label>Géneros*</label>
+            <small>Puedes seleccionar hasta 5 géneros</small>
+            <select multiple [(ngModel)]="formData.generos" name="generos" class="form-input">
+                <!-- <option *ngFor="let genero of generosDisponibles" [ngValue]="genero.id">{{ genero.nombre }}</option> -->
+            </select>
+        </div>
+
 
         <div class="form-group">
             <label>Comentarios*</label>
             <select [(ngModel)]="formData.comments" name="comments" class="form-input">
                 <option value="yes">si</option>
-                <option value="no">no</option>
             </select>
         </div>
 

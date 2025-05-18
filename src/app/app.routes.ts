@@ -16,8 +16,9 @@ import { PanelAddUserComponent } from './components/paneles/admin/panel-add-user
 import { PanelProveedorComponent } from './components/paneles/proveedor/panel-proveedor/panel-proveedor.component';
 import { BlogviewsComponent } from './dashboard/blogs/blogviews/blogviews.component';
 
-import { MultimediasettingsComponent } from './dashboard/settings/multimediasettings/multimediasettings.component';
+
 import { MultimediaviewsComponent } from './dashboard/multimedia/multimediaviews/multimediaviews.component';
+import { MultimediasettingsComponent } from './dashboard/settings/multimedia/multimediasettings/multimediasettings.component';
 
 export const routes: Routes = [
     //{ path: '', component:  },
@@ -52,7 +53,7 @@ export const routes: Routes = [
     { path: 'components/paneles/admin/panel-add-user', component: PanelAddUserComponent },
     
     { path: 'settings/blogsetting', component: BlogsettingComponent },
-    { path: 'settings/multimediasettings', component: MultimediasettingsComponent },
+    { path: 'settings/multimediasettings/multimediasettings', component: MultimediasettingsComponent },
     
     { path: 'dashboard/blogs/blogviews/:id', component: BlogviewsComponent },
     { path: 'dashboard/multimedia/multimediaviews/:id', component: MultimediaviewsComponent },
