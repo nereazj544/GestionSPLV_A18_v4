@@ -69,7 +69,7 @@ export class BlogviewsComponent implements OnInit {
     // 2. Respuestas admins (tabla aparte)
     const { data: respuestas, error: err2 } = await this.supabase.supabaseClient
       .from('respuestas_comentarios')
-      .select('*, profiles (username, imagen_perfil)')
+      .select('*, profiles (username, imagen_perfil, role)')
       .order('creado_en', { ascending: true });
 
     if (err1) { console.error(err1); return; }
@@ -154,6 +154,7 @@ async addRespuestaComentario(comentarioId: number, contenidoRespuesta: string) {
       {
         comentario_id: comentarioId,
         admin_id: adminId,
+
         contenido: contenidoRespuesta
         // creado_en se añade por defecto
       }
@@ -162,9 +163,6 @@ async addRespuestaComentario(comentarioId: number, contenidoRespuesta: string) {
   if (insertError) {
     console.error('Error al insertar la respuesta:', insertError);
   } else {
-    // Si todo va bien, limpias el campo y recargas respuestas
-    // Por ejemplo:
-    // this.adminReplyText = '';
     this.cargarComentariosYRespuestas(this.blogId);
   }
 }

@@ -54,7 +54,7 @@
                         <div>
                             <strong>{{ respuesta.profiles?.username || 'Admin' }}</strong>
                             <p class="comment-content">{{ respuesta.contenido }}</p>
-                            <span style="font-size:0.85em;color:#888;">(Respuesta de admin)</span>
+                            <span style="font-size:0.85em;color:#888;">(Respuesta de {{ respuesta.profiles?.role }})</span>
                         </div>
                     </div>
                 </div>
