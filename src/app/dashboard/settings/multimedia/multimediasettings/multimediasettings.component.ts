@@ -58,7 +58,7 @@ export class MultimediasettingsComponent implements OnInit {
       permite_comentarios: [true, Validators.required],
       generos: [[], Validators.required],
       descripcion: ['', Validators.required],
-      contenido_tipo: [[], Validators.required],
+      contenido_tipo: [[]],
       autor_obra: ['', Validators.required], // Añade el autor
       tipolibro: [[]], // Añade el tipo de libro
       fechaCreacion: ['', Validators.required],
