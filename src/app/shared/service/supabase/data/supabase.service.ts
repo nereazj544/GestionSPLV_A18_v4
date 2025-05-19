@@ -135,7 +135,7 @@ export class SupabaseService {
                 .from('contenido_tipo')
                 .insert([{
                     contenido_id: data.id,
-                    contenido_tipo_id: contenidoTipoId,
+                    tipolibro_id: contenidoTipoId,
 
                 }]);
             if (tipoError) throw tipoError;
