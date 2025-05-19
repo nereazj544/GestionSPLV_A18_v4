@@ -113,15 +113,13 @@ CREATE TABLE tipolibro (
 INSERT INTO tipolibro (nombre) VALUES
 ('manga'), ('comic'), ('novela'), ('novela-ligera'), ('novela-negra');
 
--- Añadir la relación en la tabla Multimedia
-ALTER TABLE contenidos
-ADD COLUMN id_tipolibro INT,
-ADD CONSTRAINT fk_tipolibro
-    FOREIGN KEY (id_tipolibro) REFERENCES tipolibro(id);
-
-    CREATE TABLE contenido_tipolibros (
+CREATE TABLE contenido_tipolibors (
     id serial PRIMARY KEY,
     contenido_id integer REFERENCES contenidos(id) ON DELETE CASCADE,
     tipolibro_id integer REFERENCES tipolibro(id) ON DELETE CASCADE
     
 );
+
+
+alter table contenidos
+ADD column autor_obra text;

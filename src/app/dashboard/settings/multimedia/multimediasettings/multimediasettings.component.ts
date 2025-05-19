@@ -18,31 +18,19 @@ export class MultimediasettingsComponent implements OnInit {
   imagen_perfil = '';
 
   generosDisponibles = [
-    { id: 1, nombre: 'Acción' },
-    { id: 2, nombre: 'Aventura' },
-    { id: 3, nombre: 'Animación' },
-    { id: 4, nombre: 'Ciencia ficción' },
-    { id: 5, nombre: 'Comedia' },
-    { id: 6, nombre: 'Crimen' },
-    { id: 7, nombre: 'Documental' },
-    { id: 8, nombre: 'Drama' },
-    { id: 9, nombre: 'Familia' },
-    { id: 10, nombre: 'Fantasía' },
-    { id: 11, nombre: 'Histórico' },
-    { id: 12, nombre: 'Horror' },
-    { id: 13, nombre: 'Misterio' },
-    { id: 14, nombre: 'Musical' },
-    { id: 15, nombre: 'Romance' },
-    { id: 16, nombre: 'Suspense' },
-    { id: 17, nombre: 'Terror' },
-    { id: 18, nombre: 'Thriller' },
-    { id: 19, nombre: 'Bélico' },
-    { id: 20, nombre: 'Western' },
-    { id: 21, nombre: 'Biografía' },
-    { id: 22, nombre: 'Deporte' },
-    { id: 23, nombre: 'Superhéroes' },
-    { id: 24, nombre: 'Infantil' },
-    { id: 27, nombre: 'Mafia' }
+    { id: 1, nombre: 'Acción' }, { id: 2, nombre: 'Aventura' },
+    { id: 3, nombre: 'Animación' }, { id: 4, nombre: 'Ciencia ficción' },
+    { id: 5, nombre: 'Comedia' }, { id: 6, nombre: 'Crimen' },
+    { id: 7, nombre: 'Documental' }, { id: 8, nombre: 'Drama' },
+    { id: 9, nombre: 'Familia' }, { id: 10, nombre: 'Fantasía' },
+    { id: 11, nombre: 'Histórico' }, { id: 12, nombre: 'Horror' },
+    { id: 13, nombre: 'Misterio' }, { id: 14, nombre: 'Musical' },
+    { id: 15, nombre: 'Romance' }, { id: 16, nombre: 'Suspense' },
+    { id: 17, nombre: 'Terror' }, { id: 18, nombre: 'Thriller' },
+    { id: 19, nombre: 'Bélico' }, { id: 20, nombre: 'Western' },
+    { id: 21, nombre: 'Biografía' }, { id: 22, nombre: 'Deporte' },
+    { id: 23, nombre: 'Superhéroes' }, { id: 24, nombre: 'Infantil' },
+    { id: 25, nombre: 'Mafia' }
   ];
 
   tipolibros = [
@@ -60,7 +48,7 @@ export class MultimediasettingsComponent implements OnInit {
   ) {
     this.multiFrom = this.fb.group({
       titulo: ['', Validators.required],
-      autor_obra: ['', Validators.required],
+      autor_obra: ['', Validators.required], // Campo para el autor
       tipo: ['', Validators.required],
       permite_comentarios: [true, Validators.required],
       creado: [new Date().toLocaleDateString()],
@@ -70,9 +58,8 @@ export class MultimediasettingsComponent implements OnInit {
       fechaCreacion: [new Date().toLocaleDateString(), Validators.required],
       horaCreacion: [new Date().toLocaleTimeString(), Validators.required],
       disponibilidad: ['disponible', Validators.required],
-      tipolibro: [null], // <-- Usar null o '' como valor inicial
+      tipolibro: [null], // Usar null como inicial
       comentarios: ['', Validators.required],
-      
     });
   }
 
@@ -119,20 +106,16 @@ export class MultimediasettingsComponent implements OnInit {
       titulo: formValues.titulo,
       descripcion: formValues.content,
       imagen_url: formValues.urlImg,
-      autor_obra: formValues.autor_obra,
-      fecha_creacion: formValues.fechaCreacion,
-      hora_creacion: formValues.horaCreacion,
-      creado_por: this.username,
       proveedor_id: this.id,
       permite_comentarios: formValues.permite_comentarios,
-      generos: formValues.generos, // Array de IDs de géneros
+      generos: formValues.generos,
       creado_en: new Date(),
-      comentarios: formValues.comentarios
+      comentarios: formValues.comentarios,
+      autor_obra: formValues.autor_obra // Añade el autor
     };
 
-    // Solo añade el tipo de libro si es 'libro'
     if (formValues.tipo === 'libro' && formValues.tipolibro) {
-      contenidoToInsert.id_tipolibro = Number(formValues.tipolibro);
+      contenidoToInsert.id_tipolibro = Number(formValues.tipolibro); // El id, no el nombre
     }
 
     try {
