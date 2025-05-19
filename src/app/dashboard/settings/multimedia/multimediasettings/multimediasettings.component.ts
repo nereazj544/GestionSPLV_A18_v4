@@ -48,26 +48,15 @@ export class MultimediasettingsComponent implements OnInit {
     private showService: ShowService
   ) {
     this.multiFrom = this.fb.group({
-      titulo: ['', Validators.required],
-      autor_obra: ['', Validators.required], // Campo para el autor
-      tipo: ['', Validators.required],
-      permite_comentarios: [true, Validators.required],
-      creado: [new Date().toLocaleDateString()],
-      urlImg: [''],
-      content: [''],
-      generos: [[], Validators.required],
-      fechaCreacion: [new Date().toLocaleDateString(), Validators.required],
-      horaCreacion: [new Date().toLocaleTimeString(), Validators.required],
-      disponibilidad: ['disponible', Validators.required],
-      tipolibro: [null], // Usar null como inicial
-      comentarios: ['', Validators.required],
+     
     });
   }
 
   async ngOnInit() {
-    await this.loadUserProfile();
+    await this.loadUserProfile(); // Cargar el perfil del usuario
   }
 
+  //Cargar el perfil del usuario, para mostrar su imagen y nombre
   async loadUserProfile() {
     const userId = await this.supabaseService.getCurrentUserId();
     if (!userId) {
@@ -84,6 +73,7 @@ export class MultimediasettingsComponent implements OnInit {
     this.imagen_perfil = data.imagen_perfil;
   }
 
+  //Metodo para solo poder seleccionar 5 generos
   onGeneroChange(event: any) {
     const selected = this.multiFrom.value.generos;
     if (selected.length > 5) {
