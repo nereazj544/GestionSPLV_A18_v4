@@ -236,6 +236,7 @@ export class SupabaseService {
     }
 
 
+    // Obtener todos los géneros
     getGeneros() {
         return from(this.supabaseClient
             .from('contenido_generos')

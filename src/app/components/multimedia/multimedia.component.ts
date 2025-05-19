@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { SupabaseService } from '../../shared/service/supabase/data/supabase.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-multimedia',
@@ -11,8 +12,18 @@ import { SupabaseService } from '../../shared/service/supabase/data/supabase.ser
   styleUrl: './multimedia.component.css'
 })
 export class MultimediaComponent {
+  multiFrom: FormGroup;
   allMultimedia: any[] = []; //sin filtrar
   filteredMultimedia: any[] = []; //filtrado
+
+  tipos_libros=[
+    {id: 1, nombre: 'Novela'},
+    {id: 2, nombre: 'Manga'},
+    {id: 3, nombre: 'Comic'},
+    {id: 4, nombre: 'Novela Ligera'},
+    {id: 5, nombre: 'Novela Negra'},
+  ]
+
 
   tabs = ['Libros', 'Peliculas', 'Series', 'Videojuegos'];
   activeTab = 'Series';
@@ -23,8 +34,20 @@ export class MultimediaComponent {
   }
 
   constructor(private supabaseService: SupabaseService,
-
-  ) { }
+              private fb: FormBuilder
+  ) {
+    this.multiFrom = this.fb.group({
+      titulo: ['', Validators.required],
+      tipo: ['', Validators.required],
+      tipo_libro: [''],             // SIEMPRE definir aunque esté oculto a veces
+      generos: [[], Validators.required],
+      comentarios: ['', Validators.required],
+      fechaCreacion: ['', Validators.required],
+      horaCreacion: ['', Validators.required],
+      urlImg: [''],
+      content: ['']
+    });
+  }
 
   ngOnInit(): void {
     this.cargarMultimedia();
@@ -32,7 +55,7 @@ export class MultimediaComponent {
 
 
   // TODO Mostrar los libros, peliculas, series y videojuegos de la Base de Datos
-multimedia: any[] = [];
+  multimedia: any[] = [];
 
   async cargarMultimedia() {
     try {
