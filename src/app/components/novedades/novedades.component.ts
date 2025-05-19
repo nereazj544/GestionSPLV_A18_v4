@@ -66,7 +66,7 @@ export class NovedadesComponent implements OnInit {
         if (this.currentFilter === 'Libros') {
           this.currentReleases = await this.releasesService.searchBooks(this.searchText);
         }
-        // Aquí puedes añadir más condiciones para otros tipos de búsqueda
+        
       } catch (error) {
         console.error('Error en la búsqueda:', error);
       }
@@ -109,6 +109,7 @@ export class NovedadesComponent implements OnInit {
     }
   }
 
+  //TODO FILTRO DE BLOGS (por tipo: duda o blog)
   onFilter(event: Event) {
     const target = event.target as HTMLSelectElement;
     const filterValue = target.value;

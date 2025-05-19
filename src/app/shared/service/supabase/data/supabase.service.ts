@@ -5,6 +5,7 @@ import { from } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class SupabaseService {
+
     supabaseClient: SupabaseClient;
     private userActual: any = null;
 
@@ -92,6 +93,7 @@ export class SupabaseService {
         return data;
     }
 
+    // Insertar contenido (libro, película, serie, videojuego)
     async insertContenido(contenidoData: any) {
         // 1. Insertar contenido principal
         const { data, error } = await this.supabaseClient
@@ -128,7 +130,7 @@ export class SupabaseService {
         return data;
     }
 
-
+    // Obtener todos los blogs
     getBlogs() {
         return from(this.supabaseClient
             .from('blogs')
@@ -137,7 +139,7 @@ export class SupabaseService {
         );
     }
 
-
+    // Obtener blogs con información del autor
     getBlogsWithUserInfo() {
         return from(this.supabaseClient
             .from('blogs')
@@ -152,6 +154,7 @@ export class SupabaseService {
         );
     }
 
+    // Obtener un blog por su ID
     getBlogbyIdAutor(id: string) {
         return from(this.supabaseClient
             .from('blogs')
@@ -173,7 +176,7 @@ export class SupabaseService {
         }
     }
 
-
+    // Insertar un comentario
     async insertComentario(comentarioData: any) {
         const { data, error } = await this.supabaseClient
             .from('comentarios_blogs')
@@ -200,6 +203,7 @@ export class SupabaseService {
         );
     }
 
+    // Obtener comentarios por blog
     getRespuestasPorComentario(comentarioId: number) {
         return from(this.supabaseClient
             .from('respuestas_comentarios')
@@ -220,5 +224,14 @@ export class SupabaseService {
             .from('respuestas_comentarios')
             .insert([respuesta])
             .select());
+    }
+
+    //Mostrar los libros, peliculas, series y videojuegos de la Base de Datos
+    getAllMultimedia() {
+        return from(this.supabaseClient
+            .from('contenidos')
+            .select('*')
+            .order('creado_en', { ascending: true })
+        );
     }
 }
