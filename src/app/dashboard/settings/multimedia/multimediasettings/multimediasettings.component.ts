@@ -30,7 +30,8 @@ export class MultimediasettingsComponent implements OnInit {
     { id: 19, nombre: 'Bélico' }, { id: 20, nombre: 'Western' },
     { id: 21, nombre: 'Biografía' }, { id: 22, nombre: 'Deporte' },
     { id: 23, nombre: 'Superhéroes' }, { id: 24, nombre: 'Infantil' },
-    { id: 25, nombre: 'Mafia' }
+    { id: 25, nombre: 'Mafia' }, { id: 26, nombre: 'Dark' },
+    { id: 27, nombre: 'Dark Romance' },
   ];
 
   tipolibros = [
