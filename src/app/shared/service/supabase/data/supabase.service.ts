@@ -129,13 +129,14 @@ export class SupabaseService {
         }
 
         // 3. Insertar tipo de libro (si es un libro)
-      if(contenidoData.tipolibro && contenidoData.tipo === 'libro'){
-        for (const tipoId of contenidoData.tipolibro) {
+      if(contenidoData.contenido_tipo && contenidoData.tipo === 'libro'){
+        for (const contenidoTipoId of contenidoData.contenido_tipo) {
             const { error: tipoError } = await this.supabaseClient
-                .from('contenido_tiposlibros')
+                .from('contenido_tipo')
                 .insert([{
                     contenido_id: data.id,
-                    tipo_id: tipoId
+                    contenido_tipo_id: contenidoTipoId,
+
                 }]);
             if (tipoError) throw tipoError;
         }

@@ -39,7 +39,7 @@
     <!-- Tipos de libro -->
     <div class="form-group" *ngIf="multiFrom.get('tipo')?.value === 'libro'">
       <label>Tipo libro*</label>
-      <select formControlName="tipolibro" class="form-input" >
+      <select formControlName="contenido_tipo" class="form-input" >
         <option value="">Selecciona una opción</option>
         <option *ngFor="let tipo of tipolibros" [value]="tipo.id">
           {{ tipo.nombre }}
@@ -60,7 +60,7 @@
     <div class="form-group">
       <label>Comentarios*</label>
       <select formControlName="permite_comentarios" class="form-input" required>
-        <option value="yes">Sí</option>
+        <option value="yes" >Sí</option>
         <option value="no">No</option>
       </select>
     </div>
@@ -80,7 +80,7 @@
     <!-- Contenido -->
     <div class="form-group content-area">
       <label>Contenido</label>
-      <textarea formControlName="contenido" class="form-textarea"></textarea>
+      <textarea formControlName="descripcion" class="form-textarea"></textarea>
     </div>
     <button type="submit" class="submit-button">guardar</button>
   </form>

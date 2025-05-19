@@ -39,7 +39,10 @@ export class MultimediasettingsComponent implements OnInit {
     { id: 2, nombre: 'Comic' },
     { id: 3, nombre: 'Novela' },
     { id: 4, nombre: 'Novela ligera' },
-    { id: 5, nombre: 'Novela negra' }
+    { id: 5, nombre: 'Novela negra' },
+    { id: 6, nombre: 'Manhwa' },
+    { id: 7, nombre: 'Manhua' },
+
   ];
 
   constructor(
@@ -54,10 +57,10 @@ export class MultimediasettingsComponent implements OnInit {
       imagen_url: ['', Validators.required],
       permite_comentarios: [true, Validators.required],
       generos: [[], Validators.required],
-      comentarios: [true, Validators.required],
+      descripcion: ['', Validators.required],
+      contenido_tipo: [[], Validators.required],
       autor_obra: ['', Validators.required], // Añade el autor
       tipolibro: [[]], // Añade el tipo de libro
-      contenido:['', Validators.required],
       fechaCreacion: ['', Validators.required],
       horaCreacion: ['', Validators.required]
     });
@@ -106,8 +109,9 @@ export class MultimediasettingsComponent implements OnInit {
       tipo: formValues.tipo,
       disponibilidad: formValues.disponibilidad,
       titulo: formValues.titulo,
-      descripcion: formValues.content,
-      imagen_url: formValues.urlImg,
+      descripcion: formValues.descripcion,
+      contenido_tipo: formValues.contenido_tipo,
+      imagen_url: formValues.imagen_url,
       proveedor_id: this.id,
       permite_comentarios: formValues.permite_comentarios,
       generos: formValues.generos,
@@ -116,8 +120,8 @@ export class MultimediasettingsComponent implements OnInit {
       autor_obra: formValues.autor_obra // Añade el autor
     };
 
-    if (formValues.tipo === 'libro' && formValues.tipolibro) {
-      contenidoToInsert.id_tipolibro = Number(formValues.tipolibro); // El id, no el nombre
+    if (formValues.tipo === 'libro' && formValues.contenido_tipo) {
+      contenidoToInsert.id_tipolibro = Number(formValues.contenido_tipo); // El id, no el nombre
     }
 
     try {
