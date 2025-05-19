@@ -102,3 +102,19 @@ CREATE TABLE respuestas_comentarios (
         WHERE id = admin_id AND role = 'admin'
     ))
 );
+
+-- Crear la tabla de tipos de libro
+CREATE TABLE TipoLibro (
+    id serial primary key,
+    nombre VARCHAR(50) UNIQUE NOT NULL
+);
+
+-- Insertar los tipos
+INSERT INTO TipoLibro (nombre) VALUES
+('manga'), ('comic'), ('novela'), ('novela-ligera'), ('novela-negra');
+
+-- Añadir la relación en la tabla Multimedia
+ALTER TABLE contenidos
+ADD COLUMN id_tipo_libro INT,
+ADD CONSTRAINT fk_tipo_libro
+    FOREIGN KEY (id_tipo_libro) REFERENCES TipoLibro(id);
