@@ -48,7 +48,18 @@ export class MultimediasettingsComponent implements OnInit {
     private showService: ShowService
   ) {
     this.multiFrom = this.fb.group({
-     
+      titulo: ['', Validators.required],
+      tipo: ['', Validators.required],
+      disponibilidad: ['disponible', Validators.required],
+      imagen_url: ['', Validators.required],
+      permite_comentarios: [true, Validators.required],
+      generos: [[], Validators.required],
+      comentarios: [true, Validators.required],
+      autor_obra: ['', Validators.required], // Añade el autor
+      tipolibro: [[]], // Añade el tipo de libro
+      contenido:['', Validators.required],
+      fechaCreacion: ['', Validators.required],
+      horaCreacion: ['', Validators.required]
     });
   }
 

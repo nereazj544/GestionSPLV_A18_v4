@@ -16,6 +16,15 @@
       <label>Autor*</label>
       <input type="text" formControlName="autor_obra" class="form-input" required>
     </div>
+     <!-- Disponibilidad -->
+    <div class="form-group">
+      <label>Disponibilidad *</label>
+      <select formControlName="disponibilidad" class="form-input" required>
+        <option value="" disabled>Selecciona una opción</option>
+        <option value="disponible">Disponible</option>
+        <option value="proximamente">Próximamente</option>
+      </select>
+    </div>
     <!-- Tipo multimedia -->
     <div class="form-group">
       <label>Tipo multimedia*</label>
@@ -30,7 +39,7 @@
     <!-- Tipos de libro -->
     <div class="form-group" *ngIf="multiFrom.get('tipo')?.value === 'libro'">
       <label>Tipo libro*</label>
-      <select formControlName="tipolibro" class="form-input" required>
+      <select formControlName="tipolibro" class="form-input" >
         <option value="">Selecciona una opción</option>
         <option *ngFor="let tipo of tipolibros" [value]="tipo.id">
           {{ tipo.nombre }}
@@ -50,8 +59,9 @@
     <!-- Comentarios -->
     <div class="form-group">
       <label>Comentarios*</label>
-      <select formControlName="comentarios" class="form-input" required>
+      <select formControlName="permite_comentarios" class="form-input" required>
         <option value="yes">Sí</option>
+        <option value="no">No</option>
       </select>
     </div>
     <!-- Fecha de creación -->
@@ -65,12 +75,12 @@
     <!-- URL IMG -->
     <div class="form-group">
       <label>URL IMG</label>
-      <input type="text" formControlName="urlImg" class="form-input">
+      <input type="text" formControlName="imagen_url" class="form-input">
     </div>
     <!-- Contenido -->
     <div class="form-group content-area">
       <label>Contenido</label>
-      <textarea formControlName="content" class="form-textarea"></textarea>
+      <textarea formControlName="contenido" class="form-textarea"></textarea>
     </div>
     <button type="submit" class="submit-button">guardar</button>
   </form>

@@ -103,11 +103,10 @@ export class SupabaseService {
                 disponibilidad: contenidoData.disponibilidad,
                 titulo: contenidoData.titulo,
                 autor_obra: contenidoData.autor_obra,
-                comentarios: contenidoData.comentarios,
+                permite_comentarios: contenidoData.permite_comentarios ?? true,
                 descripcion: contenidoData.descripcion,
                 imagen_url: contenidoData.imagen_url,
                 proveedor_id: contenidoData.proveedor_id,
-                permite_comentarios: contenidoData.permite_comentarios ?? true,
                 creado_en: contenidoData.creado_en ?? new Date().toISOString()
             }])
             .select()

@@ -41,8 +41,7 @@ CREATE TABLE contenidos (
     imagen_url TEXT,
     proveedor_id UUID REFERENCES profiles(id) ON DELETE SET NULL,
     permite_comentarios BOOLEAN DEFAULT TRUE,
-    creado_en TIMESTAMPTZ DEFAULT now(),
-    id_tipolibro INT REFERENCES tipolibro(id)
+    creado_en TIMESTAMPTZ DEFAULT now()
 );
 
 -- Blogs/Dudas, creados por usuarios con permisos (usualmente admin)
@@ -113,3 +112,9 @@ CREATE TABLE respuestas_comentarios (
     creado_en TIMESTAMPTZ DEFAULT now()
 );
 
+create table contenido_tipo(
+    id serial PRIMARY KEY,
+    contenido_id integer REFERENCES contenidos(id) ON DELETE CASCADE,
+    tipolibro_id integer REFERENCES tipolibro(id) ON DELETE CASCADE
+
+)
