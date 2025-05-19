@@ -19,6 +19,7 @@ export class MultimediaComponent {
 
   setActiveTab(tab: string) {
     this.activeTab = tab;
+    this.filtrarPorTipoyBusqueda();
   }
 
   constructor(private supabaseService: SupabaseService,
@@ -34,36 +35,33 @@ export class MultimediaComponent {
 multimedia: any[] = [];
 
   async cargarMultimedia() {
-    try{
-
+    try {
       const { data, error } = await firstValueFrom(this.supabaseService.getAllMultimedia());
       if (error) {
         console.error('Error al cargar multimedia:', error);
         return;
-    }
-    console.log('Multimedia cargada:', data);
-    this.multimedia = data;
-  }catch (error) {
-    console.error('Error al cargar multimedia:', error);
-  }
-
-  }
-  
-  
-  // TODO Buscador de libros, peliculas, series y videojuegos de la Base de Datos
-
-  async search(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const searchTerm = input.value.toLowerCase();
-
-    if (searchTerm) {
-      this.multimedia = this.multimedia.filter(item =>
-        item.titulo.toLowerCase().includes(searchTerm)
-      );
-    } else {
-      this.cargarMultimedia();
+      }
+      this.allMultimedia = data;
+      this.filtrarPorTipoyBusqueda();
+    } catch (error) {
+      console.error('Error al cargar multimedia:', error);
     }
   }
 
+  searchTerm: string = '';
+
+  // Se ejecuta cuando el input cambia
+  search(event: Event) {
+    this.searchTerm = (event.target as HTMLInputElement).value.toLowerCase();
+    this.filtrarPorTipoyBusqueda();
+  }
+
+  // Filtro combinado
+  async filtrarPorTipoyBusqueda() {
+    this.filteredMultimedia = this.allMultimedia.filter(item =>
+      item.tipo.toLowerCase() === this.activeTab.toLowerCase().slice(0, -1) && // "Libros" → "libro"
+      item.titulo.toLowerCase().includes(this.searchTerm)
+    );
+  }
 
 }

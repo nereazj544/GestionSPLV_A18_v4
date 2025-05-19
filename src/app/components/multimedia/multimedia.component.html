@@ -23,14 +23,19 @@
 </nav>
 
 <div class="content-area">
-    <div class="media-card">
-        <div class="media-image"></div>
+    <div class="media-card" *ngFor="let media of filteredMultimedia">
+        <div class="media-image">
+            <img [src]="media.imagen_url" alt="">
+        </div>
         <div class="media-info">
             <div>
-                <strong>Título del {{activeTab}}:</strong>
-                <p>EL JUEGO DEL CALAMAR 2</p>
+                <strong>Título {{activeTab}}:</strong>
+                <p>{{ media.titulo }}</p>
+                
+
             </div>
-            <a href="#" class="more-info">Más Inforacion</a>
+            <a href="#" class="more-info">Más Información</a>
         </div>
+
     </div>
 </div>
