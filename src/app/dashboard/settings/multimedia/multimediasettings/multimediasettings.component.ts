@@ -121,6 +121,7 @@ export class MultimediasettingsComponent implements OnInit {
 
     try {
       await this.supabaseService.insertContenido(contenidoToInsert);
+      console.log('Contenido guardado:', contenidoToInsert);
       alert('Contenido guardado correctamente');
       this.multiFrom.reset();
     } catch (error) {
