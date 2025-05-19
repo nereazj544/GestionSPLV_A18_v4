@@ -17,20 +17,40 @@ export class MultimediasettingsComponent implements OnInit {
   username = '';
   imagen_perfil = '';
 
-  // ID y nombre para futuras integraciones desde BBDD
   generosDisponibles = [
     { id: 1, nombre: 'Acción' },
     { id: 2, nombre: 'Aventura' },
-    { id: 3, nombre: 'Ciencia Ficción' },
-    { id: 4, nombre: 'Comedia' },
-    { id: 5, nombre: 'Drama' },
-    { id: 6, nombre: 'Fantasía' },
-    { id: 7, nombre: 'Horror' },
-    { id: 8, nombre: 'Romance' },
-    { id: 9, nombre: 'Suspenso' },
-    { id: 10, nombre: 'Terror' },
-    { id: 11, nombre: 'Deportes' },
-    { id: 12, nombre: 'Documental' },
+    { id: 3, nombre: 'Animación' },
+    { id: 4, nombre: 'Ciencia ficción' },
+    { id: 5, nombre: 'Comedia' },
+    { id: 6, nombre: 'Crimen' },
+    { id: 7, nombre: 'Documental' },
+    { id: 8, nombre: 'Drama' },
+    { id: 9, nombre: 'Familia' },
+    { id: 10, nombre: 'Fantasía' },
+    { id: 11, nombre: 'Histórico' },
+    { id: 12, nombre: 'Horror' },
+    { id: 13, nombre: 'Misterio' },
+    { id: 14, nombre: 'Musical' },
+    { id: 15, nombre: 'Romance' },
+    { id: 16, nombre: 'Suspense' },
+    { id: 17, nombre: 'Terror' },
+    { id: 18, nombre: 'Thriller' },
+    { id: 19, nombre: 'Bélico' },
+    { id: 20, nombre: 'Western' },
+    { id: 21, nombre: 'Biografía' },
+    { id: 22, nombre: 'Deporte' },
+    { id: 23, nombre: 'Superhéroes' },
+    { id: 24, nombre: 'Infantil' },
+    { id: 27, nombre: 'Mafia' }
+  ];
+
+  tipolibros = [
+    { id: 1, nombre: 'Manga' },
+    { id: 2, nombre: 'Comic' },
+    { id: 3, nombre: 'Novela' },
+    { id: 4, nombre: 'Novela ligera' },
+    { id: 5, nombre: 'Novela negra' }
   ];
 
   constructor(
@@ -45,10 +65,12 @@ export class MultimediasettingsComponent implements OnInit {
       creado: [new Date().toLocaleDateString()],
       urlImg: [''],
       content: [''],
-      generos: [[], Validators.required], // <- Array, no string
+      generos: [[], Validators.required],
       fechaCreacion: [new Date().toLocaleDateString(), Validators.required],
       horaCreacion: [new Date().toLocaleTimeString(), Validators.required],
       disponibilidad: ['disponible', Validators.required],
+      tipolibro: [null], // <-- Usar null o '' como valor inicial
+      comentarios: ['', Validators.required],
     });
   }
 
@@ -72,11 +94,9 @@ export class MultimediasettingsComponent implements OnInit {
     this.imagen_perfil = data.imagen_perfil;
   }
 
-  // Limitador de géneros en selección
   onGeneroChange(event: any) {
     const selected = this.multiFrom.value.generos;
     if (selected.length > 5) {
-      // Elimina el último seleccionado
       selected.pop();
       this.multiFrom.get('generos')?.setValue(selected);
       alert('Puedes seleccionar hasta 5 géneros');
@@ -88,9 +108,10 @@ export class MultimediasettingsComponent implements OnInit {
       alert('Completa todos los campos obligatorios');
       return;
     }
-    // Prepara los datos del formulario
+
     const formValues = this.multiFrom.value;
-    const contenidoToInsert = {
+
+    const contenidoToInsert: any = {
       tipo: formValues.tipo,
       disponibilidad: formValues.disponibilidad,
       titulo: formValues.titulo,
@@ -99,8 +120,14 @@ export class MultimediasettingsComponent implements OnInit {
       proveedor_id: this.id,
       permite_comentarios: formValues.permite_comentarios,
       generos: formValues.generos, // Array de IDs de géneros
-      creado_en: new Date() // O combínalo con fechaCreacion/horaCreacion si prefieres
+      creado_en: new Date(),
+      comentarios: formValues.comentarios
     };
+
+    // Solo añade el tipo de libro si es 'libro'
+    if (formValues.tipo === 'libro' && formValues.tipolibro) {
+      contenidoToInsert.id_tipolibro = Number(formValues.tipolibro);
+    }
 
     try {
       await this.supabaseService.insertContenido(contenidoToInsert);

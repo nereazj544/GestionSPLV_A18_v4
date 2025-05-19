@@ -244,4 +244,12 @@ export class SupabaseService {
             .order('nombre', { ascending: true })
         );
     }
+
+    getTipos(){
+        return from(this.supabaseClient
+            .from('contenido_tiposlibros')
+            .select('*, tiposlibros(nombre)')
+            .order('nombre', { ascending: true })
+        );
+    }
 }

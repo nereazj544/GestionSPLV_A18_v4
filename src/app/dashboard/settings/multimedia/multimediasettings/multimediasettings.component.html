@@ -17,10 +17,6 @@
     <div class="form-group">
       <label>Tipo multimedia*</label>
       <select formControlName="tipo" name="tipo" class="form-input" required>
-        name="mediaType"
-        class="form-input"
-        required
-        >
         <option value="" disabled selected>Selecciona una opción</option>
         <option value="pelicula">Pelicula</option>
         <option value="videojuego">Videojuego</option>
@@ -32,13 +28,11 @@
     <!-- Tipos de libro -->
     <div class="form-group" *ngIf="multiFrom.get('tipo')?.value === 'libro'">
       <label>Tipo libro*</label>
-      <select formControlName="tipo_libro" class="form-input" required>
-        <option value="" disabled>Selecciona una opción</option>
-        <option value="manga">Manga</option>
-        <option value="comic">Comic</option>
-        <option value="novela">Novela</option>
-        <option value="novela-ligera">Novela ligera</option>
-        <option value="novela-negra">Novela negra</option>
+      <select formControlName="tipolibro" class="form-input" required>
+        <option value="">Selecciona una opción</option>
+        <option *ngFor="let tipo of tipolibros" [ngValue]="tipo.nombre">
+          {{ tipo.nombre }}
+        </option>
       </select>
     </div>
 

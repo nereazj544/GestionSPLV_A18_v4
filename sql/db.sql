@@ -104,17 +104,24 @@ CREATE TABLE respuestas_comentarios (
 );
 
 -- Crear la tabla de tipos de libro
-CREATE TABLE TipoLibro (
+CREATE TABLE tipolibro (
     id serial primary key,
     nombre VARCHAR(50) UNIQUE NOT NULL
 );
 
 -- Insertar los tipos
-INSERT INTO TipoLibro (nombre) VALUES
+INSERT INTO tipolibro (nombre) VALUES
 ('manga'), ('comic'), ('novela'), ('novela-ligera'), ('novela-negra');
 
 -- Añadir la relación en la tabla Multimedia
 ALTER TABLE contenidos
-ADD COLUMN id_tipo_libro INT,
-ADD CONSTRAINT fk_tipo_libro
-    FOREIGN KEY (id_tipo_libro) REFERENCES TipoLibro(id);
+ADD COLUMN id_tipolibro INT,
+ADD CONSTRAINT fk_tipolibro
+    FOREIGN KEY (id_tipolibro) REFERENCES tipolibro(id);
+
+    CREATE TABLE contenido_tipolibros (
+    id serial PRIMARY KEY,
+    contenido_id integer REFERENCES contenidos(id) ON DELETE CASCADE,
+    tipolibro_id integer REFERENCES tipolibro(id) ON DELETE CASCADE
+    
+);
