@@ -234,4 +234,13 @@ export class SupabaseService {
             .order('creado_en', { ascending: true })
         );
     }
+
+
+    getGeneros() {
+        return from(this.supabaseClient
+            .from('contenido_generos')
+            .select('*, generos(nombre)')
+            .order('nombre', { ascending: true })
+        );
+    }
 }
