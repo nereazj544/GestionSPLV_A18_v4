@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { SupabaseService } from '../../shared/service/supabase/data/supabase.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-multimedia',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './multimedia.component.html',
   styleUrl: './multimedia.component.css'
 })

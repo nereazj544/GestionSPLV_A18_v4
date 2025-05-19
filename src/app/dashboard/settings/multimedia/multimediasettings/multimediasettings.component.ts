@@ -60,6 +60,7 @@ export class MultimediasettingsComponent implements OnInit {
   ) {
     this.multiFrom = this.fb.group({
       titulo: ['', Validators.required],
+      autor_obra: ['', Validators.required],
       tipo: ['', Validators.required],
       permite_comentarios: [true, Validators.required],
       creado: [new Date().toLocaleDateString()],
@@ -71,6 +72,7 @@ export class MultimediasettingsComponent implements OnInit {
       disponibilidad: ['disponible', Validators.required],
       tipolibro: [null], // <-- Usar null o '' como valor inicial
       comentarios: ['', Validators.required],
+      
     });
   }
 
@@ -117,6 +119,10 @@ export class MultimediasettingsComponent implements OnInit {
       titulo: formValues.titulo,
       descripcion: formValues.content,
       imagen_url: formValues.urlImg,
+      autor_obra: formValues.autor_obra,
+      fecha_creacion: formValues.fechaCreacion,
+      hora_creacion: formValues.horaCreacion,
+      creado_por: this.username,
       proveedor_id: this.id,
       permite_comentarios: formValues.permite_comentarios,
       generos: formValues.generos, // Array de IDs de géneros
