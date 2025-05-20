@@ -20,6 +20,7 @@ import { BlogviewsComponent } from './dashboard/blogs/blogviews/blogviews.compon
 import { MultimediaviewsComponent } from './dashboard/multimedia/multimediaviews/multimediaviews.component';
 import { MultimediasettingsComponent } from './dashboard/settings/multimedia/multimediasettings/multimediasettings.component';
 import { MultimediaComponent } from './components/multimedia/multimedia.component';
+import { MibibliotecaComponent } from './components/mibiblioteca/mibiblioteca.component';
 
 export const routes: Routes = [
     //{ path: '', component:  },
@@ -28,6 +29,7 @@ export const routes: Routes = [
     { path: 'home', component: HOMEComponent },
     { path: 'novedades', component: NovedadesComponent },
     { path: 'multimedia', component: MultimediaComponent },
+    { path: 'mibiblioteca', component: MibibliotecaComponent },
 
     // TODO: RUTAS DE AUTENTICACION
     { path: 'login', component: AuthLoginComponent },
