@@ -41,19 +41,29 @@
 </div>
 
 <div class="separador"></div>
+<div class="container_reviews">
 
-<h1>Comunidad</h1>
-<p>Últimas <span>“Reviews”</span> de los usuarios</p>
-<div class="filtro">
-    <label for="">Tipo de multimedia</label>
-    <select (change)="filtrarReviews($event)">
+    
+    <h1>Comunidad</h1>
+    <p>Últimas <span>“Reviews”</span> de los usuarios</p>
+    <div class="filtro">
+        <label for="">Tipo de multimedia</label>
+        <select (change)="filtrarReviews($event)">
             <option value="all">Todos</option>
             <option value="videojuego">Videojuegos</option>
             <option value="serie">Series</option>
             <option value="pelicula">Peliculas</option>
             <option value="libro">Libros</option>
         </select>
+    </div>
+    
+    
+    <div class="reviews">
+        <button>VER MÁS CONTENIDO</button>
+    <div class="separador"></div>    
+    </div>
+    
+    
+    
 </div>
-
-
-<div class="reviews"></div>
+    

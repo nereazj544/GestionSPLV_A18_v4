@@ -28,6 +28,18 @@ CREATE TABLE generos (
     nombre TEXT NOT NULL UNIQUE
 );
 
+create table plataforma(
+    id serial primary key,
+    nombre text not null unique
+);
+
+create table temporada(
+    id serial primary key,
+    numero text not null unique
+);
+
+
+
 -- TABLAS SECUNDARIAS
 
 -- Contenidos multimedia (pueden ser libros, series, etc)
@@ -64,6 +76,20 @@ CREATE TABLE contenido_generos (
     contenido_id INT REFERENCES contenidos(id) ON DELETE CASCADE,
     genero_id INT REFERENCES generos(id) ON DELETE CASCADE
 );
+
+CREATE TABLE contenido_plataformas (
+    id SERIAL PRIMARY KEY,
+    contenido_id INT REFERENCES contenidos(id) ON DELETE CASCADE,
+    plataforma_id INT REFERENCES plataforma(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE contenido_temporada (
+    id SERIAL PRIMARY KEY,
+    contenido_id INT REFERENCES contenidos(id) ON DELETE CASCADE,
+    temporada_id INT REFERENCES temporada(id) ON DELETE CASCADE
+);
+
 
 -- Guardar el contenido en la biblioteca personal de un usuario
 CREATE TABLE mi_biblioteca (
