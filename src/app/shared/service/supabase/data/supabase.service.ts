@@ -142,6 +142,32 @@ export class SupabaseService {
             }
         }
 
+        // 4. Insertar plataformas (si existen)
+        if (contenidoData.plataformas && Array.isArray(contenidoData.plataformas)) {
+            for (const plataformaId of contenidoData.plataforma) {
+                const { error: plataformaError } = await this.supabaseClient
+                    .from('contenido_plataformas')
+                    .insert([{
+                        contenido_id: data.id,
+                        plataforma_id: plataformaId
+                    }]);
+                if (plataformaError) throw plataformaError;
+            }
+        }
+
+        // 5. Insertar temporadas (si existen)
+        if (contenidoData.temporadas && Array.isArray(contenidoData.temporadas)) {
+            for (const temporadaId of contenidoData.temporada) {
+                const { error: temporadaError } = await this.supabaseClient
+                    .from('contenido_temporadas')
+                    .insert([{
+                        contenido_id: data.id,
+                        temporada_id: temporadaId
+                    }]);
+                if (temporadaError) throw temporadaError;
+            }
+        }
+
         return data;
     }
 

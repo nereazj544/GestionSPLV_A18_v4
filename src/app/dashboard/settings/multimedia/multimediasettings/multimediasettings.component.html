@@ -16,7 +16,7 @@
       <label>Autor*</label>
       <input type="text" formControlName="autor_obra" class="form-input" required>
     </div>
-     <!-- Disponibilidad -->
+    <!-- Disponibilidad -->
     <div class="form-group">
       <label>Disponibilidad *</label>
       <select formControlName="disponibilidad" class="form-input" required>
@@ -36,13 +36,33 @@
         <option value="libro">Libro</option>
       </select>
     </div>
-    <!-- Tipos de libro -->
+    <!-- TODO: SELECCIONES MÁS ESPECIFICAS -->
     <div class="form-group" *ngIf="multiFrom.get('tipo')?.value === 'libro'">
       <label>Tipo libro*</label>
-      <select formControlName="contenido_tipo" class="form-input" >
+      <select formControlName="contenido_tipo" class="form-input">
         <option value="">Selecciona una opción</option>
         <option *ngFor="let tipo of tipolibros" [value]="tipo.id">
           {{ tipo.nombre }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group" *ngIf="multiFrom.get('tipo')?.value === 'videojuego'">
+      <label>Plataformas*</label>
+      <select formControlName="plataformas" class="form-input">
+        <option value="">Selecciona una opción</option>
+        <option *ngFor="let plataforma of plataformas" [value]="plataforma.id">
+          {{ plataforma.nombre }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group" *ngIf="multiFrom.get('tipo')?.value === 'serie'">
+      <label>Temporadas*</label>
+      <select formControlName="temporadas" class="form-input">
+
+        <option *ngFor="let temporada of temporadas" [value]="temporada.id">
+          {{ temporada.nombre }}
         </option>
       </select>
     </div>
@@ -60,7 +80,7 @@
     <div class="form-group">
       <label>Comentarios*</label>
       <select formControlName="permite_comentarios" class="form-input" required>
-        <option value="yes" >Sí</option>
+        <option value="yes">Sí</option>
         <option value="no">No</option>
       </select>
     </div>

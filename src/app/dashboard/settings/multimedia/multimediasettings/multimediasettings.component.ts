@@ -45,6 +45,28 @@ export class MultimediasettingsComponent implements OnInit {
 
   ];
 
+  plataformas = [
+    { id: 1, nombre: 'PS4|PS5' },
+    { id: 2, nombre: 'Xbox-S|X' },
+    { id: 3, nombre: 'Nintendo Switch' },
+    { id: 4, nombre: 'PC' },
+    { id: 5, nombre: 'Nintendo DS' },
+    { id: 6, nombre: 'Nintendo 3DS' }
+  ];
+
+  temporadas = [
+    { id: 1, nombre: '1' },
+    { id: 2, nombre: '2' },
+    { id: 3, nombre: '3' },
+    { id: 4, nombre: '4' },
+    { id: 5, nombre: '5' },
+    { id: 6, nombre: '6' },
+    { id: 7, nombre: '7' },
+    { id: 8, nombre: '8' },
+    { id: 9, nombre: '9' },
+    { id: 10, nombre: '10' }
+  ];
+
   constructor(
     private fb: FormBuilder,
     private supabaseService: SupabaseService,
@@ -59,6 +81,8 @@ export class MultimediasettingsComponent implements OnInit {
       generos: [[], Validators.required],
       descripcion: ['', Validators.required],
       contenido_tipo: [[]],
+      plataformas: [[]],
+      temporadas: [[]],
       autor_obra: ['', Validators.required], // Añade el autor
       tipolibro: [[]], // Añade el tipo de libro
       fechaCreacion: ['', Validators.required],
@@ -115,6 +139,8 @@ export class MultimediasettingsComponent implements OnInit {
       proveedor_id: this.id,
       permite_comentarios: formValues.permite_comentarios,
       generos: formValues.generos,
+      plataformas: formValues.plataformas,
+      temporadas: formValues.temporadas,
       creado_en: new Date(),
       comentarios: formValues.comentarios,
       autor_obra: formValues.autor_obra // Añade el autor

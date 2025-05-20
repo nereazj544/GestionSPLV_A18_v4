@@ -27,9 +27,13 @@ export class MultimediaviewsComponent implements OnInit {
   mtId!: number;
   comentariosPermitidos: boolean = false;
   activeReplyId: number | null = null;
+
+  // Variables para el detalle del multimedia
   tipo: string | null = null;
   generos: string[] = [];
   tiposLibros: string[] = []; // solo para libros
+  plataformas: string[] = []; // solo para videojuegos
+  temporadas: string[] = []; // solo para series
 
   constructor(
     private supabase: SupabaseService,
@@ -78,7 +82,9 @@ export class MultimediaviewsComponent implements OnInit {
         *,
         profiles(username, imagen_perfil),
         contenido_generos(generos(nombre)),
-        contenido_tipo(tipolibro(nombre))
+        contenido_tipo(tipolibro(nombre)),
+        contenido_plataformas(plataforma(nombre)),
+        contenido_temporada(temporada(numero))
       `)
       .eq('id', id)
       .single();
@@ -99,6 +105,8 @@ export class MultimediaviewsComponent implements OnInit {
     this.tipo = data.tipo;
     this.generos = (data.contenido_generos || []).map((g: any) => g.generos?.nombre);
     this.tiposLibros = (data.contenido_tipo || []).map((t: any) => t.tipolibro?.nombre);
+    this.plataformas = (data.contenido_plataformas || []).map((p: any) => p.plataforma?.nombre);
+    this.temporadas = (data.contenido_temporada || []).map((t: any) => t.temporada?.numero);
   }
 
 

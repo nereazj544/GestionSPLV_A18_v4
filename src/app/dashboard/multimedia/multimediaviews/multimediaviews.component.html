@@ -28,7 +28,8 @@
                 <p>Disponibilidad: {{ dispo }}</p>
                 <p>Géneros: {{ generos.length ? generos.join(', ') : 'No hay géneros' }}</p>
                 <p *ngIf="tipo === 'libro' && tiposLibros.length">Tipo de Libro: {{ tiposLibros.length ? tiposLibros.join(', ') : 'No hay tipos de libro' }}</p>
-
+                <p *ngIf="tipo === 'videojuego' && plataformas.length">Plataformas: {{ plataformas.length ? plataformas.join(', ') : 'No hay plataformas' }}</p>
+                <p *ngIf="tipo === 'serie' && temporadas.length">Temporadas: {{ temporadas.length ? temporadas.join(', ') : 'No hay temporadas' }}</p>
             </div>
         </div>
 
