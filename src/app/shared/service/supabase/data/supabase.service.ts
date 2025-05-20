@@ -129,26 +129,26 @@ export class SupabaseService {
         }
 
         // 3. Insertar tipo de libro (si es un libro)
-      if(contenidoData.contenido_tipo && contenidoData.tipo === 'libro'){
-        for (const contenidoTipoId of contenidoData.contenido_tipo) {
-            const { error: tipoError } = await this.supabaseClient
-                .from('contenido_tipo')
-                .insert([{
-                    contenido_id: data.id,
-                    tipolibro_id: contenidoTipoId,
+        if (contenidoData.contenido_tipo && contenidoData.tipo === 'libro') {
+            for (const contenidoTipoId of contenidoData.contenido_tipo) {
+                const { error: tipoError } = await this.supabaseClient
+                    .from('contenido_tipo')
+                    .insert([{
+                        contenido_id: data.id,
+                        tipolibro_id: contenidoTipoId,
 
-                }]);
-            if (tipoError) throw tipoError;
+                    }]);
+                if (tipoError) throw tipoError;
+            }
         }
+
+        return data;
     }
 
-    return data;
-}
-
-// Obtener todos los blogs
-getBlogs() {
-    return from(this.supabaseClient
-        .from('blogs')
+    // Obtener todos los blogs
+    getBlogs() {
+        return from(this.supabaseClient
+            .from('blogs')
             .select('*')
             .order('creado_en', { ascending: true })
         );
