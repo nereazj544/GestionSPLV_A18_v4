@@ -22,6 +22,12 @@ CREATE TABLE tipolibro (
 INSERT INTO tipolibro (nombre) VALUES
     ('manga'), ('comic'), ('novela'), ('novela-ligera'), ('novela-negra');
 
+INSERT INTO plataforma (nombre) VALUES
+    ('PS4|PS5'), ('Xbox-S|X'), ('nintendo switch-|-2'), ('PC'), ('Nintendo-DS'), ('Nintendo-3Ds');
+
+insert into temporada (numero) values
+(1), (2), (3), (4), (5), (6), (7), (8), (9), (10);
+
 -- Géneros (pueden usarse en cualquier contenido)
 CREATE TABLE generos (
     id SERIAL PRIMARY KEY,
