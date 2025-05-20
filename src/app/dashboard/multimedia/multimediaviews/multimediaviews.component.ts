@@ -13,62 +13,109 @@ import { FormsModule } from '@angular/forms';
 })
 export class MultimediaviewsComponent implements OnInit {
   contTitle: string | null = null;
-  blogContent: string | null = null;
+  multContent: string | null = null;
   username: string | null = null;
   imagen_perfil: string | null = null;
-  blogTimestamp: string | null = null;
-
+  mlTimestamp: string | null = null;
+  mlAutor: string | null = null;
+  imagen: string | null = null;
+  dispo: boolean = false;
   comments: any[] = [];
   respuestas: any[] = []; // <-- Aquí se guardarán las respuestas_comentarios
   newComment: string = '';
   replyText: string = '';
-  blogId!: number;
+  mtId!: number;
   comentariosPermitidos: boolean = false;
   activeReplyId: number | null = null;
+  tipo: string | null = null;
+  generos: string[] = [];
+  tiposLibros: string[] = []; // solo para libros
 
   constructor(
     private supabase: SupabaseService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    const blogId = this.route.snapshot.paramMap.get('id');
-    if (blogId) {
+    const multiId = this.route.snapshot.paramMap.get('id');
+    if (multiId) {
       this.supabase.supabaseClient
         .from('contenidos')
         .select('*, profiles (username, imagen_perfil)')
-        .eq('id', blogId)
+        .eq('id', multiId)
         .single()
         .then(({ data, error }) => {
           if (error) {
             console.error('Error al obtener el blog:', error);
           } else if (data) {
             this.contTitle = data.titulo;
-            this.blogContent = data.contenido;
-            this.blogTimestamp = data.creado_en;
+            this.imagen = data.imagen_url;
+            this.mlAutor = data.autor_obra;
+            this.dispo = data.disponibilidad;
+            this.multContent = data.descripcion;
+            this.mlTimestamp = data.creado_en;
             this.username = data.profiles?.username;
             this.imagen_perfil = data.profiles?.imagen_perfil;
-            this.blogId = parseInt(blogId);
+            this.mtId = parseInt(multiId);
             this.comentariosPermitidos = data.permite_comentarios;
-            this.cargarComentariosYRespuestas(this.blogId);
+            this.cargarComentariosYRespuestas(this.mtId);
           }
         });
     }
+
+    if (multiId) {
+      this.cargarDetalleMultimedia(multiId);
+    }
   }
 
+
+  async cargarDetalleMultimedia(id: string) {
+    // Traer todo lo necesario con subselects y relaciones
+    const { data, error } = await this.supabase.supabaseClient
+      .from('contenidos')
+      .select(`
+        *,
+        profiles(username, imagen_perfil),
+        contenido_generos(generos(nombre)),
+        contenido_tipo(tipolibro(nombre))
+      `)
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Error al obtener multimedia:', error);
+      return;
+    }
+
+    this.contTitle = data.titulo;
+    this.multContent = data.descripcion;
+    this.mlTimestamp = data.creado_en;
+    this.username = data.profiles?.username;
+    this.imagen_perfil = data.profiles?.imagen_perfil;
+    this.imagen = data.imagen_url;
+    this.mlAutor = data.autor_obra;
+    this.dispo = data.disponibilidad;
+    this.tipo = data.tipo;
+    this.generos = (data.contenido_generos || []).map((g: any) => g.generos?.nombre);
+    this.tiposLibros = (data.contenido_tipo || []).map((t: any) => t.tipolibro?.nombre);
+  }
+
+
+
+  // TODO: COMENTARIOS
   // Carga comentarios y respuestas de ambas tablas y las asocia
   async cargarComentariosYRespuestas(blogId: number) {
     // 1. Comentarios principales (y replies internos por padre)
     const { data: comentarios, error: err1 } = await this.supabase.supabaseClient
-      .from('comentarios_blog')
+      .from('comentarios_multimedia')
       .select('*, profiles (username, imagen_perfil)')
-      .eq('blog_id', blogId)
+      .eq('contenido_id', blogId)
       .order('creado_en', { ascending: true });
 
     // 2. Respuestas admins (tabla aparte)
     const { data: respuestas, error: err2 } = await this.supabase.supabaseClient
-      .from('respuestas_comentarios')
+      .from('rc_multimedia')
       .select('*, profiles (username, imagen_perfil, role)')
       .order('creado_en', { ascending: true });
 
@@ -119,10 +166,10 @@ export class MultimediaviewsComponent implements OnInit {
     }
     const userId = data.user.id;
     const { error: insertError } = await this.supabase.supabaseClient
-      .from('comentarios_blog')
+      .from('comentarios_multimedia')
       .insert([
         {
-          blog_id: this.blogId,
+          contenido_id: this.mtId,
           autor_id: userId,
           contenido: this.newComment
         }
@@ -131,42 +178,40 @@ export class MultimediaviewsComponent implements OnInit {
       console.error('Error al insertar comentario:', insertError);
     } else {
       this.newComment = '';
-      this.cargarComentariosYRespuestas(this.blogId);
+      this.cargarComentariosYRespuestas(this.mtId);
     }
   }
 
+  async addRespuestaComentario(comentarioId: number, contenidoRespuesta: string) {
+    if (!contenidoRespuesta.trim()) return; // No permitir respuestas vacías
 
-async addRespuestaComentario(comentarioId: number, contenidoRespuesta: string) {
-  if (!contenidoRespuesta.trim()) return; // No permitir respuestas vacías
+    // Obtener el usuario actual (admin)
+    const { data, error } = await this.supabase.supabaseClient.auth.getUser();
+    if (error || !data?.user) {
+      alert("Debes iniciar sesión como administrador para responder.");
+      return;
+    }
+    const adminId = data.user.id;
 
-  // Obtener el usuario actual (admin)
-  const { data, error } = await this.supabase.supabaseClient.auth.getUser();
-  if (error || !data?.user) {
-    alert("Debes iniciar sesión como administrador para responder.");
-    return;
+    // Insertar la respuesta en la tabla respuestas_comentarios
+    const { error: insertError } = await this.supabase.supabaseClient
+      .from('rc_multimedia')
+      .insert([
+        {
+          comentario_id: comentarioId,
+          admin_id: adminId,
+
+          contenido: contenidoRespuesta
+          // creado_en se añade por defecto
+        }
+      ]);
+
+    if (insertError) {
+      console.error('Error al insertar la respuesta:', insertError);
+    } else {
+      this.cargarComentariosYRespuestas(this.mtId);
+    }
   }
-  const adminId = data.user.id;
-
-  // Insertar la respuesta en la tabla respuestas_comentarios
-  const { error: insertError } = await this.supabase.supabaseClient
-    .from('respuestas_comentarios')
-    .insert([
-      {
-        comentario_id: comentarioId,
-        admin_id: adminId,
-
-        contenido: contenidoRespuesta
-        // creado_en se añade por defecto
-      }
-    ]);
-
-  if (insertError) {
-    console.error('Error al insertar la respuesta:', insertError);
-  } else {
-    this.cargarComentariosYRespuestas(this.blogId);
-  }
-}
-
 
   toggleReply(commentId: number) {
     this.activeReplyId = this.activeReplyId === commentId ? null : commentId;
@@ -182,11 +227,11 @@ async addRespuestaComentario(comentarioId: number, contenidoRespuesta: string) {
     }
     const userId = data.user.id;
     const { error: insertError } = await this.supabase.supabaseClient
-      .from('comentarios_blog')
+      .from('rc_multimedia')
       .insert([
         {
-          blog_id: this.blogId,
-          autor_id: userId,
+          contenido_id: this.mtId,
+          admin_id: userId,
           contenido: this.replyText,
           comentario_padre_id: parentCommentId
         }
@@ -194,7 +239,7 @@ async addRespuestaComentario(comentarioId: number, contenidoRespuesta: string) {
     if (!insertError) {
       this.replyText = '';
       this.activeReplyId = null;
-      this.cargarComentariosYRespuestas(this.blogId);
+      this.cargarComentariosYRespuestas(this.mtId);
     } else {
       console.error('Error al insertar respuesta:', insertError);
     }

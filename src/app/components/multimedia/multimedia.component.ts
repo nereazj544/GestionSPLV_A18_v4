@@ -15,6 +15,9 @@ export class MultimediaComponent {
   allMultimedia: any[] = []; //sin filtrar
   filteredMultimedia: any[] = []; //filtrado
 
+  currentFilter: string = 'Libros';
+  currentReleases: any[] = [];
+
   tabs = ['Libros', 'Peliculas', 'Series', 'Videojuegos'];
   activeTab = 'Series';
 
@@ -63,6 +66,10 @@ multimedia: any[] = [];
       item.tipo.toLowerCase() === this.activeTab.toLowerCase().slice(0, -1) && // "Libros" → "libro"
       item.titulo.toLowerCase().includes(this.searchTerm)
     );
+  }
+
+  filtrarReviews(event: Event) {
+   
   }
 
 }
