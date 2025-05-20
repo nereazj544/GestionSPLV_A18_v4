@@ -263,7 +263,7 @@ export class SupabaseService {
     // Obtener todos los tipos de libros
     getTipos() {
         return from(this.supabaseClient
-            .from('contenido_tiposlibros')
+            .from('contenido_tipo') 
             .select('*, tiposlibros(nombre)')
             .order('nombre', { ascending: true })
         );
