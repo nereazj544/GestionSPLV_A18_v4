@@ -55,16 +55,17 @@ export class MultimediasettingsComponent implements OnInit {
   ];
 
   temporadas = [
-    { id: 1, nombre: '1' },
-    { id: 2, nombre: '2' },
-    { id: 3, nombre: '3' },
-    { id: 4, nombre: '4' },
-    { id: 5, nombre: '5' },
-    { id: 6, nombre: '6' },
-    { id: 7, nombre: '7' },
-    { id: 8, nombre: '8' },
-    { id: 9, nombre: '9' },
-    { id: 10, nombre: '10' }
+    { id: 1, numero: '1' },
+    { id: 2, numero: '2' },
+    { id: 3, numero: '3' },
+    { id: 4, numero: '4' },
+    { id: 5, numero: '5' },
+    { id: 6, numero: '6' },
+    { id: 7, numero: '7' },
+    { id: 8, numero: '8' },
+    { id: 9, numero: '9' },
+    { id: 10,numero: '10' },
+    {id: 11, numero: '+10'}
   ];
 
   constructor(

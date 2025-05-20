@@ -59,10 +59,10 @@
 
     <div class="form-group" *ngIf="multiFrom.get('tipo')?.value === 'serie'">
       <label>Temporadas*</label>
-      <select formControlName="temporadas" class="form-input">
+      <select multiple formControlName="temporadas" class="form-input">
 
         <option *ngFor="let temporada of temporadas" [value]="temporada.id">
-          {{ temporada.nombre }}
+          {{ temporada.numero }}
         </option>
       </select>
     </div>
