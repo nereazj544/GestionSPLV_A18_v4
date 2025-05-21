@@ -49,7 +49,7 @@
 
     <div class="form-group" *ngIf="multiFrom.get('tipo')?.value === 'videojuego'">
       <label>Plataformas*</label>
-      <select formControlName="plataformas" class="form-input">
+      <select multiple formControlName="plataformas" class="form-input">
         <option value="">Selecciona una opción</option>
         <option *ngFor="let plataforma of plataformas" [value]="plataforma.id">
           {{ plataforma.nombre }}

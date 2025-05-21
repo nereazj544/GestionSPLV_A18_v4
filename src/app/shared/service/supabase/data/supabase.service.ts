@@ -144,7 +144,7 @@ export class SupabaseService {
 
         // 4. Insertar plataformas (si existen)
         if (contenidoData.plataformas && Array.isArray(contenidoData.plataformas)) {
-            for (const plataformaId of contenidoData.plataforma) {
+            for (const plataformaId of contenidoData.plataformas) {
                 const { error: plataformaError } = await this.supabaseClient
                     .from('contenido_plataformas')
                     .insert([{
@@ -157,9 +157,9 @@ export class SupabaseService {
 
         // 5. Insertar temporadas (si existen)
         if (contenidoData.temporadas && Array.isArray(contenidoData.temporadas)) {
-            for (const temporadaId of contenidoData.temporada) {
+            for (const temporadaId of contenidoData.temporadas) {
                 const { error: temporadaError } = await this.supabaseClient
-                    .from('contenido_temporadas')
+                    .from('contenido_temporada')
                     .insert([{
                         contenido_id: data.id,
                         temporada_id: temporadaId

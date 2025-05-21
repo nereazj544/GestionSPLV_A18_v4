@@ -48,7 +48,7 @@ export class MultimediasettingsComponent implements OnInit {
   plataformas = [
     { id: 1, nombre: 'PS4|PS5' },
     { id: 2, nombre: 'Xbox-S|X' },
-    { id: 3, nombre: 'Nintendo Switch' },
+    { id: 3, nombre: 'Nintendo Switch | 2' },
     { id: 4, nombre: 'PC' },
     { id: 5, nombre: 'Nintendo DS' },
     { id: 6, nombre: 'Nintendo 3DS' }
