@@ -4,3 +4,52 @@
     tipo
     buscar el nombre de la multimedia
 -->
+
+<div class="form-container">
+    <form>
+        <!-- Usuario que crea -->
+        <div class="form-group">
+            <label for="creado">Creado por: </label>
+            <img [src]="" alt="Imagen de perfil">
+            <input type="text" id="creado" name="creado" [value]="" readonly>
+        </div>
+        <!-- Título -->
+        <div class="form-group">
+            <label>Título*</label>
+            <input type="text" formControlName="titulo" class="form-input" required>
+        </div>
+
+
+        <!-- Tipo multimedia -->
+        <div class="form-group">
+            <label>Tipo multimedia*</label>
+            <select formControlName="tipo" class="form-input" required>
+                <option value="" disabled>Selecciona una opción</option>
+                <option value="pelicula">Pelicula</option>
+                <option value="videojuego">Videojuego</option>
+                <option value="serie">Serie</option>
+                <option value="libro">Libro</option>
+            </select>
+        </div>
+
+
+
+
+        <!-- Fecha de creación -->
+        <div class="form-group">
+            <label>Creado</label>
+            <div class="fechahora">
+                <input type="date" formControlName="fechaCreacion" class="fecha" required>
+                <input type="time" formControlName="horaCreacion" class="hora" required>
+            </div>
+        </div>
+        <!-- URL IMG -->
+
+        <!-- Contenido -->
+        <div class="form-group content-area">
+            <label>Contenido</label>
+            <textarea formControlName="descripcion" class="form-textarea"></textarea>
+        </div>
+        <button type="submit" class="submit-button">guardar</button>
+    </form>
+</div>
