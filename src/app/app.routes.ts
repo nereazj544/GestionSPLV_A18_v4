@@ -21,6 +21,7 @@ import { MultimediaviewsComponent } from './dashboard/multimedia/multimediaviews
 import { MultimediasettingsComponent } from './dashboard/settings/multimedia/multimediasettings/multimediasettings.component';
 import { MultimediaComponent } from './components/multimedia/multimedia.component';
 import { MibibliotecaComponent } from './components/mibiblioteca/mibiblioteca.component';
+import { ReviesviewsComponent } from './dashboard/reviesviews/reviesviews.component';
 
 export const routes: Routes = [
     //{ path: '', component:  },
@@ -58,6 +59,8 @@ export const routes: Routes = [
     // TODO: MOSTRAR CONTENIDO 
     { path: 'dashboard/blogs/blogviews/:id', component: BlogviewsComponent },
     { path: 'dashboard/multimedia/multimediaviews/:id', component: MultimediaviewsComponent },
+
+    { path: 'dashboard/reviesviews/reviesviews/:id', component: ReviesviewsComponent },
     
     // TODO: Paneles de desarrollo
     { path: 'components/paneles/admin/admin-panel', component: AdminPanelComponent },
