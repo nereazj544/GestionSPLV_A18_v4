@@ -148,7 +148,6 @@ create table contenido_tipo(
     id serial PRIMARY KEY,
     contenido_id integer REFERENCES contenidos(id) ON DELETE CASCADE,
     tipolibro_id integer REFERENCES tipolibro(id) ON DELETE CASCADE
-
 )
 
 -- Tabla de Review
@@ -160,8 +159,6 @@ CREATE TABLE Review (
     -- Otros campos que necesites agregar
 );
 
-
-
 -- Tabla intermedia contenido_review
 CREATE TABLE contenido_review (
     id SERIAL PRIMARY KEY,
@@ -171,3 +168,5 @@ CREATE TABLE contenido_review (
     FOREIGN KEY (contenido_id) REFERENCES contenidos(id) ON DELETE CASCADE
 );
 
+ALTER TABLE review
+ADD column creado timestamp;
