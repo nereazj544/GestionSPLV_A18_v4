@@ -22,6 +22,7 @@ import { MultimediasettingsComponent } from './dashboard/settings/multimedia/mul
 import { MultimediaComponent } from './components/multimedia/multimedia.component';
 import { MibibliotecaComponent } from './components/mibiblioteca/mibiblioteca.component';
 import { ReviesviewsComponent } from './dashboard/reviesviews/reviesviews.component';
+import { ReviewssettingsComponent } from './dashboard/settings/reviessettings/reviewssettings/reviewssettings.component';
 
 export const routes: Routes = [
     //{ path: '', component:  },
@@ -55,6 +56,7 @@ export const routes: Routes = [
     { path: 'settings/perfilsetting', component: PerfilsettingComponent },
     { path: 'settings/blogsetting', component: BlogsettingComponent },
     { path: 'settings/multimediasettings/multimediasettings', component: MultimediasettingsComponent },
+    { path: 'dashboard/settings/reviessettings/reviewssettings', component: ReviewssettingsComponent },
     
     // TODO: MOSTRAR CONTENIDO 
     { path: 'dashboard/blogs/blogviews/:id', component: BlogviewsComponent },
