@@ -160,12 +160,7 @@ CREATE TABLE Review (
     -- Otros campos que necesites agregar
 );
 
--- Tabla de Contenido (ejemplo, ajústala según tus necesidades)
-CREATE TABLE Contenido (
-    id SERIAL PRIMARY KEY,
-    titulo VARCHAR(255) NOT NULL
-    -- Otros campos que necesites agregar
-);
+
 
 -- Tabla intermedia contenido_review
 CREATE TABLE contenido_review (
@@ -173,5 +168,6 @@ CREATE TABLE contenido_review (
     review_id INTEGER NOT NULL,
     contenido_id INTEGER NOT NULL,
     FOREIGN KEY (review_id) REFERENCES Review(id) ON DELETE CASCADE,
-    FOREIGN KEY (contenido_id) REFERENCES Contenido(id) ON DELETE CASCADE
+    FOREIGN KEY (contenido_id) REFERENCES contenidos(id) ON DELETE CASCADE
 );
+
