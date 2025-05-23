@@ -233,6 +233,15 @@ export class SupabaseService {
         );
     }
 
+    //Obtener reviews por id
+    getReviewsById() {
+        return from(this.supabaseClient
+            .from('review')
+            .select('*, profiles (username, imagen_perfil)')
+            .order('creado', { ascending: true })
+        );
+    }
+
     // Obtener un blog por su ID
     getBlogbyIdAutor(id: string) {
         return from(this.supabaseClient

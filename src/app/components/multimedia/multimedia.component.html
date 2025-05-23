@@ -63,6 +63,9 @@
     <div class="reviews" *ngFor="let review of reviews">
 
         <div class="reviews">
+            <p>{{ review.texto }}</p>
+            <p>Creado por: {{ review.creado }}</p>
+            <p>Puntuación: {{ review.puntuacion }}</p>
             <button>VER MÁS CONTENIDO</button>
             <div class="separador"></div>    
         </div>

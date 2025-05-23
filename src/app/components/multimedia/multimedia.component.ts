@@ -71,6 +71,18 @@ multimedia: any[] = [];
   //Mostar las Reviews
   reviews: any[] = [];
 
+  async cargarReviews() {
+    try {
+      const { data, error } = await firstValueFrom(this.supabaseService.getReviewsById());
+      if (error) {
+        console.error('Error al cargar reviews:', error);
+        return;
+      }
+      this.reviews = data;
+    } catch (error) {
+      console.error('Error al cargar reviews:', error);
+    }
+  }
 
   filtrarReviews(event: Event) {
    
