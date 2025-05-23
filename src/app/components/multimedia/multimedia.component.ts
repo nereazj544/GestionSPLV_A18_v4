@@ -68,6 +68,10 @@ multimedia: any[] = [];
     );
   }
 
+  //Mostar las Reviews
+  reviews: any[] = [];
+
+
   filtrarReviews(event: Event) {
    
   }
