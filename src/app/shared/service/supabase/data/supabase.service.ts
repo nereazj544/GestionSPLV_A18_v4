@@ -171,6 +171,41 @@ export class SupabaseService {
         return data;
     }
 
+    //Insertar reseñas
+    async insertReview(reviewData: any) {
+        const { data, error } = await this.supabaseClient
+            .from('review')
+            .insert([{
+                texto: reviewData.texto,
+                autor_id: reviewData.autor_id,
+                tipo: reviewData.tipo,
+            }])
+            .select()
+            .single();
+
+        if (error) throw error;
+
+        if (reviewData.contenido_review && Array.isArray(reviewData.contenido_review)) {
+            for (const contenidoId of reviewData.contenido_review) {
+                const { error: contenidoError } = await this.supabaseClient
+                    .from('contenido_review')
+                    .insert([{
+                        contenido_id: contenidoId,
+                        review_id: data.id
+                    }]);
+                if (contenidoError) throw contenidoError;
+            }
+        }
+
+        return data;
+    }
+
+
+
+
+
+
+
     // Obtener todos los blogs
     getBlogs() {
         return from(this.supabaseClient
@@ -289,7 +324,7 @@ export class SupabaseService {
     // Obtener todos los tipos de libros
     getTipos() {
         return from(this.supabaseClient
-            .from('contenido_tipo') 
+            .from('contenido_tipo')
             .select('*, tiposlibros(nombre)')
             .order('nombre', { ascending: true })
         );
