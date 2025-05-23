@@ -179,6 +179,9 @@ export class SupabaseService {
                 texto: reviewData.texto,
                 autor_id: reviewData.autor_id,
                 tipo: reviewData.tipo,
+                creado: reviewData.creado,
+                puntuacion: reviewData.puntuacion,
+                
             }])
             .select()
             .single();
