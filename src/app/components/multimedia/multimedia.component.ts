@@ -14,6 +14,7 @@ import { RouterLink } from '@angular/router';
 export class MultimediaComponent {
   allMultimedia: any[] = []; //sin filtrar
   filteredMultimedia: any[] = []; //filtrado
+  
 
   currentFilter: string = 'Libros';
   currentReleases: any[] = [];
@@ -79,6 +80,7 @@ multimedia: any[] = [];
         return;
       }
       this.reviews = data;
+      
     } catch (error) {
       console.error('Error al cargar reviews:', error);
     }

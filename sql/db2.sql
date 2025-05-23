@@ -148,7 +148,19 @@ create table contenido_tipo(
     id serial PRIMARY KEY,
     contenido_id integer REFERENCES contenidos(id) ON DELETE CASCADE,
     tipolibro_id integer REFERENCES tipolibro(id) ON DELETE CASCADE
-)
+);
+
+-- Tabla de listas
+CREATE TABLE lista (
+    id SERIAL PRIMARY KEY,
+    titulo TEXT NOT NULL,
+    descripcion TEXT, -- OPCIONAL
+    autor_id UUID REFERENCES profiles(id) ON DELETE CASCADE, 
+    contenido_id INTEGER REFERENCES contenidos(id) ON DELETE CASCADE,
+);
+
+
+
 
 -- Tabla de Review
 CREATE TABLE Review (
