@@ -154,7 +154,7 @@ create table contenido_tipo(
 CREATE TABLE Review (
     id SERIAL PRIMARY KEY,
     texto_reseña TEXT NOT NULL,
-    autor_id INTEGER NOT NULL,
+    autor_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
     tipo VARCHAR(20) NOT NULL
     -- Otros campos que necesites agregar
 );
