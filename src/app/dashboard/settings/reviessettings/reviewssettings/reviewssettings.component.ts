@@ -16,14 +16,15 @@ export class ReviewssettingsComponent implements OnInit {
   id = '';
   username = '';
   imagen_perfil = '';
-constructor(
-  private supabaseService: SupabaseService,
-  private showService: ShowService,
-){}
+  constructor(
+    private supabaseService: SupabaseService,
+    private showService: ShowService,
+  ) { }
 
 
-async ngOnInit() {
+  async ngOnInit() {
     await this.loadUserProfile(); // Cargar el perfil del usuario
+
 
   }
 
@@ -44,7 +45,22 @@ async ngOnInit() {
     this.imagen_perfil = data.imagen_perfil;
   }
 
+  //Insertar en la base de datos la reseña
 
 
+
+  //buscador para el contenido
+  buscarContenido(event: any) {
+    const query = event.target.value.toLowerCase();
+    const contenido = document.querySelectorAll('.contenido');
+    contenido.forEach((element: any) => {
+      const texto = element.textContent.toLowerCase();
+      if (texto.includes(query)) {
+        element.style.display = 'block';
+      } else {
+        element.style.display = 'none';
+      }
+    });
+  }
 
 }

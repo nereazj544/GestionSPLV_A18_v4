@@ -32,6 +32,7 @@ export class MultimediasettingsComponent implements OnInit {
     { id: 23, nombre: 'Superhéroes' }, { id: 24, nombre: 'Infantil' },
     { id: 25, nombre: 'Mafia' }, { id: 26, nombre: 'Dark' },
     { id: 27, nombre: 'Dark Romance' }, { id: 28, nombre: 'Sobrenatural' },
+    {id: 29, nombre: 'Futbol' },
     
   ];
 
