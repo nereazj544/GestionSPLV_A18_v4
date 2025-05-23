@@ -63,4 +63,7 @@ export class ReviewssettingsComponent implements OnInit {
     });
   }
 
+  
+
+
 }
