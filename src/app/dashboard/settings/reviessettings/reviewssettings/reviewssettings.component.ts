@@ -3,23 +3,37 @@ import { SupabaseService } from '../../../../shared/service/supabase/data/supaba
 import { Route, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ShowService } from '../../../../shared/service/supabase/show.service';
-
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reviewssettings',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule],
   templateUrl: './reviewssettings.component.html',
   styleUrl: './reviewssettings.component.css'
 })
 export class ReviewssettingsComponent implements OnInit {
+
+  reviewsForm: FormGroup;
+
   id = '';
   username = '';
   imagen_perfil = '';
   constructor(
     private supabaseService: SupabaseService,
     private showService: ShowService,
-  ) { }
+    private formBuilder: FormBuilder
+  ) {
+    this.reviewsForm = this.formBuilder.group({
+      texto: ['', Validators.required],
+      autor_id: [this.id],
+      tipo: ['', Validators.required],
+      puntuacion: ['', Validators.required],
+      fechaCreacion: [new Date(), Validators.required],
+      horaCreacion: [new Date(), Validators.required],
+
+    });
+  }
 
 
   async ngOnInit() {
@@ -46,7 +60,25 @@ export class ReviewssettingsComponent implements OnInit {
   }
 
   //Insertar en la base de datos la reseña
+  async onSubmit() {
+    if (this.reviewsForm.valid) {
+      const reviewData = this.reviewsForm.value;
+      try{
+        const { data, error } = await this.supabaseService.insertReview({
+          texto: reviewData.texto,
+          autor_id: this.id,
+          tipo: reviewData.tipo,
+          puntuacion: reviewData.puntuacion,
+          fechaCreacion: reviewData.fechaCreacion,
+          horaCreacion: reviewData.horaCreacion
+        });
+      }catch (error) {
+        console.error('Error al insertar la reseña:', error);
+        alert('Error al insertar la reseña');
+      }
 
+    }
+  }
 
 
   //buscador para el contenido

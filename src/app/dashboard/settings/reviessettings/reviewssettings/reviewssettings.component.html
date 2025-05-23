@@ -6,17 +6,19 @@
 -->
 
 <div class="form-container">
-    <form>
+    <form [formGroup]="reviewsForm" (ngSubmit)="onSubmit()">
         <!-- Usuario que crea -->
         <div class="form-group">
             <label for="creado">Creado por: </label>
             <img [src]="imagen_perfil" alt="Imagen de perfil">
             <input type="text" id="creado" name="creado" [value]="username" readonly>
         </div>
-        <!-- Título -->
+       
+
+        <!-- Puntuación -->
         <div class="form-group">
-            <label>Título*</label>
-            <input type="text" formControlName="titulo" class="form-input" required>
+            <label>Puntuación*</label>
+            <input type="number" formControlName="puntuacion" class="form-input" required>
         </div>
 
         <!-- Tipo multimedia -->
@@ -32,10 +34,10 @@
         </div>
 
         <!-- TODO: BUSCADOR PARA ESCRIBIR EL NOMBRE DE LA MULTIMEDIA -->
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label>Multimedia*</label>
             <input type="text" formControlName="multimedia" class="form-input" required (input)="buscarContenido($event)">
-        </div>
+        </div> -->
 
         <!-- Fecha de creación -->
         <div class="form-group">
@@ -49,7 +51,7 @@
         <!-- Contenido -->
         <div class="form-group content-area">
             <label>Contenido</label>
-            <textarea formControlName="descripcion" class="form-textarea"></textarea>
+            <textarea formControlName="texto" class="form-textarea"></textarea>
         </div>
         <button type="submit" class="submit-button">guardar</button>
     </form>

@@ -60,10 +60,12 @@
         </select>
     </div>
     
-    
-    <div class="reviews">
-        <button>VER MÁS CONTENIDO</button>
-    <div class="separador"></div>    
+    <div class="reviews" *ngFor="let review of filteredReviews">
+
+        <div class="reviews">
+            <button>VER MÁS CONTENIDO</button>
+            <div class="separador"></div>    
+        </div>
     </div>
     
     
