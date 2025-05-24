@@ -21,8 +21,9 @@ import { MultimediaviewsComponent } from './dashboard/multimedia/multimediaviews
 import { MultimediasettingsComponent } from './dashboard/settings/multimedia/multimediasettings/multimediasettings.component';
 import { MultimediaComponent } from './components/multimedia/multimedia.component';
 import { MibibliotecaComponent } from './components/mibiblioteca/mibiblioteca.component';
-import { ReviesviewsComponent } from './dashboard/reviesviews/reviesviews.component';
+
 import { ReviewssettingsComponent } from './dashboard/settings/reviessettings/reviewssettings/reviewssettings.component';
+import { ReviewsComponent } from './components/paneles/reviews/reviews.component';
 
 export const routes: Routes = [
     //{ path: '', component:  },
@@ -57,19 +58,19 @@ export const routes: Routes = [
     { path: 'settings/blogsetting', component: BlogsettingComponent },
     { path: 'settings/multimediasettings/multimediasettings', component: MultimediasettingsComponent },
     { path: 'dashboard/settings/reviessettings/reviewssettings', component: ReviewssettingsComponent },
-    
+
     // TODO: MOSTRAR CONTENIDO 
     { path: 'dashboard/blogs/blogviews/:id', component: BlogviewsComponent },
     { path: 'dashboard/multimedia/multimediaviews/:id', component: MultimediaviewsComponent },
 
-    { path: 'dashboard/reviesviews/reviesviews/:id', component: ReviesviewsComponent },
-    
+    { path: 'paneles/reviews/reviews/:id', component: ReviewsComponent },
+
     // TODO: Paneles de desarrollo
     { path: 'components/paneles/admin/admin-panel', component: AdminPanelComponent },
     { path: 'components/paneles/proveedor/panel-proveedor', component: PanelProveedorComponent },
     { path: 'components/paneles/admin/panel-add-user', component: PanelAddUserComponent },
 
-    
+
 
 
 

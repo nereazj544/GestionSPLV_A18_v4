@@ -1,1 +1,99 @@
-<p>reviews works!</p>
+<div class="multimedia-card">
+    <div class="header">
+        <div class="header-inf">
+            <h2>{{ contTitle }}</h2>
+            <p>{{mlTimestamp | date: 'short'}}</p>
+        </div>
+        <div class="author">
+            <p>Creado por: {{username}}</p>
+            <div class="avatar">
+                <img [src]="imagen_perfil" alt="Imagen de perfil">
+            </div>
+        </div>
+    </div>
+    <div class="contenido">
+
+        <div class="img_container">
+            <img [src]="imagen" alt="Imagen de {{contTitle}}">
+        </div>
+        <div class="description-section">
+            <div class="description">
+                <h3>Sinopsis</h3>
+                <pre>{{multContent}}</pre>
+
+            </div>
+            <!-- TODO DATOS -->
+            <div class="datos">
+                <p>Autor/a/es: {{mlAutor}}</p>
+                <p>Disponibilidad: {{ dispo }}</p>
+                <p>Géneros: {{ generos.length ? generos.join(', ') : 'No hay géneros' }}</p>
+                <p *ngIf="tipo === 'libro' && tiposLibros.length">Tipo de Libro: {{ tiposLibros.length ? tiposLibros.join(', ') : 'No hay tipos de libro' }}</p>
+                <p *ngIf="tipo === 'videojuego' && plataformas.length">Plataformas: {{ plataformas.length ? plataformas.join(', ') : 'No hay plataformas' }}</p>
+                <p *ngIf="tipo === 'serie' && temporadas.length">Temporadas: {{ temporadas.length ? temporadas.join(', ') : 'No hay temporadas' }}</p>
+            </div>
+        </div>
+
+    </div>
+    <button class="add-button">Añadir a mi lista</button>
+
+
+
+
+</div>
+
+
+<!-- TODO: Comentarios -->
+<section class="comments-section">
+    <h3 class="comments-title">COMENTARIOS</h3>
+    <div class="comment" *ngFor="let comment of comments">
+        <div class="comment-avatar">
+            <img *ngIf="comment.avatar" [src]="comment.avatar" alt="">
+        </div>
+        <div>
+            <strong>{{ comment.author }}</strong>
+            <p class="comment-content">{{ comment.text }}</p>
+            <button (click)="toggleReply(comment.id)">Responder</button>
+            <div *ngIf="activeReplyId === comment.id" class="reply-box">
+                <textarea [(ngModel)]="replyText" rows="2" placeholder="Escribe una respuesta..."></textarea>
+                <button (click)="sendReply(comment.id)" (click)="addRespuestaComentario(comment.id, replyText)">Enviar
+                    respuesta</button>
+            </div>
+
+            <!-- Respuestas de usuarios/replies normales -->
+            <div class="replies" *ngIf="comment.replies?.length">
+                <div class="comment reply" *ngFor="let reply of comment.replies">
+                    <div class="comment-avatar">
+                        <img *ngIf="reply.avatar" [src]="reply.avatar" alt="">
+                    </div>
+                    <div>
+                        <strong>{{ reply.author }}</strong>
+                        <p class="comment-content">{{ reply.text }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Respuestas de admin desde tabla respuestas_comentarios -->
+            <div class="respuestas" *ngIf="comment.respuestas?.length">
+                <div class="comment respuesta" *ngFor="let respuesta of comment.respuestas">
+                    <div class="comment-avatar">
+                        <img *ngIf="respuesta.profiles?.imagen_perfil" [src]="respuesta.profiles.imagen_perfil" alt="">
+                    </div>
+                    <div>
+                        <strong>{{ respuesta.profiles?.username || 'Admin' }}</strong>
+                        <p class="comment-content">{{ respuesta.contenido }}</p>
+                        <span style="font-size:0.85em;color:#888;">(Respuesta de {{ respuesta.profiles?.role }})</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="new-comment" *ngIf="comentariosPermitidos">
+        <h4>Nuevo Comentario</h4>
+        <textarea class="comment-input" rows="4" [(ngModel)]="newComment"></textarea>
+        <button class="submit-button" (click)="addComment()">Enviar</button>
+    </div>
+    <section *ngIf="!comentariosPermitidos" class="new-comments">
+        <p>Este blog no permite comentarios.</p>
+    </section>
+</section>

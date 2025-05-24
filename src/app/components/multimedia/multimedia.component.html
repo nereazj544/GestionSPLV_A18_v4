@@ -60,17 +60,17 @@
 <div class="reviews">
     <div class="review" *ngFor="let item of reviews">
         <div class="review-header">
-            <img [src]="item.imagen_url" alt="User avatar" class="avatar">
+            <img [src]="item.profiles?.imagen_perfil" alt="User avatar" class="avatar">
+            <div class="username">{{ item.profiles?.username }}</div>
             <div class="review-meta">
-                <div class="username">{{ item.username }}</div>
-                <div class="title">TITULO: {{ item.title }}</div>
+                <div class="title">{{ item.titulo }}</div>
                 <p class="tag">Tag: #{{ item.tipo }}</p>
                 <p>{{ item.creado_en | date: 'short' }}</p>
             </div>
             <div class="rating">
-                VALORACION: {{ item.rating }}
+                VALORACION: {{ item.puntuacion }}
             </div>
         </div>
-        <button class="view-more">VER MÁS</button>
+        <button class="view-more" [routerLink]="['/paneles/reviews/reviews', item.id]">VER MÁS</button>
     </div>
 </div>
