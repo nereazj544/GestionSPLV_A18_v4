@@ -57,18 +57,20 @@
         </select>
     </div>
 </div>
-    <div class="reviews">
-        <div class="review" *ngFor="let item of reviews">
-            <div class="review-header">
-                <img src="https://via.placeholder.com/50" alt="User avatar" class="avatar">
-                <div class="review-meta">
-                    <div class="username">{{ item.username }}</div>
-                    <div class="title">TITULO: {{ item.title }}</div>
-                </div>
-                <div class="rating">
-                    VALORACION: {{ item. }}
-                </div>
+<div class="reviews">
+    <div class="review" *ngFor="let item of reviews">
+        <div class="review-header">
+            <img [src]="item.imagen_url" alt="User avatar" class="avatar">
+            <div class="review-meta">
+                <div class="username">{{ item.username }}</div>
+                <div class="title">TITULO: {{ item.title }}</div>
+                <p class="tag">Tag: #{{ item.tipo }}</p>
+                <p>{{ item.creado_en | date: 'short' }}</p>
             </div>
-            <button class="view-more">VER MÁS</button>
+            <div class="rating">
+                VALORACION: {{ item.rating }}
+            </div>
         </div>
+        <button class="view-more">VER MÁS</button>
     </div>
+</div>
