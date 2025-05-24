@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SupabaseService } from '../../../../shared/service/supabase/data/supabase.service';
-import { Route, RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { ShowService } from '../../../../shared/service/supabase/show.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-reviewssettings',
@@ -19,6 +20,11 @@ export class ReviewssettingsComponent implements OnInit {
   id = '';
   username = '';
   imagen_perfil = '';
+
+  todosLosContenidos: any[] = [];
+  resultadosBusqueda: any[] = [];
+  contenidoSeleccionado: any = null;
+
   constructor(
     private supabaseService: SupabaseService,
     private showService: ShowService,
@@ -26,23 +32,22 @@ export class ReviewssettingsComponent implements OnInit {
   ) {
     this.reviewsForm = this.formBuilder.group({
       texto: ['', Validators.required],
-      autor_id: [this.id],
+      autor_id: [''],
+      titulo: [''],
       tipo: ['', Validators.required],
       puntuacion: ['', Validators.required],
       fechaCreacion: [new Date(), Validators.required],
       horaCreacion: [new Date(), Validators.required],
-
+      multimedia:['']
     });
   }
 
-
   async ngOnInit() {
-    await this.loadUserProfile(); // Cargar el perfil del usuario
-
-
+    await this.loadUserProfile();
+    await this.loadContenidos();
   }
 
-  //Cargar el perfil del usuario, para mostrar su imagen y nombre
+  // Cargar perfil del usuario
   async loadUserProfile() {
     const userId = await this.supabaseService.getCurrentUserId();
     if (!userId) {
@@ -59,43 +64,73 @@ export class ReviewssettingsComponent implements OnInit {
     this.imagen_perfil = data.imagen_perfil;
   }
 
-  //Insertar en la base de datos la reseña
+  // Cargar todo el contenido multimedia
+  async loadContenidos() {
+    const {data, error} = await firstValueFrom(this.supabaseService.getAllMultimedia());
+    if (error) {
+      console.error('Error al obtener contenidos:', error);
+      return;
+    }
+    this.todosLosContenidos = data;
+  }
+
+  // Buscar contenido por título
+  // Corregida: recibe el evento y extrae el valor
+buscarContenido(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  const valor = input?.value || '';
+
+  const termino = valor.toLowerCase();
+  this.resultadosBusqueda = this.todosLosContenidos.filter(contenido =>
+    contenido.titulo.toLowerCase().includes(termino)
+  );
+}
+
+
+
+  // Seleccionar contenido de la lista
+  seleccionarContenido(contenido: any) {
+    this.contenidoSeleccionado = contenido;
+    this.resultadosBusqueda = [];
+
+    this.reviewsForm.patchValue({
+      tipo: contenido.tipo,
+      titulo: contenido.titulo
+    });
+  }
+
+  // Insertar la reseña
   async onSubmit() {
-    if (this.reviewsForm.valid) {
+    if (this.reviewsForm.valid && this.contenidoSeleccionado) {
       const reviewData = this.reviewsForm.value;
-      try{
+
+      try {
         const { data, error } = await this.supabaseService.insertReview({
           texto: reviewData.texto,
           autor_id: this.id,
-          tipo: reviewData.tipo,
+          titulo: this.contenidoSeleccionado.titulo,
+          tipo: this.contenidoSeleccionado.tipo,
           puntuacion: reviewData.puntuacion,
           fechaCreacion: reviewData.fechaCreacion,
-          horaCreacion: reviewData.horaCreacion
+          horaCreacion: reviewData.horaCreacion,
+          contenido_review: [this.contenidoSeleccionado.id] // Asociar reseña al contenido
         });
-      }catch (error) {
+
+        if (error) {
+          throw error;
+        }
+
+        alert('Reseña insertada correctamente');
+        this.reviewsForm.reset();
+        this.contenidoSeleccionado = null;
+      } catch (error) {
         console.error('Error al insertar la reseña:', error);
         alert('Error al insertar la reseña');
       }
 
+    } else {
+      alert('Formulario inválido o no se ha seleccionado un contenido');
     }
   }
-
-
-  //buscador para el contenido
-  buscarContenido(event: any) {
-    const query = event.target.value.toLowerCase();
-    const contenido = document.querySelectorAll('.contenido');
-    contenido.forEach((element: any) => {
-      const texto = element.textContent.toLowerCase();
-      if (texto.includes(query)) {
-        element.style.display = 'block';
-      } else {
-        element.style.display = 'none';
-      }
-    });
-  }
-
-  
-
 
 }

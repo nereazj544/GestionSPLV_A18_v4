@@ -13,7 +13,24 @@
             <img [src]="imagen_perfil" alt="Imagen de perfil">
             <input type="text" id="creado" name="creado" [value]="username" readonly>
         </div>
-       
+
+        <!-- Titulo -->
+        <div class="form-group">
+            <label>Título*</label>
+            <input type="text" formControlName="titulo" class="form-input" required>
+        </div>
+        <!-- Buscador del contenido multimedia -->
+        <div class="form-group">
+            <label>Multimedia*</label>
+            <input type="text" class="form-input" (input)="buscarContenido($event)"
+                [value]="contenidoSeleccionado?.titulo || ''" placeholder="Buscar por título">
+            <!-- Lista de sugerencias -->
+            <ul *ngIf="resultadosBusqueda.length && !contenidoSeleccionado">
+                <li *ngFor="let item of resultadosBusqueda" (click)="seleccionarContenido(item)">
+                    {{ item.titulo }}
+                </li>
+            </ul>
+        </div>
 
         <!-- Puntuación -->
         <div class="form-group">
