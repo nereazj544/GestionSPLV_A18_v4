@@ -1,42 +1,48 @@
 <div class="multimedia-card">
-    <div class="header">
-        <div class="header-inf">
-            <h2>{{ contTitle }}</h2>
-            <p>{{mlTimestamp | date: 'short'}}</p>
-        </div>
-        <div class="author">
-            <p>Creado por: {{username}}</p>
-            <div class="avatar">
-                <img [src]="imagen_perfil" alt="Imagen de perfil">
-            </div>
-        </div>
+  <div class="header">
+    <div class="header-inf">
+      <h2>Título Reseña: {{ rTitutlo }}</h2>
+      <h5>Título de multimedia: {{ contTitle }}</h5>
+      <p>{{ mlTimestamp | date: 'short' }}</p>
     </div>
+    <div class="author">
+      <p>Creado por: {{ username }}</p>
+      <div class="avatar">
+        <img [src]="imagen_perfil" alt="Imagen de perfil del usuario">
+      </div>
+    </div>
+  </div>
 
-<div class="review">
+  <div class="review">
     <div class="review-content">
-        <pre></pre>
-        <div class="review-footer">
-            <!-- <span class="rating">Valoración: {{puntuacion}}/5</span> -->
-
-        </div>
+      <pre>{{ reviewTexto }}</pre>
+      <div class="review-footer">
+        <span *ngIf="reviewPuntuacion !== undefined" class="rating">Valoración: {{ reviewPuntuacion }}/5</span>
+      </div>
     </div>
+  </div>
+
+  <div class="separador"></div>
+
+  <div class="datos-ml">
+    <div class="contenido">
+      <h2>Datos</h2>
+      <div class="datos">
+        <p>Autor/a/es: {{ autor }}</p>
+        <p>Géneros: {{ generos.length ? generos.join(', ') : 'No hay géneros' }}</p>
+
+        <p *ngIf="tipo === 'libro'">
+          Tipo de Libro: {{ tiposLibros.length ? tiposLibros.join(', ') : 'No hay tipos de libro' }}
+        </p>
+
+        <p *ngIf="tipo === 'videojuego'">
+          Plataformas: {{ plataformas.length ? plataformas.join(', ') : 'No hay plataformas' }}
+        </p>
+
+        <p *ngIf="tipo === 'serie'">
+          Temporadas: {{ temporadas.length ? temporadas.join(', ') : 'No hay temporadas' }}
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
-
-<div class="separador"></div>
-
-    <div class="datos-ml">
-
-        <div class="contenido">
-            <h2>Datos</h2>
-            <!-- TODO DATOS_Estos datos salen de la tabla contenido y el genero de la tabla contenido_generos -->
-            <div class="datos">
-                <p>Autor/a/es: {{autor}}</p>
-                <p>Géneros: {{ generos.length ? generos.join(', ') : 'No hay géneros' }}</p>
-                <p *ngIf="tipo === 'libro' && tiposLibros.length">Tipo de Libro: {{ tiposLibros.length ? tiposLibros.join(', ') : 'No hay tipos de libro' }}</p>
-                <p *ngIf="tipo === 'videojuego' && plataformas.length">Plataformas: {{ plataformas.length ? plataformas.join(', ') : 'No hay plataformas' }}</p>
-                <p *ngIf="tipo === 'serie' && temporadas.length">Temporadas: {{ temporadas.length ? temporadas.join(', ') : 'No hay temporadas' }}</p>
-            </div>
-        </div>
-        
-    </div>
-    </div>
