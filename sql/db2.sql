@@ -167,8 +167,11 @@ CREATE TABLE Review (
     id SERIAL PRIMARY KEY,
     texto_reseña TEXT NOT NULL,
     autor_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-    tipo VARCHAR(20) NOT NULL
-    -- Otros campos que necesites agregar
+    tipo VARCHAR(20) NOT NULL,
+    titulo TEXT NOT NULL,
+    puntuacion number,
+    creado_en TIMESTAMPTZ DEFAULT now(),
+    
 );
 
 -- Tabla intermedia contenido_review
@@ -180,5 +183,3 @@ CREATE TABLE contenido_review (
     FOREIGN KEY (contenido_id) REFERENCES contenidos(id) ON DELETE CASCADE
 );
 
-ALTER TABLE review
-ADD column creado timestamp;
