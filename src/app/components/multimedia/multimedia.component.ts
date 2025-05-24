@@ -12,32 +12,40 @@ import { RouterLink } from '@angular/router';
   styleUrl: './multimedia.component.css'
 })
 export class MultimediaComponent {
-  allMultimedia: any[] = []; //sin filtrar
-  filteredMultimedia: any[] = []; //filtrado
-  
 
-  currentFilter: string = 'Libros';
-  currentReleases: any[] = [];
-
+  // Multimedia
+  allMultimedia: any[] = [];
+  filteredMultimedia: any[] = [];
+  searchTerm: string = '';
   tabs = ['Libros', 'Peliculas', 'Series', 'Videojuegos'];
   activeTab = 'Series';
+
+  // Reviews
+  allReviews: any[] = [];
+  reviews: any[] = [];
+  tipoFiltro: string = 'all';
+
+  constructor(private supabaseService: SupabaseService) {}
+
+  ngOnInit(): void {
+    this.cargarMultimedia();
+    this.cargarReviews();
+  }
 
   setActiveTab(tab: string) {
     this.activeTab = tab;
     this.filtrarPorTipoyBusqueda();
   }
 
-  constructor(private supabaseService: SupabaseService,
-
-  ) { }
-
-  ngOnInit(): void {
-    this.cargarMultimedia();
+  tabToTipo(tab: string): string {
+    switch (tab.toLowerCase()) {
+      case 'libros': return 'libro';
+      case 'peliculas': return 'pelicula';
+      case 'series': return 'serie';
+      case 'videojuegos': return 'videojuego';
+      default: return tab.toLowerCase();
+    }
   }
-
-
-  // TODO Mostrar los libros, peliculas, series y videojuegos de la Base de Datos
-multimedia: any[] = [];
 
   async cargarMultimedia() {
     try {
@@ -46,32 +54,27 @@ multimedia: any[] = [];
         console.error('Error al cargar multimedia:', error);
         return;
       }
-      this.allMultimedia = data;
+      this.allMultimedia = data || [];
       this.filtrarPorTipoyBusqueda();
     } catch (error) {
       console.error('Error al cargar multimedia:', error);
     }
   }
 
-  searchTerm: string = '';
-
-  // Se ejecuta cuando el input cambia
   search(event: Event) {
     this.searchTerm = (event.target as HTMLInputElement).value.toLowerCase();
     this.filtrarPorTipoyBusqueda();
   }
 
-  // Filtro combinado
-  async filtrarPorTipoyBusqueda() {
+  filtrarPorTipoyBusqueda() {
+    const tipo = this.tabToTipo(this.activeTab);
     this.filteredMultimedia = this.allMultimedia.filter(item =>
-      item.tipo.toLowerCase() === this.activeTab.toLowerCase().slice(0, -1) && // "Libros" → "libro"
+      item.tipo.toLowerCase() === tipo &&
       item.titulo.toLowerCase().includes(this.searchTerm)
     );
   }
 
-  //Mostar las Reviews
-  reviews: any[] = [];
-
+  // Reseñas
   async cargarReviews() {
     try {
       const { data, error } = await firstValueFrom(this.supabaseService.getReviewsById());
@@ -79,15 +82,26 @@ multimedia: any[] = [];
         console.error('Error al cargar reviews:', error);
         return;
       }
-      this.reviews = data;
-      
+      this.allReviews = data || [];
+      this.aplicarFiltroReviews();
     } catch (error) {
       console.error('Error al cargar reviews:', error);
     }
   }
 
   filtrarReviews(event: Event) {
-   
+    const selectElement = event.target as HTMLSelectElement;
+    this.tipoFiltro = selectElement.value;
+    this.aplicarFiltroReviews();
   }
 
+  aplicarFiltroReviews() {
+    if (this.tipoFiltro === 'all') {
+      this.reviews = [...this.allReviews];
+    } else {
+      this.reviews = this.allReviews.filter(review =>
+        review.tipo?.toLowerCase() === this.tipoFiltro
+      );
+    }
+  }
 }

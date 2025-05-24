@@ -31,7 +31,7 @@
             <div>
                 <strong>Título {{activeTab}}:</strong>
                 <p>{{ media.titulo }}</p>
-                
+
 
             </div>
             <a [routerLink]="['/dashboard/multimedia/multimediaviews', media.id]" class="more-info">Más Información</a>
@@ -41,16 +41,13 @@
 </div>
 
 <div class="separador"></div>
-<div class="container_reviews">
-
-    <div class="container2">
-
-        <h1>Comunidad</h1>
-        <p>Últimas <span>“Reviews”</span> de los usuarios</p>
-        <button [routerLink]="['/dashboard/settings/reviessettings/reviewssettings']">Agregar Review</button>
-    </div>
+<div class="container3">
+    <h1>Reseñas</h1>
+    <p class="subtitle">Últimas "Reviews" de los usuarios</p>
+    <button [routerLink]="['/dashboard/settings/reviessettings/reviewssettings']">
+        Agregar Review</button>
     <div class="filtro">
-        <label for="">Tipo de multimedia</label>
+        <label>Tipo de multimedia</label>
         <select (change)="filtrarReviews($event)">
             <option value="all">Todos</option>
             <option value="videojuego">Videojuegos</option>
@@ -59,30 +56,19 @@
             <option value="libro">Libros</option>
         </select>
     </div>
-    
-    <div class="reviews_container">
-        <div class="no-blog" *ngIf="!reviews || reviews.length == 0">
-            <p>No hay reviews disponibles</p>
-        </div>
-
-        <div class="si-blog" *ngIf="reviews && reviews.length > 0">
-
-            <div class="container-blog" *ngFor="let item of reviews">
-                <p class="tituloblog">{{ item.titulo }}</p>
-                <p class="descripcion">{{ item.descripcion }}</p>
-
-                <p class="tag">Tag: #{{ item.tipo }}</p>
-                <p>{{ item.creado_en | date: 'short' }}</p>
-                <div class="auth-blog">
-                    <p>Autor:  {{ item.profiles.username }} </p>
-                    <img [src]="item.profiles.imagen_perfil" alt="imagen del administrador" class="admin-image">
+</div>
+    <div class="reviews">
+        <div class="review" *ngFor="let item of reviews">
+            <div class="review-header">
+                <img src="https://via.placeholder.com/50" alt="User avatar" class="avatar">
+                <div class="review-meta">
+                    <div class="username">{{ item.username }}</div>
+                    <div class="title">TITULO: {{ item.title }}</div>
                 </div>
-                <button class="btn-view-btn"><a [routerLink]="['/dashboard/blogs/blogviews', item.id]">Ir al blog</a></button>
+                <div class="rating">
+                    VALORACION: {{ item. }}
+                </div>
             </div>
+            <button class="view-more">VER MÁS</button>
         </div>
     </div>
-    
-    
-    
-</div>
-    

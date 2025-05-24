@@ -181,7 +181,8 @@ export class SupabaseService {
                 tipo: reviewData.tipo,
                 creado: reviewData.creado,
                 puntuacion: reviewData.puntuacion,
-                
+                titulo: reviewData.titulo,
+
             }])
             .select()
             .single();
