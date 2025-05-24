@@ -18,7 +18,7 @@ export class ReviewsComponent implements OnInit {
   imagen_perfil: string | null = null;
   mlTimestamp: string | null = null;
   mlAutor: string | null = null;
-
+  autor: string | null = null;
 
   newComment: string = '';
   replyText: string = '';
@@ -43,25 +43,24 @@ export class ReviewsComponent implements OnInit {
     const multiId = this.route.snapshot.paramMap.get('id');
     if (multiId) {
       this.supabase.supabaseClient
-        .from('reviews')
-        .select('*, profiles (username, imagen_perfil)')
-        
+        .from('review')
+        .select('*, profiles (username, imagen_perfil), contenidos (titulo, descripcion, creado_en, autor_obra, permite_comentarios, profiles (username, imagen_perfil))')
+
         .single()
         .then(({ data, error }) => {
           if (error) {
             console.error('Error al obtener el blog:', error);
           } else if (data) {
             this.contTitle = data.titulo;
-            ;
-            this.mlAutor = data.autor_obra;
-            
+            this.mlAutor = data.autor_id;
+            this.autor = data.autor_obra;
             this.multContent = data.descripcion;
             this.mlTimestamp = data.creado_en;
             this.username = data.profiles?.username;
             this.imagen_perfil = data.profiles?.imagen_perfil;
-            
-            this.comentariosPermitidos = data.permite_comentarios;
-            
+
+
+
           }
         });
     }
@@ -75,14 +74,11 @@ export class ReviewsComponent implements OnInit {
   async cargarDetalleMultimedia(id: string) {
     // Traer todo lo necesario con subselects y relaciones
     const { data, error } = await this.supabase.supabaseClient
-      .from('contenidos')
+      .from('contenido_review')
       .select(`
-        *,
-        profiles(username, imagen_perfil),
-        contenido_generos(generos(nombre)),
-        contenido_tipo(tipolibro(nombre)),
-        contenido_plataformas(plataforma(nombre)),
-        contenido_temporada(temporada(numero))
+        *, contenidos: (autor_obra)
+          
+        
       `)
       .eq('id', id)
       .single();
@@ -92,19 +88,18 @@ export class ReviewsComponent implements OnInit {
       return;
     }
 
-    
-    this.multContent = data.descripcion;
-    this.mlTimestamp = data.creado_en;
-    this.username = data.profiles?.username;
-    this.imagen_perfil = data.profiles?.imagen_perfil;
-    
-    this.mlAutor = data.autor_obra;
-    
-    this.tipo = data.tipo;
-    this.generos = (data.contenido_generos || []).map((g: any) => g.generos?.nombre);
-    this.tiposLibros = (data.contenido_tipo || []).map((t: any) => t.tipolibro?.nombre);
-    this.plataformas = (data.contenido_plataformas || []).map((p: any) => p.plataforma?.nombre);
-    this.temporadas = (data.contenido_temporada || []).map((t: any) => t.temporada?.numero);
+
+
+
+
+
+    // this.autor = data.autor_obra;
+
+    // this.tipo = data.tipo;
+    // this.generos = (data.contenido_generos || []).map((g: any) => g.generos?.nombre);
+    // this.tiposLibros = (data.contenido_tipo || []).map((t: any) => t.tipolibro?.nombre);
+    // this.plataformas = (data.contenido_plataformas || []).map((p: any) => p.plataforma?.nombre);
+    // this.temporadas = (data.contenido_temporada || []).map((t: any) => t.temporada?.numero);
   }
 
 
@@ -113,6 +108,6 @@ export class ReviewsComponent implements OnInit {
 
 
 
-  
-  
+
+
 }
