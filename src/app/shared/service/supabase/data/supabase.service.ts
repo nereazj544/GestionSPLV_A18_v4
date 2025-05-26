@@ -84,7 +84,7 @@ export class SupabaseService {
                 tipo: biblioDATA.tipo,
                 empezado: biblioDATA.agregado,
                 terminado: biblioDATA.finalizado,
-                clasificacion: biblioDATA.clasificacion,
+                clasificacion: biblioDATA.calificacion,
                 estado: biblioDATA.estado,
                 comentario: biblioDATA.comentario
             }])
@@ -359,6 +359,21 @@ export class SupabaseService {
             .single();
 
         if (error) throw error;
+
+        if(bibliotecaData.mi_biblioteca_contenido && Array.isArray(bibliotecaData.mi_biblioteca_contenido)) {
+            for(const contenidoId of bibliotecaData.mi_biblioteca_contenido)
+            {
+                const{error: contenidoError} = await this.supabaseClient
+                .from('mi_biblioteca_contenido')
+                .insert([{
+                    contenido_id: contenidoId,
+                    biblioteca_id: data.id
+                }]);
+
+                if (contenidoError) throw contenidoError;
+            }
+        }
+
         return data;
     }
 }

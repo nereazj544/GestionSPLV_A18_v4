@@ -94,7 +94,6 @@ CREATE TABLE contenido_temporada (
 CREATE TABLE mi_biblioteca (
     id SERIAL PRIMARY KEY,
     usuario_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-    contenido_id INT REFERENCES contenidos(id) ON DELETE CASCADE,
     tipo TEXT CHECK (tipo IN ('libro', 'pelicula', 'serie', 'videojuego')) NOT NULL,
     estado TEXT CHECK (estado IN ('Pendiente','Completado')) DEFAULT 'Pendiente',
     calificacion INTEGER CHECK (calificacion BETWEEN 1 AND 5),
@@ -102,6 +101,13 @@ CREATE TABLE mi_biblioteca (
     agregado_en TIMESTAMPTZ DEFAULT now(),
     finalizado_en TIMESTAMPTZ
 );
+
+create table mi_biblioteca_contenido(
+    id serial primary key,
+    mi_biblioteca_id integer references mi_biblioteca(id) on delete cascade,
+    contenido_id integer references contenidos(id) on delete cascade
+);
+
 
 -- Comentarios en contenidos multimedia (y respuestas admin)
 CREATE TABLE comentarios_multimedia (
