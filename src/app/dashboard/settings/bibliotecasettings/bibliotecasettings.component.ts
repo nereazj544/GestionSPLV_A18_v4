@@ -40,6 +40,7 @@ export class BibliotecasettingsComponent implements OnInit {
 
   async ngOnInit() {
     await this.loadUserProfile(); // Cargar el perfil del usuario
+
   }
 
   //Cargar el perfil del usuario, para mostrar su imagen y nombre
@@ -61,7 +62,7 @@ export class BibliotecasettingsComponent implements OnInit {
 
   // Buscar contenido por título
 
- buscarContenido(event: Event): void {
+  buscarContenido(event: Event): void {
     const input = event.target as HTMLInputElement;
     const valor = input?.value || '';
     const termino = valor.toLowerCase();

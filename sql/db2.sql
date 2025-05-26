@@ -96,7 +96,7 @@ CREATE TABLE mi_biblioteca (
     usuario_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
     tipo TEXT CHECK (tipo IN ('libro', 'pelicula', 'serie', 'videojuego')) NOT NULL,
     estado TEXT CHECK (estado IN ('Pendiente','Completado')) DEFAULT 'Pendiente',
-    calificacion INTEGER CHECK (calificacion BETWEEN 1 AND 5),
+    calificacion numeric CHECK (calificacion BETWEEN 1 AND 5),
     comentario TEXT,
     agregado_en TIMESTAMPTZ DEFAULT now(),
     finalizado_en TIMESTAMPTZ
