@@ -1,58 +1,58 @@
 <!-- TODO:  -->
 
 <nav>
-    <ul class="nav-tabs">
-        <li *ngFor="let tab of tabs">
-            <button class="nav-tab" [class.active]="activeTab === tab" (click)="activeTab = tab">
-                {{tab}}
-            </button>
-        </li>
-    </ul>
+  <ul class="nav-tabs">
+    <li *ngFor="let tab of tabs">
+      <button class="nav-tab" [class.active]="activeTab === tab" (click)="activeTab = tab">
+        {{tab}}
+      </button>
+    </li>
+  </ul>
 </nav>
 
 <!-- TODO: Contenido -->
-   <section class="content-section">
-      <div *ngIf="activeTab === 'Libros'">
-        
-        <div class="media-item" >
-          <!-- <img [src]="book.imageUrl" [alt]="book.title" class="media-image"> -->
-          <div class="media-info">
-            <!-- <h3>{{book.title}}</h3> -->
-            <!-- <p>Valoracion: 
-              <span *ngFor="let star of ' '.repeat(book.rating || 0).split('')" class="star">★</span>
-            </p> -->
-            <!-- <p>Estado: {{book.status}}</p> -->
-          </div>
-        </div>
-      </div>
+<section class="content-section">
+  <div *ngIf="activeTab === 'Libros'">
 
-      <div *ngIf="activeTab === 'Peliculas'">
-        <div class="media-item" >
-          <!-- <img [src]="movie.imageUrl" [alt]="movie.title" class="media-image"> -->
-          <div class="media-info">
-            <!-- <h3>{{movie.title}}</h3> -->
-            <!-- <p>Estado: {{movie.status}}</p> -->
-          </div>
-        </div>
+    <div class="media-item">
+      <img [src]="conImagen" [alt]="conTitulo" class="media-image">
+      <div class="media-info">
+        <h3>{{conTitulo}}</h3>
+        <p>Valoracion:
+          <span *ngFor="let star of ' '.repeat(bibliotecaCalificacion || 0).split('')" class="star">★</span>
+        </p>
+        <p>Estado: {{bibliotecaEstado}}</p>
       </div>
+    </div>
+  </div>
 
-      <div *ngIf="activeTab === 'Series'">
-        <div class="media-item" >
-          <!-- <img [src]="series.imageUrl" [alt]="series.title" class="media-image"> -->
-          <div class="media-info">
-            <!-- <h3>{{series.title}}</h3> -->
-            <!-- <p>Estado: {{series.status}}</p> -->
-          </div>
-        </div>
+  <div *ngIf="activeTab === 'Peliculas'">
+    <div class="media-item">
+      <!-- <img [src]="movie.imageUrl" [alt]="movie.title" class="media-image"> -->
+      <div class="media-info">
+        <!-- <h3>{{movie.title}}</h3> -->
+        <!-- <p>Estado: {{movie.status}}</p> -->
       </div>
+    </div>
+  </div>
 
-      <div *ngIf="activeTab === 'Videojuegos'">
-        <div class="media-item" >
-          <!-- <img [src]="game.imageUrl" [alt]="game.title" class="media-image"> -->
-          <div class="media-info">
-            <!-- <h3>{{game.title}}</h3> -->
-            <!-- <p>Estado: {{game.status}}</p> -->
-          </div>
-        </div>
+  <div *ngIf="activeTab === 'Series'">
+    <div class="media-item">
+      <!-- <img [src]="series.imageUrl" [alt]="series.title" class="media-image"> -->
+      <div class="media-info">
+        <!-- <h3>{{series.title}}</h3> -->
+        <!-- <p>Estado: {{series.status}}</p> -->
       </div>
-    </section>
+    </div>
+  </div>
+
+  <div *ngIf="activeTab === 'Videojuegos'">
+    <div class="media-item">
+      <!-- <img [src]="game.imageUrl" [alt]="game.title" class="media-image"> -->
+      <div class="media-info">
+        <!-- <h3>{{game.title}}</h3> -->
+        <!-- <p>Estado: {{game.status}}</p> -->
+      </div>
+    </div>
+  </div>
+</section>

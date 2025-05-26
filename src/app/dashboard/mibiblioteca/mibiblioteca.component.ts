@@ -32,11 +32,11 @@ export class MibibliotecaComponent implements OnInit {
       this.cargarBiblioteca(bbliId);
     }
   }
-  
+
   async cargarBiblioteca(id: string) {
-    const {data, error} = await this.supabase.supabaseClient
-    .from('mi_biblioteca_contenido')
-     .select(`
+    const { data, error } = await this.supabase.supabaseClient
+      .from('mi_biblioteca_contenido')
+      .select(`
       *,
       mi_biblioteca (
         id,
@@ -51,8 +51,8 @@ export class MibibliotecaComponent implements OnInit {
         
       )
     `)
-    .eq('id', id)
-    .single();
+      .eq('id', id)
+      .single();
     if (error) {
       console.error('Error al cargar la biblioteca:', error);
     }
@@ -70,7 +70,7 @@ export class MibibliotecaComponent implements OnInit {
       this.bibliotecaAgregadoEn = b.agregado_en;
       this.bibliotecaFinalizadoEn = b.finalizado_en;
 
-  }
+    }
 
-}
+  }
 }
