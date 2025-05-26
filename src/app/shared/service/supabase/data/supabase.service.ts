@@ -350,14 +350,29 @@ export class SupabaseService {
             .from('biblioteca')
             .insert([{
                 tipo: bibliotecaData.tipo,
-      estado: bibliotecaData.estado,
-      calificacion: bibliotecaData.calificacion ?? null, // por si viene vacío
-      comentario: bibliotecaData.comentario ?? null      // por si viene vacío
+                estado: bibliotecaData.estado,
+                calificacion: bibliotecaData.calificacion,
+                comentario: bibliotecaData.comentario || null,
+                agregado_en: bibliotecaData.agregado ? new Date(bibliotecaData.agregado) : null,
+                finalizado_en: bibliotecaData.finalizado ? new Date(bibliotecaData.finalizado) : null,
+                usuario_id: bibliotecaData.usuario_id,
             }])
             .select()
             .single();
 
         if (error) throw error;
+
+
+        if (bibliotecaData.contenido_id && Array.isArray(bibliotecaData.contenido_id)) {
+            for (const contenidoId of bibliotecaData.contenido_id) {
+                await this.supabaseClient
+                    .from('mi_biblioteca_contenido')
+                    .insert([{
+                        mi_biblioteca_id: data.id,
+                        contenido_id: contenidoId
+                    }]);
+            }
+        }
         return data;
     }
 }

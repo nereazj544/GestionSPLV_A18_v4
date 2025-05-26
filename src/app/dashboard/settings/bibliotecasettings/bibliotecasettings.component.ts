@@ -96,7 +96,7 @@ export class BibliotecasettingsComponent implements OnInit {
             calificacion : bblData.calificacion ,
             comentario: bblData.comentario || null,
             agregado_en: bblData.agregado ? new Date(bblData.agregado) : null,
-            finalizado_en: bblData.finalizado ? new Date(bblData.finalizado) : null
+            finalizado_en: bblData.finalizado || null
           }])
           .select()
           .single();

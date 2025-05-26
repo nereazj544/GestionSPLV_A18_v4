@@ -48,12 +48,15 @@
 
             <div class="form-group">
                 <label for="agregado">Dia de comienzo *</label>
-                <input type="date" formControlName="agregado" class="form-input">
+                <input type="date" formControlName="agregado" class="form-input" required>
+                <input type="time" formControlName="agregado" class="form-input" required>
+                
 
             </div>
             <div class="form-group">
                 <label for="agregado">Dia de finalizacion</label>
                 <input type="date" formControlName="finalizado" class="form-input">
+                <input type="time" formControlName="finalizado" class="form-input">
 
             </div>
 
