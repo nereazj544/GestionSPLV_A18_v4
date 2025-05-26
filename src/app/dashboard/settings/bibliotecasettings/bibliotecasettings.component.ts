@@ -31,7 +31,7 @@ export class BibliotecasettingsComponent implements OnInit {
     this.biblioSettings = this.fb.group({
       tipo: ['', Validators.required],
       estado: [''],
-      calificacion : [''],
+      calificacion: [''],
       comentario: [''],
       agregado: [],
       finalizado: [new Date(), Validators.required],
@@ -40,7 +40,14 @@ export class BibliotecasettingsComponent implements OnInit {
 
   async ngOnInit() {
     await this.loadUserProfile(); // Cargar el perfil del usuario
-
+    this.supabaseService.getAllMultimedia().subscribe({
+      next: ({ data }) => {
+        this.todosLosContenidos = data || [];
+      },
+      error: (err) => {
+        console.error('Error al cargar los contenidos:', err);
+      }
+    });
   }
 
   //Cargar el perfil del usuario, para mostrar su imagen y nombre
@@ -93,7 +100,7 @@ export class BibliotecasettingsComponent implements OnInit {
             usuario_id: this.id,
             tipo: bblData.tipo,
             estado: bblData.estado,
-            calificacion : bblData.calificacion ,
+            calificacion: bblData.calificacion,
             comentario: bblData.comentario || null,
             agregado_en: bblData.agregado ? new Date(bblData.agregado) : null,
             finalizado_en: bblData.finalizado || null
