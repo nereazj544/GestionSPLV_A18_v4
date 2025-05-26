@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SupabaseService } from '../../shared/service/supabase/data/supabase.service';
+import { ShowService } from '../../shared/service/supabase/show.service';
 
 @Component({
   selector: 'app-mibiblioteca',
@@ -23,36 +24,43 @@ export class MibibliotecaComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private supabase: SupabaseService
+    private supabase: SupabaseService,
+    private show: ShowService
+
   ) { }
 
 
-  ngOnInit() {
-    const bbliId = this.route.snapshot.paramMap.get('id');
-    if (bbliId) {
-      this.cargarBiblioteca(bbliId);
+  async ngOnInit() {
+    const { data: { user } } = await this.supabase.supabaseClient.auth.getUser();
+
+    if (user?.id) {
+      await this.cargarTodaBibliotecaDelUsuario(user.id);
+    } else {
+      console.warn('No se pudo obtener el usuario actual');
     }
   }
+
 
   async cargarBiblioteca(id: string) {
     const { data, error } = await this.supabase.supabaseClient
       .from('mi_biblioteca_contenido')
       .select(`
-      *,
-      mi_biblioteca (
-        id,
-        estado, 
-        calificacion,
-        agregado_en,
-        finalizado_en
-      ),
-      contenidos (
-        titulo,
-        imagen_url
-        
-      )
-    `)
-      .eq('id', id)
+    *,
+    mi_biblioteca (
+      id,
+      estado,
+      calificacion,
+      agregado_en,
+      finalizado_en,
+      usuario_id
+    ),
+    contenidos (
+      titulo,
+      imagen_url,
+      tipo
+    )
+  `)
+      .eq('mi_biblioteca.usuario_id', id)
       .single();
     if (error) {
       console.error('Error al cargar la biblioteca:', error);
@@ -77,10 +85,10 @@ export class MibibliotecaComponent implements OnInit {
   }
   contenidos: any[] = [];
 
-async cargarTodaBibliotecaDelUsuario(usuarioId: string) {
-  const { data, error } = await this.supabase.supabaseClient
-    .from('mi_biblioteca_contenido')
-    .select(`
+  async cargarTodaBibliotecaDelUsuario(usuarioId: string) {
+    const { data, error } = await this.supabase.supabaseClient
+      .from('mi_biblioteca_contenido')
+      .select(`
       *,
       mi_biblioteca (
         id,
@@ -96,25 +104,25 @@ async cargarTodaBibliotecaDelUsuario(usuarioId: string) {
         tipo
       )
     `)
-  ;
+      ;
 
-  if (error) {
-    console.error('Error al cargar toda la biblioteca:', error);
-    return;
+    if (error) {
+      console.error('Error al cargar toda la biblioteca:', error);
+      return;
+    }
+    this.contenidos = data || [];
   }
-  this.contenidos = data || [];
-}
 
-// Método auxiliar para filtrar por tipo (pestaña)
-getContenidosPorTipo(tipoTab: string) {
-  const map: any = {
-    'Libros': 'libro',
-    'Películas': 'pelicula',
-    'Series': 'serie',
-    'Videojuegos': 'videojuego'
-  };
-  const tipoDb = map[tipoTab] || '';
-  return this.contenidos.filter(item => item.contenidos && item.contenidos.tipo === tipoDb);
-}
+  // Método auxiliar para filtrar por tipo (pestaña)
+  getContenidosPorTipo(tipoTab: string) {
+    const map: any = {
+      'Libros': 'libro',
+      'Películas': 'pelicula',
+      'Series': 'serie',
+      'Videojuegos': 'videojuego'
+    };
+    const tipoDb = map[tipoTab] || '';
+    return this.contenidos.filter(item => item.contenidos && item.contenidos.tipo === tipoDb);
+  }
 
 }
