@@ -8,7 +8,7 @@ import { firstValueFrom } from 'rxjs';
 @Component({
   selector: 'app-reviewssettings',
   standalone: true,
-  imports: [CommonModule,  ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './reviewssettings.component.html',
   styleUrl: './reviewssettings.component.css'
 })
@@ -37,7 +37,7 @@ export class ReviewssettingsComponent implements OnInit {
       puntuacion: ['', Validators.required],
       fechaCreacion: [new Date(), Validators.required],
       horaCreacion: [new Date(), Validators.required],
-      multimedia:['']
+      multimedia: ['']
     });
   }
 
@@ -65,7 +65,7 @@ export class ReviewssettingsComponent implements OnInit {
 
   // Cargar todo el contenido multimedia
   async loadContenidos() {
-    const {data, error} = await firstValueFrom(this.supabaseService.getAllMultimedia());
+    const { data, error } = await firstValueFrom(this.supabaseService.getAllMultimedia());
     if (error) {
       console.error('Error al obtener contenidos:', error);
       return;
@@ -75,15 +75,15 @@ export class ReviewssettingsComponent implements OnInit {
 
   // Buscar contenido por título
   // Corregida: recibe el evento y extrae el valor
-buscarContenido(event: Event): void {
-  const input = event.target as HTMLInputElement;
-  const valor = input?.value || '';
+  buscarContenido(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const valor = input?.value || '';
 
-  const termino = valor.toLowerCase();
-  this.resultadosBusqueda = this.todosLosContenidos.filter(contenido =>
-    contenido.titulo.toLowerCase().includes(termino)
-  );
-}
+    const termino = valor.toLowerCase();
+    this.resultadosBusqueda = this.todosLosContenidos.filter(contenido =>
+      contenido.titulo.toLowerCase().includes(termino)
+    );
+  }
 
 
 
@@ -94,7 +94,7 @@ buscarContenido(event: Event): void {
 
     this.reviewsForm.patchValue({
       tipo: contenido.tipo,
-      // titulo: contenido.titulo
+      
     });
   }
 

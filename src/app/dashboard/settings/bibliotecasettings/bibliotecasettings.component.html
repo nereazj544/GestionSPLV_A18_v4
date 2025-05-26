@@ -1,1 +1,26 @@
-<p>bibliotecasettings works!</p>
+<h1>Configuración de Mi Biblioteca</h1>
+<div class="form-container">
+    <form>
+        <div class="form-group">
+            <label for="creado">Creado Por:</label>
+            <img [src]="imagen_perfil" alt="imagen_perfil">
+            <input type="text" id="creado" name="creado" placeholder="Nombre del creador" required>
+        </div>
+        <!-- TODO: CONTENIDO BUSQUEDA -->
+        <div class="form-group">
+            <label>Contenido *</label>
+            <input type="text" class="form-input" (input)="buscarContenido($event)"
+                [value]="contenidoSeleccionado?.titulo || ''" placeholder="Buscar por título">
+            <!-- Lista de sugerencias -->
+            <ul *ngIf="resultadosBusqueda.length && !contenidoSeleccionado">
+                <li *ngFor="let item of resultadosBusqueda" (click)="seleccionarContenido(item)">
+                    {{ item.titulo }}
+                </li>
+            </ul>
+        </div>
+        
+
+
+
+    </form>
+</div>

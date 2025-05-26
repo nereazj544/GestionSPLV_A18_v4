@@ -24,6 +24,7 @@ import { MibibliotecaComponent } from './dashboard/mibiblioteca/mibiblioteca.com
 
 import { ReviewssettingsComponent } from './dashboard/settings/reviessettings/reviewssettings/reviewssettings.component';
 import { ReviewsComponent } from './components/paneles/reviews/reviews.component';
+import { BibliotecasettingsComponent } from './dashboard/settings/bibliotecasettings/bibliotecasettings.component';
 
 export const routes: Routes = [
     //{ path: '', component:  },
@@ -32,27 +33,26 @@ export const routes: Routes = [
     { path: 'home', component: HOMEComponent },
     { path: 'novedades', component: NovedadesComponent },
     { path: 'multimedia', component: MultimediaComponent },
-    { path: 'mibiblioteca/:role/:username', component: MibibliotecaComponent },
-
+    
     // TODO: RUTAS DE AUTENTICACION
     { path: 'login', component: AuthLoginComponent },
     { path: 'signup', component: AuthSingUpComponent },
-
-
+    
+    
     //TODO: RUTAS DE PERFILES
     { path: 'perfil/admin', component: AdminComponent },
     { path: 'perfil/user', component: UserComponent },
     { path: 'perfil/proveedor', component: ProveedorComponent },
     { path: 'perfil/default', component: DefaultComponent }, // default route for authenticated users
-
-
+    
+    
     // TODO: RUTAS PARA PERFILES USERNAME
     { path: 'perfil/admin/:username', component: AdminComponent },
     { path: 'perfil/user/:username', component: UserComponent },
     { path: 'perfil/proveedor/:username', component: ProveedorComponent },
-
-
-
+    
+    
+    
     // TODO: RUTAS DE SETTINGS
     { path: 'settings/perfilsetting', component: PerfilsettingComponent },
     { path: 'settings/blogsetting', component: BlogsettingComponent },
@@ -62,15 +62,18 @@ export const routes: Routes = [
     // TODO: MOSTRAR CONTENIDO 
     { path: 'dashboard/blogs/blogviews/:id', component: BlogviewsComponent },
     { path: 'dashboard/multimedia/multimediaviews/:id', component: MultimediaviewsComponent },
-
+    
     { path: 'paneles/reviews/reviews/:id', component: ReviewsComponent },
-
+    
     // TODO: Paneles de desarrollo
     { path: 'components/paneles/admin/admin-panel', component: AdminPanelComponent },
     { path: 'components/paneles/proveedor/panel-proveedor', component: PanelProveedorComponent },
     { path: 'components/paneles/admin/panel-add-user', component: PanelAddUserComponent },
-
-
+    
+    
+    //TODO: Settings mi biblioteca
+    { path: 'mibiblioteca/:role/:username', component: MibibliotecaComponent },
+    { path: 'settings/bibliotecasettings', component: BibliotecasettingsComponent },
 
 
 
