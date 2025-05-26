@@ -20,7 +20,7 @@ import { BlogviewsComponent } from './dashboard/blogs/blogviews/blogviews.compon
 import { MultimediaviewsComponent } from './dashboard/multimedia/multimediaviews/multimediaviews.component';
 import { MultimediasettingsComponent } from './dashboard/settings/multimedia/multimediasettings/multimediasettings.component';
 import { MultimediaComponent } from './components/multimedia/multimedia.component';
-import { MibibliotecaComponent } from './components/mibiblioteca/mibiblioteca.component';
+import { MibibliotecaComponent } from './dashboard/mibiblioteca/mibiblioteca.component';
 
 import { ReviewssettingsComponent } from './dashboard/settings/reviessettings/reviewssettings/reviewssettings.component';
 import { ReviewsComponent } from './components/paneles/reviews/reviews.component';
