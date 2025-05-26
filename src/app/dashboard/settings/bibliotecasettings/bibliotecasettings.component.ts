@@ -80,7 +80,7 @@ export class BibliotecasettingsComponent implements OnInit {
 
     this.biblioSettings.patchValue({
       tipo: contenido.tipo,
-      // titulo: contenido.titulo
+
     });
   }
 
@@ -93,7 +93,7 @@ export class BibliotecasettingsComponent implements OnInit {
           ...bblData,
           contenido_id: this.contenidoSeleccionado.id,
           usuario_id: this.id,
-          
+
         });
       } catch (error) {
         console.error('Error al insertar la multimedia en la biblioteca:', error);
