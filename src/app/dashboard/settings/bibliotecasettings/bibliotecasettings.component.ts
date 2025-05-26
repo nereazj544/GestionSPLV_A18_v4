@@ -61,47 +61,63 @@ export class BibliotecasettingsComponent implements OnInit {
 
   // Buscar contenido por título
 
-  buscarContenido(event: Event): void {
+ buscarContenido(event: Event): void {
     const input = event.target as HTMLInputElement;
     const valor = input?.value || '';
-
     const termino = valor.toLowerCase();
-    this.resultadosBusqueda = this.todosLosContenidos.filter(contenido =>
-      contenido.titulo.toLowerCase().includes(termino)
+    const tipo = this.biblioSettings.get('tipo')?.value;
+    this.resultadosBusqueda = this.todosLosContenidos.filter(
+      contenido => (!tipo || contenido.tipo === tipo) &&
+        contenido.titulo.toLowerCase().includes(termino)
     );
+    this.contenidoSeleccionado = null;
   }
 
-
-
-  // Seleccionar contenido de la lista
   seleccionarContenido(contenido: any) {
     this.contenidoSeleccionado = contenido;
     this.resultadosBusqueda = [];
-
     this.biblioSettings.patchValue({
-      tipo: contenido.tipo,
-
+      tipo: contenido.tipo
     });
   }
 
   async onSubmit() {
     if (this.biblioSettings.valid && this.contenidoSeleccionado) {
       const bblData = this.biblioSettings.value;
-
       try {
-        const { data, error } = await this.supabaseService.addBiblioteca({
-          ...bblData,
-          contenido_id: this.contenidoSeleccionado.id,
-          usuario_id: this.id,
+        // Insertar en mi_biblioteca
+        const { data, error } = await this.supabaseService.supabaseClient
+          .from('mi_biblioteca')
+          .insert([{
+            usuario_id: this.id,
+            tipo: bblData.tipo,
+            estado: bblData.estado,
+            calificacion: bblData.calificacion ? Number(bblData.calificacion) : null,
+            comentario: bblData.comentario || null,
+            agregado_en: bblData.agregado ? new Date(bblData.agregado) : null,
+            finalizado_en: bblData.finalizado ? new Date(bblData.finalizado) : null
+          }])
+          .select()
+          .single();
 
-        });
+        if (error) throw error;
+        // Inserta en mi_biblioteca_contenido la relación con el contenido elegido
+        const idBiblioteca = data.id;
+        const contenido_id = this.contenidoSeleccionado.id;
+        const rel = await this.supabaseService.supabaseClient
+          .from('mi_biblioteca_contenido')
+          .insert([{
+            mi_biblioteca_id: idBiblioteca,
+            contenido_id: contenido_id
+          }]);
+
+        alert('¡Guardado en tu biblioteca!');
+        this.biblioSettings.reset();
+        this.contenidoSeleccionado = null;
       } catch (error) {
         console.error('Error al insertar la multimedia en la biblioteca:', error);
         alert('Error al insertar la multimedia en la biblioteca. Por favor, inténtalo de nuevo más tarde.');
       }
     }
   }
-
-
-
 }

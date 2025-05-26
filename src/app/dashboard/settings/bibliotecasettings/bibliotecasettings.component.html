@@ -32,8 +32,8 @@
                 </ul>
             </div>
             <div class="form-group">
-                <label for="">Clasificacion</label>
-                <input type="number" name="" id="" formControlName="clasificacion" class="form-input"
+                <label>Clasificacion</label>
+                <input type="number" formControlName="clasificacion" class="form-input"
                     placeholder="Clasificación (0-5)">
             </div>
 
@@ -49,17 +49,22 @@
 
 
 
-            <div class="form group">
+            <div class="form-group">
                 <label for="agregado">Dia de comienzo *</label>
-                <input type="date" name="" id="" formControlName="agregado" class="form-input">
+                <input type="date" formControlName="agregado" class="form-input">
 
             </div>
-            <div class="form group">
+            <div class="form-group">
                 <label for="agregado">Dia de finalizacion</label>
-                <input type="date" name="" id="" formControlName="finalizado" class="form-input">
+                <input type="date" formControlName="finalizado" class="form-input">
 
             </div>
 
+            <div class="form-group">
+                <label>Comentario</label>
+                <textarea formControlName="comentario" class="form-textarea"
+                    placeholder="Escribe un comentario"></textarea>
+            </div>
 
             <button type="submit" class="submit-button">
                 Guardar
