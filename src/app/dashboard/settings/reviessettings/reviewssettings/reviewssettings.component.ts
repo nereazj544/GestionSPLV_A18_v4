@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { SupabaseService } from '../../../../shared/service/supabase/data/supabase.service';
 import { ShowService } from '../../../../shared/service/supabase/show.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-reviewssettings',
   standalone: true,
-  imports: [CommonModule, RouterLink, ReactiveFormsModule],
+  imports: [CommonModule,  ReactiveFormsModule],
   templateUrl: './reviewssettings.component.html',
   styleUrl: './reviewssettings.component.css'
 })
