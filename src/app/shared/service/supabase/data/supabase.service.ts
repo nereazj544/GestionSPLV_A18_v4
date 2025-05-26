@@ -75,17 +75,16 @@ export class SupabaseService {
 
 
     //insert blog
-    async insertBlog(blogData: any) {
+    async insertBlog(biblioDATA: any) {
         const { data, error } = await this.supabaseClient
-            .from('blogs')
+            .from('mi_biblioteca')
             .insert([{
-                autor_id: blogData.autor_id,
-                titulo: blogData.titulo,
-                contenido: blogData.contenido,
-                tipo: blogData.tipo,
-                permite_comentarios: blogData.comentarios,
-                descripcion: blogData.descripcion,
-                creado_en: blogData.creado_en
+                autor_id: biblioDATA.autor_id,
+                contenido: biblioDATA.contenido,
+                tipo: biblioDATA.tipo,
+                empezado: biblioDATA.agregado,
+                terminado: biblioDATA.finalizado,
+                comentario: biblioDATA.comentario
             }])
             .select();
 
@@ -349,7 +348,10 @@ export class SupabaseService {
         const { data, error } = await this.supabaseClient
             .from('biblioteca')
             .insert([{
-                
+                tipo: bibliotecaData.tipo,
+                estado: bibliotecaData.estado,
+                calificacion: bibliotecaData.calificacion ?? null, // por si viene vacío
+                comentario: bibliotecaData.comentario ?? null      // por si viene vacío
             }])
             .select()
             .single();

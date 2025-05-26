@@ -90,16 +90,18 @@ export class BibliotecasettingsComponent implements OnInit {
 
       try {
         const { data, error } = await this.supabaseService.addBiblioteca({
-
+          ...bblData,
+          contenido_id: this.contenidoSeleccionado.id,
+          usuario_id: this.id,
+          
         });
+      } catch (error) {
+        console.error('Error al insertar la multimedia en la biblioteca:', error);
+        alert('Error al insertar la multimedia en la biblioteca. Por favor, inténtalo de nuevo más tarde.');
       }
-     catch (error) {
-      console.error('Error al insertar la multimedia en la biblioteca:', error);
-      alert('Error al insertar la multimedia en la biblioteca. Por favor, inténtalo de nuevo más tarde.');
     }
   }
 
 
 
-}
 }
