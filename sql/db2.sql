@@ -19,14 +19,7 @@ CREATE TABLE tipolibro (
     nombre VARCHAR(50) UNIQUE NOT NULL
 );
 
-INSERT INTO tipolibro (nombre) VALUES
-    ('manga'), ('comic'), ('novela'), ('novela-ligera'), ('novela-negra');
 
-INSERT INTO plataforma (nombre) VALUES
-    ('PS4|PS5'), ('Xbox-S|X'), ('nintendo switch-|-2'), ('PC'), ('Nintendo-DS'), ('Nintendo-3Ds');
-
-insert into temporada (numero) values
-(1), (2), (3), (4), (5), (6), (7), (8), (9), (10);
 
 -- Géneros (pueden usarse en cualquier contenido)
 CREATE TABLE generos (
@@ -156,10 +149,8 @@ CREATE TABLE lista (
     titulo TEXT NOT NULL,
     descripcion TEXT, -- OPCIONAL
     autor_id UUID REFERENCES profiles(id) ON DELETE CASCADE, 
-    contenido_id INTEGER REFERENCES contenidos(id) ON DELETE CASCADE,
+    contenido_id INTEGER REFERENCES contenidos(id) ON DELETE CASCADE
 );
-
-
 
 
 -- Tabla de Review
@@ -169,8 +160,8 @@ CREATE TABLE Review (
     autor_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
     tipo VARCHAR(20) NOT NULL,
     titulo TEXT NOT NULL,
-    puntuacion number,
-    creado_en TIMESTAMPTZ DEFAULT now(),
+     puntuacion numeric CHECK (puntuacion BETWEEN 1 AND 5),
+    creado_en TIMESTAMPTZ DEFAULT now()
     
 );
 
@@ -183,3 +174,13 @@ CREATE TABLE contenido_review (
     FOREIGN KEY (contenido_id) REFERENCES contenidos(id) ON DELETE CASCADE
 );
 
+
+
+INSERT INTO tipolibro (nombre) VALUES
+    ('manga'), ('comic'), ('novela'), ('novela-ligera'), ('novela-negra');
+
+INSERT INTO plataforma (nombre) VALUES
+    ('PS4|PS5'), ('Xbox-S|X'), ('nintendo switch-|-2'), ('PC'), ('Nintendo-DS'), ('Nintendo-3Ds');
+
+insert into temporada (numero) values
+(1), (2), (3), (4), (5), (6), (7), (8), (9), (10);

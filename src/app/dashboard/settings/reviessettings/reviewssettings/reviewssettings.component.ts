@@ -95,7 +95,7 @@ buscarContenido(event: Event): void {
 
     this.reviewsForm.patchValue({
       tipo: contenido.tipo,
-      titulo: contenido.titulo
+      // titulo: contenido.titulo
     });
   }
 
