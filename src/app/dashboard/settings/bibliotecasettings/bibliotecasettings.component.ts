@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SupabaseService } from '../../../shared/service/supabase/data/supabase.service';
 import { ShowService } from '../../../shared/service/supabase/show.service';
 
 @Component({
   selector: 'app-bibliotecasettings',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './bibliotecasettings.component.html',
   styleUrl: './bibliotecasettings.component.css'
 })
@@ -28,7 +28,14 @@ biblioSettings: FormGroup;
     private supabaseService: SupabaseService,
     private showService: ShowService
   ) {
-    this.biblioSettings = this.fb.group({});
+    this.biblioSettings = this.fb.group({
+      tipo: ['', Validators.required],
+      estado: [''],
+      calificacon: [''],
+      comentario: [''],
+      agregado: [new Date(), Validators.required],
+      finalizado: [new Date(), Validators.required],
+    });
   }
 
   async ngOnInit() {
@@ -53,7 +60,7 @@ biblioSettings: FormGroup;
   }
 
   // Buscar contenido por título
-  // Corregida: recibe el evento y extrae el valor
+  
   buscarContenido(event: Event): void {
     const input = event.target as HTMLInputElement;
     const valor = input?.value || '';

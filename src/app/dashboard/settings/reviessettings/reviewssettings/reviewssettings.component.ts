@@ -74,7 +74,6 @@ export class ReviewssettingsComponent implements OnInit {
   }
 
   // Buscar contenido por título
-  // Corregida: recibe el evento y extrae el valor
   buscarContenido(event: Event): void {
     const input = event.target as HTMLInputElement;
     const valor = input?.value || '';
