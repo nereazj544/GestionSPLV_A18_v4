@@ -99,14 +99,11 @@ CREATE TABLE mi_biblioteca (
     calificacion numeric CHECK (calificacion BETWEEN 1 AND 5),
     comentario TEXT,
     agregado_en TIMESTAMPTZ DEFAULT now(),
-    finalizado_en TIMESTAMPTZ
-);
-
-create table mi_biblioteca_contenido(
-    id serial primary key,
-    mi_biblioteca_id integer references mi_biblioteca(id) on delete cascade,
+    finalizado_en TIMESTAMPTZ,
     contenido_id integer references contenidos(id) on delete cascade
 );
+
+
 
 
 -- Comentarios en contenidos multimedia (y respuestas admin)

@@ -72,7 +72,7 @@ export const routes: Routes = [
     
     
     //TODO: Settings mi biblioteca
-    { path: 'mibiblioteca/:role/:username', component: MibibliotecaComponent },
+    { path: 'mibiblioteca/:username', component: MibibliotecaComponent },
     { path: 'settings/bibliotecasettings', component: BibliotecasettingsComponent },
 
 

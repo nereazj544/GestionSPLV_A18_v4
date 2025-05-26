@@ -253,6 +253,16 @@ export class SupabaseService {
         );
     }
 
+    getBibliotecaByIdAutor(id: string) {
+        return from(this.supabaseClient
+            .from('mi_biblioteca')
+            .select(`*, contenidos(*)`)
+            .eq('mi_biblioteca.usuario_id', id)
+            
+        );
+    }
+
+
     // TODO: Cerrar sesion
     async signOut() {
         try {
@@ -356,23 +366,12 @@ export class SupabaseService {
                 agregado_en: bibliotecaData.agregado ? new Date(bibliotecaData.agregado) : null,
                 finalizado_en: bibliotecaData.finalizado ? new Date(bibliotecaData.finalizado) : null,
                 usuario_id: bibliotecaData.usuario_id,
+                contenido_id: bibliotecaData.contenido_id
             }])
             .select()
             .single();
 
         if (error) throw error;
-
-
-        if (bibliotecaData.contenido_id && Array.isArray(bibliotecaData.contenido_id)) {
-            for (const contenidoId of bibliotecaData.contenido_id) {
-                await this.supabaseClient
-                    .from('mi_biblioteca_contenido')
-                    .insert([{
-                        mi_biblioteca_id: data.id,
-                        contenido_id: contenidoId
-                    }]);
-            }
-        }
         return data;
     }
 }
