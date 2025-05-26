@@ -12,7 +12,7 @@ import { ShowService } from '../../../shared/service/supabase/show.service';
   styleUrl: './bibliotecasettings.component.css'
 })
 export class BibliotecasettingsComponent implements OnInit {
-biblioSettings: FormGroup;
+  biblioSettings: FormGroup;
 
 
   id = '';
@@ -31,7 +31,7 @@ biblioSettings: FormGroup;
     this.biblioSettings = this.fb.group({
       tipo: ['', Validators.required],
       estado: [''],
-      calificacon: [''],
+      clasificacion: [''],
       comentario: [''],
       agregado: [new Date(), Validators.required],
       finalizado: [new Date(), Validators.required],
@@ -60,7 +60,7 @@ biblioSettings: FormGroup;
   }
 
   // Buscar contenido por título
-  
+
   buscarContenido(event: Event): void {
     const input = event.target as HTMLInputElement;
     const valor = input?.value || '';
@@ -84,6 +84,22 @@ biblioSettings: FormGroup;
     });
   }
 
+  async onSubmit() {
+    if (this.biblioSettings.valid && this.contenidoSeleccionado) {
+      const bblData = this.biblioSettings.value;
+
+      try {
+        const { data, error } = await this.supabaseService.addBiblioteca({
+
+        });
+      }
+     catch (error) {
+      console.error('Error al insertar la multimedia en la biblioteca:', error);
+      alert('Error al insertar la multimedia en la biblioteca. Por favor, inténtalo de nuevo más tarde.');
+    }
+  }
 
 
+
+}
 }

@@ -342,4 +342,19 @@ export class SupabaseService {
             .order('nombre', { ascending: true })
         );
     }
+
+
+    //Insertar en la biblioteca
+    async addBiblioteca(bibliotecaData: any) {
+        const { data, error } = await this.supabaseClient
+            .from('biblioteca')
+            .insert([{
+                
+            }])
+            .select()
+            .single();
+
+        if (error) throw error;
+        return data;
+    }
 }
