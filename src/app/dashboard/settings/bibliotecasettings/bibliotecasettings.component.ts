@@ -33,7 +33,7 @@ export class BibliotecasettingsComponent implements OnInit {
       estado: [''],
       clasificacion: [''],
       comentario: [''],
-      agregado: [new Date(), Validators.required],
+      agregado: [],
       finalizado: [new Date(), Validators.required],
     });
   }
@@ -93,7 +93,7 @@ export class BibliotecasettingsComponent implements OnInit {
             usuario_id: this.id,
             tipo: bblData.tipo,
             estado: bblData.estado,
-            calificacion: bblData.calificacion ? Number(bblData.calificacion) : null,
+            clasificacion: bblData.clasificacion ? Number(bblData.clasificacion) : null,
             comentario: bblData.comentario || null,
             agregado_en: bblData.agregado ? new Date(bblData.agregado) : null,
             finalizado_en: bblData.finalizado ? new Date(bblData.finalizado) : null
