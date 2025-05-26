@@ -11,7 +11,7 @@ import { SupabaseService } from '../../shared/service/supabase/data/supabase.ser
   styleUrl: './mibiblioteca.component.css'
 })
 export class MibibliotecaComponent implements OnInit {
-  tabs = ['Libros', 'Películas', 'Series', 'Juegos'];
+  tabs = ['Libros', 'Películas', 'Series', 'Videojuegos'];
   activeTab = this.tabs[0];
   conTitulo: string | null = null;
   conImagen: string | null = null;
@@ -75,4 +75,46 @@ export class MibibliotecaComponent implements OnInit {
     }
 
   }
+  contenidos: any[] = [];
+
+async cargarTodaBibliotecaDelUsuario(usuarioId: string) {
+  const { data, error } = await this.supabase.supabaseClient
+    .from('mi_biblioteca_contenido')
+    .select(`
+      *,
+      mi_biblioteca (
+        id,
+        estado,
+        calificacion,
+        agregado_en,
+        finalizado_en,
+        usuario_id
+      ),
+      contenidos (
+        titulo,
+        imagen_url,
+        tipo
+      )
+    `)
+  ;
+
+  if (error) {
+    console.error('Error al cargar toda la biblioteca:', error);
+    return;
+  }
+  this.contenidos = data || [];
+}
+
+// Método auxiliar para filtrar por tipo (pestaña)
+getContenidosPorTipo(tipoTab: string) {
+  const map: any = {
+    'Libros': 'libro',
+    'Películas': 'pelicula',
+    'Series': 'serie',
+    'Videojuegos': 'videojuego'
+  };
+  const tipoDb = map[tipoTab] || '';
+  return this.contenidos.filter(item => item.contenidos && item.contenidos.tipo === tipoDb);
+}
+
 }

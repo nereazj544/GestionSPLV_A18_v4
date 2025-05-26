@@ -13,50 +13,19 @@
 
 <!-- TODO: Contenido -->
 <section class="content-section">
-  <div *ngIf="activeTab === 'Libros'">
-
+  <div *ngFor="let item of getContenidosPorTipo(activeTab)">
     <div class="media-item">
-      <img [src]="conImagen" [alt]="conTitulo" class="media-image">
+      <img [src]="item.contenidos.imagen_url" [alt]="item.contenidos.titulo" class="media-image">
       <div class="media-info">
-        <h3>{{conTitulo}}</h3>
-        <p>Valoracion: {{bibliotecaValoracion}}
-        
-        </p>
-        <p>Estado: {{bibliotecaEstado}}</p>
-        <p>FECHAS</p>
-        <p>Fecha de inicio: {{bibliotecaAgregadoEn}}</p>
-        <p>Fecha de finalización: {{bibliotecaFinalizadoEn}}</p>
+        <h3>{{item.contenidos.titulo}}</h3>
+        <p>Valoración: {{item.calificacion}}</p>
+        <p>Estado: {{item.estado}}</p>
+        <p>Fecha de inicio: {{item.agregado_en | date:'short'}}</p>
+        <p>Fecha de finalización: {{item.finalizado_en | date:'short'}}</p>
       </div>
     </div>
   </div>
-
-  <div *ngIf="activeTab === 'Peliculas'">
-    <div class="media-item">
-      <!-- <img [src]="movie.imageUrl" [alt]="movie.title" class="media-image"> -->
-      <div class="media-info">
-        <!-- <h3>{{movie.title}}</h3> -->
-        <!-- <p>Estado: {{movie.status}}</p> -->
-      </div>
-    </div>
-  </div>
-
-  <div *ngIf="activeTab === 'Series'">
-    <div class="media-item">
-      <!-- <img [src]="series.imageUrl" [alt]="series.title" class="media-image"> -->
-      <div class="media-info">
-        <!-- <h3>{{series.title}}</h3> -->
-        <!-- <p>Estado: {{series.status}}</p> -->
-      </div>
-    </div>
-  </div>
-
-  <div *ngIf="activeTab === 'Videojuegos'">
-    <div class="media-item">
-      <!-- <img [src]="game.imageUrl" [alt]="game.title" class="media-image"> -->
-      <div class="media-info">
-        <!-- <h3>{{game.title}}</h3> -->
-        <!-- <p>Estado: {{game.status}}</p> -->
-      </div>
-    </div>
+  <div *ngIf="getContenidosPorTipo(activeTab).length === 0">
+    <p>No hay contenido en esta categoría</p>
   </div>
 </section>

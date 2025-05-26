@@ -13,12 +13,9 @@ import { ShowService } from '../../../shared/service/supabase/show.service';
 })
 export class BibliotecasettingsComponent implements OnInit {
   biblioSettings: FormGroup;
-
-
   id = '';
   username = '';
   imagen_perfil = '';
-
   todosLosContenidos: any[] = [];
   resultadosBusqueda: any[] = [];
   contenidoSeleccionado: any = null;
@@ -30,16 +27,18 @@ export class BibliotecasettingsComponent implements OnInit {
   ) {
     this.biblioSettings = this.fb.group({
       tipo: ['', Validators.required],
-      estado: [''],
+      estado: ['', Validators.required],
       calificacion: [''],
       comentario: [''],
-      agregado: [],
-      finalizado: [new Date(), Validators.required],
+      agregado_fecha: [''],
+      agregado_hora: [''],
+      finalizado_fecha: [''],
+      finalizado_hora: [''],
     });
   }
 
   async ngOnInit() {
-    await this.loadUserProfile(); // Cargar el perfil del usuario
+    await this.loadUserProfile();
     this.supabaseService.getAllMultimedia().subscribe({
       next: ({ data }) => {
         this.todosLosContenidos = data || [];
@@ -50,7 +49,7 @@ export class BibliotecasettingsComponent implements OnInit {
     });
   }
 
-  //Cargar el perfil del usuario, para mostrar su imagen y nombre
+  // Cargar el perfil del usuario, para mostrar su imagen y nombre
   async loadUserProfile() {
     const userId = await this.supabaseService.getCurrentUserId();
     if (!userId) {
@@ -68,7 +67,6 @@ export class BibliotecasettingsComponent implements OnInit {
   }
 
   // Buscar contenido por título
-
   buscarContenido(event: Event): void {
     const input = event.target as HTMLInputElement;
     const valor = input?.value || '';
@@ -92,32 +90,43 @@ export class BibliotecasettingsComponent implements OnInit {
   async onSubmit() {
     if (this.biblioSettings.valid && this.contenidoSeleccionado) {
       const bblData = this.biblioSettings.value;
+
+      // Armar fecha-hora en ISO SOLO si ambos existen
+      const agregado_en = (bblData.agregado_fecha && bblData.agregado_hora)
+        ? new Date(`${bblData.agregado_fecha}T${bblData.agregado_hora}`).toISOString()
+        : null;
+      const finalizado_en = (bblData.finalizado_fecha && bblData.finalizado_hora)
+        ? new Date(`${bblData.finalizado_fecha}T${bblData.finalizado_hora}`).toISOString()
+        : null;
+
+      // Si "Pendiente", no mandar calificacion ni fechas
+      let insertData: any = {
+        usuario_id: this.id,
+        tipo: bblData.tipo,
+        estado: bblData.estado,
+        comentario: bblData.comentario || null,
+      };
+
+      if (bblData.estado === 'Completado') {
+        insertData.calificacion = bblData.calificacion ? Number(bblData.calificacion) : null;
+        insertData.agregado_en = agregado_en;
+        insertData.finalizado_en = finalizado_en;
+      }
+
       try {
-        // Insertar en mi_biblioteca
         const { data, error } = await this.supabaseService.supabaseClient
           .from('mi_biblioteca')
-          .insert([{
-            usuario_id: this.id,
-            tipo: bblData.tipo,
-            estado: bblData.estado,
-            calificacion: bblData.calificacion,
-            comentario: bblData.comentario || null,
-            agregado_en: bblData.agregado || null,
-            finalizado_en: bblData.finalizado || null
-          }])
+          .insert([insertData])
           .select()
           .single();
-
         if (error) throw error;
-        // Inserta en mi_biblioteca_contenido la relación con el contenido elegido
+
+        // Guardar relación con contenido
         const idBiblioteca = data.id;
         const contenido_id = this.contenidoSeleccionado.id;
-        const rel = await this.supabaseService.supabaseClient
+        await this.supabaseService.supabaseClient
           .from('mi_biblioteca_contenido')
-          .insert([{
-            mi_biblioteca_id: idBiblioteca,
-            contenido_id: contenido_id
-          }]);
+          .insert([{ mi_biblioteca_id: idBiblioteca, contenido_id }]);
 
         alert('¡Guardado en tu biblioteca!');
         this.biblioSettings.reset();
