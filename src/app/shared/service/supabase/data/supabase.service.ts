@@ -84,6 +84,8 @@ export class SupabaseService {
                 tipo: biblioDATA.tipo,
                 empezado: biblioDATA.agregado,
                 terminado: biblioDATA.finalizado,
+                clasificacion: biblioDATA.clasificacion,
+                estado: biblioDATA.estado,
                 comentario: biblioDATA.comentario
             }])
             .select();
