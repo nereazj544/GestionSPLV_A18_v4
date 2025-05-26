@@ -18,10 +18,13 @@
       <img [src]="conImagen" [alt]="conTitulo" class="media-image">
       <div class="media-info">
         <h3>{{conTitulo}}</h3>
-        <p>Valoracion:
-          <span *ngFor="let star of ' '.repeat(bibliotecaCalificacion || 0).split('')" class="star">★</span>
+        <p>Valoracion: {{bibliotecaValoracion}}
+        
         </p>
         <p>Estado: {{bibliotecaEstado}}</p>
+        <p>FECHAS</p>
+        <p>Fecha de inicio: {{bibliotecaAgregadoEn}}</p>
+        <p>Fecha de finalización: {{bibliotecaFinalizadoEn}}</p>
       </div>
     </div>
   </div>

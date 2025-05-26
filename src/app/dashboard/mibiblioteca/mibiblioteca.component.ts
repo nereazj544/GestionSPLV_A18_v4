@@ -13,12 +13,13 @@ import { SupabaseService } from '../../shared/service/supabase/data/supabase.ser
 export class MibibliotecaComponent implements OnInit {
   tabs = ['Libros', 'Películas', 'Series', 'Juegos'];
   activeTab = this.tabs[0];
-  conTitulo: any;
-  conImagen: any;
-  bibliotecaEstado: any;
-  bibliotecaCalificacion: any;
-  bibliotecaAgregadoEn: any;
-  bibliotecaFinalizadoEn: any;
+  conTitulo: string | null = null;
+  conImagen: string | null = null;
+  bibliotecaEstado: string | null = null;
+  bibliotecaCalificacion: string | null = null;
+  bibliotecaAgregadoEn: string | null = null;
+  bibliotecaFinalizadoEn: string | null = null;
+  bibliotecaValoracion: number | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -66,6 +67,7 @@ export class MibibliotecaComponent implements OnInit {
 
       //datos biblioteca
       this.bibliotecaEstado = b.estado;
+      this.bibliotecaValoracion = b.valoracion;
       this.bibliotecaCalificacion = b.calificacion;
       this.bibliotecaAgregadoEn = b.agregado_en;
       this.bibliotecaFinalizadoEn = b.finalizado_en;
