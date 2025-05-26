@@ -9,6 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './mibiblioteca.component.css'
 })
 export class MibibliotecaComponent {
-tabs =['Libros', 'Películas', 'Series', 'Juegos'];
-activeTab = this.tabs[0];
+  tabs = ['Libros', 'Películas', 'Series', 'Juegos'];
+  activeTab = this.tabs[0];
+
+
+
 }
