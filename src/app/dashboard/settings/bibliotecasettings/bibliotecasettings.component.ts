@@ -102,7 +102,7 @@ export class BibliotecasettingsComponent implements OnInit {
             estado: bblData.estado,
             calificacion: bblData.calificacion,
             comentario: bblData.comentario || null,
-            agregado_en: bblData.agregado ? new Date(bblData.agregado) : null,
+            agregado_en: bblData.agregado || null,
             finalizado_en: bblData.finalizado || null
           }])
           .select()

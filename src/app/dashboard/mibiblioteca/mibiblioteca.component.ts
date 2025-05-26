@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SupabaseService } from '../../shared/service/supabase/data/supabase.service';
 
 @Component({
   selector: 'app-mibiblioteca',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './mibiblioteca.component.html',
   styleUrl: './mibiblioteca.component.css'
 })
