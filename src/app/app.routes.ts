@@ -32,7 +32,7 @@ export const routes: Routes = [
     { path: 'home', component: HOMEComponent },
     { path: 'novedades', component: NovedadesComponent },
     { path: 'multimedia', component: MultimediaComponent },
-    { path: 'mibiblioteca', component: MibibliotecaComponent },
+    { path: 'mibiblioteca/:role/:username', component: MibibliotecaComponent },
 
     // TODO: RUTAS DE AUTENTICACION
     { path: 'login', component: AuthLoginComponent },
