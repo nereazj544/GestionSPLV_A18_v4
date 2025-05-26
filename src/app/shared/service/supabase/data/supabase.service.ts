@@ -75,18 +75,17 @@ export class SupabaseService {
 
 
     //insert blog
-    async insertBlog(biblioDATA: any) {
+    async insertBlog(blogData: any) {
         const { data, error } = await this.supabaseClient
-            .from('mi_biblioteca')
+            .from('blogs')
             .insert([{
-                autor_id: biblioDATA.autor_id,
-                contenido: biblioDATA.contenido,
-                tipo: biblioDATA.tipo,
-                empezado: biblioDATA.agregado,
-                terminado: biblioDATA.finalizado,
-                clasificacion: biblioDATA.calificacion,
-                estado: biblioDATA.estado,
-                comentario: biblioDATA.comentario
+                autor_id: blogData.autor_id,
+                titulo: blogData.titulo,
+                contenido: blogData.contenido,
+                tipo: blogData.tipo,
+                permite_comentarios: blogData.comentarios,
+                descripcion: blogData.descripcion,
+                creado_en: blogData.creado_en
             }])
             .select();
 
@@ -351,29 +350,14 @@ export class SupabaseService {
             .from('biblioteca')
             .insert([{
                 tipo: bibliotecaData.tipo,
-                estado: bibliotecaData.estado,
-                calificacion: bibliotecaData.calificacion ?? null, // por si viene vacío
-                comentario: bibliotecaData.comentario ?? null      // por si viene vacío
+      estado: bibliotecaData.estado,
+      calificacion: bibliotecaData.calificacion ?? null, // por si viene vacío
+      comentario: bibliotecaData.comentario ?? null      // por si viene vacío
             }])
             .select()
             .single();
 
         if (error) throw error;
-
-        if(bibliotecaData.mi_biblioteca_contenido && Array.isArray(bibliotecaData.mi_biblioteca_contenido)) {
-            for(const contenidoId of bibliotecaData.mi_biblioteca_contenido)
-            {
-                const{error: contenidoError} = await this.supabaseClient
-                .from('mi_biblioteca_contenido')
-                .insert([{
-                    contenido_id: contenidoId,
-                    biblioteca_id: data.id
-                }]);
-
-                if (contenidoError) throw contenidoError;
-            }
-        }
-
         return data;
     }
 }
