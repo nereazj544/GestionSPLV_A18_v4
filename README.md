@@ -82,6 +82,9 @@ npm install -g @angular/cli@18
 ```sh
 npm install @supabase/supabase-js
 ```
+```sh
+npm install @angular/material
+```
 
 
 
@@ -115,6 +118,8 @@ npm start
 # ⚠️ Errores
 
 Si sale este error: ``_An unhandled exception occurred: EBUSY: resource busy or locked, rmdir 'node_modules'._``
+<br>
+<br>
 Para solucionarlo, hay que eliminar la carpeta `.angular` y despues ejecutar el siguiente comando:
 
 ```sh
