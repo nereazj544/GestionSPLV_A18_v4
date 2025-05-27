@@ -47,7 +47,6 @@ La aplicación está desarrollada en **Angular v18** y **Typescript**, y utiliza
 ## Captura de pantalla de la aplicación
 ![paginadeInicio](image.png)
 
-
 <br>
 
 # 💻 Lista de comandos
@@ -130,7 +129,7 @@ Para solucionarlo, hay que eliminar la carpeta `.angular` y despues ejecutar el 
 npm start
 ```
 <br>
----
+
 
 
 [typescript-url]: https://www.typescriptlang.org/
