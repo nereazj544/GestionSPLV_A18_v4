@@ -44,7 +44,7 @@ Donde se gestionan los datos multimedia de los usuarios que se registran en la a
 La aplicación está desarrollada en **Angular v18** y **Typescript**, y utiliza **Supabase** como base de datos.
 
 
-## Capturas de pantalla de la aplicación
+## Captura de pantalla de la aplicación
 ![paginadeInicio](image.png)
 
 
