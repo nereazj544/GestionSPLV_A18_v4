@@ -20,7 +20,7 @@
         </button>
     </div>
 
-    <!-- todo LIBROS -->
+    <!-- todo APIs -->
     <div *ngIf="currentFilter === 'Libros'">
 
         <div class="releases-carousel">
@@ -47,7 +47,7 @@
     </div>
     <div *ngIf="currentFilter == 'Peliculas'">
 
-        <div class="releases-carousel" >
+        <div class="releases-carousel">
             <div class="carousel-items">
                 <div class="release-item" *ngFor="let movies of latestMovies">
                     <div class="release-card">
@@ -59,7 +59,7 @@
                             <p class="release-platform">
                                 {{movies.original_language | uppercase}}
                             </p>
-                            
+
                         </div>
                     </div>
 
@@ -68,48 +68,71 @@
 
         </div>
 
-        <!-- TODO: CIERRE DEL CALENDAR -->
     </div>
 
 
-<div class="separdadordiv"></div>
+    <div *ngIf="currentFilter == 'Series'">
+        <p>ESTO ES LO QUE SE EMITE ACTUALMENTE EN LA TELEVISION</p>
+        <div class="releases-carousel">
+            <div class="carousel-items">
+                <div class="release-item" *ngFor="let series of latestSeries">
+                    <div class="release-card">
+                        <img [src]="'https://image.tmdb.org/t/p/w500' + series.poster_path" alt=""
+                            class="release-image">
+                        <div class="release-info">
+                            <h3 class="release-title">{{series.name}}</h3>
+                            <p class="release-date">{{series.first_air_date | date:'MMM d, yyyy':'':'es'}}</p>
+                            <p class="release-platform">
+                                {{series.original_language | uppercase}}
+                            </p>
 
-<div class="comu">
-    <h2>Dudas & Blog</h2>
+                        </div>
+                    </div>
 
-    <!-- TODO: DESPLEGABLE PARA FILTARA -->
-    <div class="filter">
-        Filtrar por:
-        <select (change)="onFilter($event)">
-            <option value="all">Todos</option>
-            <option value="blog">Blog</option>
-            <option value="duda">Duda</option>
-        </select>
-    </div>
-
-    <!-- TODO AÑADIR LOS BLOGS & DUDAS (ALMACENADOS EN LA BASE DE DATOS) -->
-    <div class="blogs">
-        <div class="no-blog" *ngIf="!blogs || blogs.length ==0">
-            <p>No hay blogs disponibles</p>
-        </div>
-
-        <div class="si-blog" *ngIf="blogs && blogs.length > 0">
-
-            <div class="container-blog" *ngFor="let item of filteredBlogs">
-                <p class="tituloblog">{{ item.titulo }}</p>
-                <p class="descripcion">{{ item.descripcion }}</p>
-
-                <p class="tag">Tag: #{{ item.tipo }}</p>
-                <p>{{ item.creado_en | date: 'short' }}</p>
-                <div class="auth-blog">
-                    <p>Autor: {{ item.profiles.username }} </p>
-                    <img [src]="item.profiles.imagen_perfil" alt="imagen del administrador" class="admin-image">
                 </div>
-                <button class="btn-view-btn"><a [routerLink]="['/dashboard/blogs/blogviews', item.id]">Ir al
-                        blog</a></button>
             </div>
+
         </div>
 
-    </div>
 
-</div>
+        <div class="separdadordiv"></div>
+
+        <div class="comu">
+            <h2>Dudas & Blog</h2>
+
+            <!-- TODO: DESPLEGABLE PARA FILTARA -->
+            <div class="filter">
+                Filtrar por:
+                <select (change)="onFilter($event)">
+                    <option value="all">Todos</option>
+                    <option value="blog">Blog</option>
+                    <option value="duda">Duda</option>
+                </select>
+            </div>
+
+            <!-- TODO AÑADIR LOS BLOGS & DUDAS (ALMACENADOS EN LA BASE DE DATOS) -->
+            <div class="blogs">
+                <div class="no-blog" *ngIf="!blogs || blogs.length ==0">
+                    <p>No hay blogs disponibles</p>
+                </div>
+
+                <div class="si-blog" *ngIf="blogs && blogs.length > 0">
+
+                    <div class="container-blog" *ngFor="let item of filteredBlogs">
+                        <p class="tituloblog">{{ item.titulo }}</p>
+                        <p class="descripcion">{{ item.descripcion }}</p>
+
+                        <p class="tag">Tag: #{{ item.tipo }}</p>
+                        <p>{{ item.creado_en | date: 'short' }}</p>
+                        <div class="auth-blog">
+                            <p>Autor: {{ item.profiles.username }} </p>
+                            <img [src]="item.profiles.imagen_perfil" alt="imagen del administrador" class="admin-image">
+                        </div>
+                        <button class="btn-view-btn"><a [routerLink]="['/dashboard/blogs/blogviews', item.id]">Ir al
+                                blog</a></button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>

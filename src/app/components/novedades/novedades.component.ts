@@ -36,6 +36,7 @@ export class NovedadesComponent implements OnInit {
   selectedFilter: string = 'all';
   currentFilter: string = 'Libros';
   currentReleases: any[] = [];
+  _currentReleases: any = [];
 
   constructor(private releasesService: ReleasesService,
     private showService: ShowService,
@@ -79,7 +80,9 @@ export class NovedadesComponent implements OnInit {
         if (this.currentFilter === 'Libros') {
           this.currentReleases = await this.releasesService.searchBooks(this.searchText);
         }
-
+        if (this.currentFilter === 'Peliculas') {
+          this._currentReleases = await this.movieService.searchMovies(this.searchText);
+        }
       } catch (error) {
         console.error('Error en la búsqueda:', error);
       }
