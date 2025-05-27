@@ -14,8 +14,9 @@
 4. [💻 Lista de comandos](#-ˏˋ--lista-de-comandos-ˊˎ-)
 3. [⚙️ Instalación](#️-instalación)
     - [Prerequisitos](#prerequisitos)
-5.  
-      
+5.  [⚠️ Errores](#-errores)
+
+
 </details>
 
 <br>
@@ -29,8 +30,6 @@
 [![Notion][notion-bage]][notion-url]
 [![GitHub][github-bage]][github-url]
 [![Power Point][powerpoint-bage]][powerpoint-url]
-
-
 
 <br>
 
@@ -114,6 +113,7 @@ npm start
 
 
 
+<br>
 
 # ⚠️ Errores
 
