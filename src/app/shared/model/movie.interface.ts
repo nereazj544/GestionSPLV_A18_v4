@@ -7,6 +7,7 @@ export interface Movie {
     poster_path: string;
     backdrop_path: string;
     adult: boolean;
+    without_genres: string[];
 }
 
 export interface MovieResponse {

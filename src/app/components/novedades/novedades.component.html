@@ -21,53 +21,59 @@
     </div>
 
     <!-- todo LIBROS -->
-     <div *ngIf="currentFilter === 'Libros'">
+    <div *ngIf="currentFilter === 'Libros'">
 
-         <div class="releases-carousel">
-             <div class="carousel-items">
-                 <div class="release-item" *ngFor="let release of currentReleases">
-                     <div class="release-card">
-                         <img [src]="release.imageUrl" [alt]="release.title" class="release-image">
-                         <div class="release-info">
-                             <h3 class="release-title">{{ release.title }}</h3>
-                             <p class="release-date">
-                                 {{ release.releaseDate | date:'MMM d, yyyy':'':'es' }}
-                        </p>
-                        <p *ngIf="release.authors" class="release-authors">
-                            Por {{ release.authors.join(', ') }}
-                        </p>
-                        <p *ngIf="release.platform" class="release-platform">
-                            {{ release.platform }}
-                        </p>
+        <div class="releases-carousel">
+            <div class="carousel-items">
+                <div class="release-item" *ngFor="let release of currentReleases">
+                    <div class="release-card">
+                        <img [src]="release.imageUrl" [alt]="release.title" class="release-image">
+                        <div class="release-info">
+                            <h3 class="release-title">{{ release.title }}</h3>
+                            <p class="release-date">
+                                {{ release.releaseDate | date:'MMM d, yyyy':'':'es' }}
+                            </p>
+                            <p *ngIf="release.authors" class="release-authors">
+                                Por {{ release.authors.join(', ') }}
+                            </p>
+                            <p *ngIf="release.platform" class="release-platform">
+                                {{ release.platform }}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>
         </div>
     </div>
-<div class="" *ngIf="currentFilter == 'Peliculas'">
+    <div *ngIf="currentFilter == 'Peliculas'">
 
-    <div class="releases-carousel">
-        <div class="carousel-items">
-            <div class="release-item">
-                <div class="release-card">
-                    <img src="" alt="" class="release-image">
-                    <div class="release-info">
-                        <h3 class="release-title">Título del lanzamiento</h3>
-                        <p class="release-date">Fecha de lanzamiento</p>
-                        <p class="release-authors">Por Autor 1, Autor 2</p>
-                        <p class="release-platform">Plataforma</p>
+        <div class="releases-carousel" >
+            <div class="carousel-items">
+                <div class="release-item" *ngFor="let movies of latestMovies">
+                    <div class="release-card">
+                        <img [src]="'https://image.tmdb.org/t/p/w500' + movies.poster_path" alt=""
+                            class="release-image">
+                        <div class="release-info">
+                            <h3 class="release-title">{{movies.title}}</h3>
+                            <p class="release-date">{{movies.release_date | date:'MMM d, yyyy':'':'es'}}</p>
+                            <p class="release-platform">
+                                {{movies.original_language | uppercase}}
+                            </p>
+                            
+                        </div>
                     </div>
+
                 </div>
-                
             </div>
+
         </div>
-        
+
+        <!-- TODO: CIERRE DEL CALENDAR -->
     </div>
-</div>
-    
-    <div class="separdadordiv"></div>
-    
+
+
+<div class="separdadordiv"></div>
+
 <div class="comu">
     <h2>Dudas & Blog</h2>
 
@@ -96,10 +102,11 @@
                 <p class="tag">Tag: #{{ item.tipo }}</p>
                 <p>{{ item.creado_en | date: 'short' }}</p>
                 <div class="auth-blog">
-                    <p>Autor:  {{ item.profiles.username }} </p>
+                    <p>Autor: {{ item.profiles.username }} </p>
                     <img [src]="item.profiles.imagen_perfil" alt="imagen del administrador" class="admin-image">
                 </div>
-                <button class="btn-view-btn"><a [routerLink]="['/dashboard/blogs/blogviews', item.id]">Ir al blog</a></button>
+                <button class="btn-view-btn"><a [routerLink]="['/dashboard/blogs/blogviews', item.id]">Ir al
+                        blog</a></button>
             </div>
         </div>
 

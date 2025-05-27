@@ -79,7 +79,7 @@ export class NovedadesComponent implements OnInit {
         if (this.currentFilter === 'Libros') {
           this.currentReleases = await this.releasesService.searchBooks(this.searchText);
         }
-        
+
       } catch (error) {
         console.error('Error en la búsqueda:', error);
       }
@@ -98,7 +98,7 @@ export class NovedadesComponent implements OnInit {
   pageSize = 10;
   latestMovies: Movie[] = [];
   latestSeries: any[] = [];
-loadMovie(): void {
+  loadMovie(): void {
     this.loading = true;
     const pageNumber = this.currentMovies + 1;
 
@@ -150,7 +150,7 @@ loadMovie(): void {
       next: (response) => {
         this.latestMovies = response.results;
         this.totalItems = response.total_results;
-        
+
         // this.loading = false;
       },
       error: (error) => {
