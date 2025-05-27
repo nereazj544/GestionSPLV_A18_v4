@@ -75,6 +75,13 @@ export class NovedadesComponent implements OnInit {
     }
   }
 
+  //TODO API - PELICULAS & SERIES
+  
+
+
+
+
+  //TODO API -  LIBROS
 
 
   private async updateReleases() {

@@ -21,15 +21,17 @@
     </div>
 
     <!-- todo LIBROS -->
-    <div class="releases-carousel">
-        <div class="carousel-items">
-            <div class="release-item" *ngFor="let release of currentReleases">
-                <div class="release-card">
-                    <img [src]="release.imageUrl" [alt]="release.title" class="release-image">
-                    <div class="release-info">
-                        <h3 class="release-title">{{ release.title }}</h3>
-                        <p class="release-date">
-                            {{ release.releaseDate | date:'MMM d, yyyy':'':'es' }}
+     <div *ngIf="currentFilter === 'Libros'">
+
+         <div class="releases-carousel">
+             <div class="carousel-items">
+                 <div class="release-item" *ngFor="let release of currentReleases">
+                     <div class="release-card">
+                         <img [src]="release.imageUrl" [alt]="release.title" class="release-image">
+                         <div class="release-info">
+                             <h3 class="release-title">{{ release.title }}</h3>
+                             <p class="release-date">
+                                 {{ release.releaseDate | date:'MMM d, yyyy':'':'es' }}
                         </p>
                         <p *ngIf="release.authors" class="release-authors">
                             Por {{ release.authors.join(', ') }}
@@ -40,13 +42,32 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
     </div>
+<div class="" *ngIf="currentFilter == 'Peliculas'">
 
+    <div class="releases-carousel">
+        <div class="carousel-items">
+            <div class="release-item">
+                <div class="release-card">
+                    <img src="" alt="" class="release-image">
+                    <div class="release-info">
+                        <h3 class="release-title">Título del lanzamiento</h3>
+                        <p class="release-date">Fecha de lanzamiento</p>
+                        <p class="release-authors">Por Autor 1, Autor 2</p>
+                        <p class="release-platform">Plataforma</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
 </div>
-
-<div class="separdadordiv"></div>
-
+    
+    <div class="separdadordiv"></div>
+    
 <div class="comu">
     <h2>Dudas & Blog</h2>
 
