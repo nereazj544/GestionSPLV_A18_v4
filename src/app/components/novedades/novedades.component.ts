@@ -5,12 +5,20 @@ import { RouterLink } from '@angular/router';
 import { ShowService } from '../../shared/service/supabase/show.service';
 import { firstValueFrom } from 'rxjs';
 import { SupabaseService } from '../../shared/service/supabase/data/supabase.service';
+import { Movie } from '../../shared/model/movie.interface';
+import { TmdbService } from '../../shared/service/APIs/tmdb/tmdb.service';
+import {
+  MatPaginator,
+  MatPaginatorModule,
+  PageEvent,
+} from '@angular/material/paginator';
+
 @Component({
   selector: 'app-novedades',
   standalone: true,
   templateUrl: './novedades.component.html',
   styleUrls: ['./novedades.component.css'],
-  imports: [CommonModule, RouterLink]
+  imports: [CommonModule, RouterLink, MatPaginatorModule]
 })
 export class NovedadesComponent implements OnInit {
   role: string | null = null;
@@ -31,12 +39,17 @@ export class NovedadesComponent implements OnInit {
 
   constructor(private releasesService: ReleasesService,
     private showService: ShowService,
-    private supabaseService: SupabaseService
+    private supabaseService: SupabaseService,
+    private movieService: TmdbService
   ) { }
 
   ngOnInit(): void {
     this.updateReleases();
     this.cargarBlog(); //Cargar blogs al iniciar
+    this.loadMovie();
+    this.setupLazyLoading();
+    this.loadLatestMovies();
+    this.loadLatestSeries();
   }
 
 
@@ -76,10 +89,95 @@ export class NovedadesComponent implements OnInit {
   }
 
   //TODO API - PELICULAS & SERIES
-  
+
+  loading = false;
+  currentMovies = 1;
+  movies: Movie[] = [];
+  totalItems = 0;
+  isInViewport = false;
+  pageSize = 10;
+  latestMovies: Movie[] = [];
+  latestSeries: any[] = [];
+loadMovie(): void {
+    this.loading = true;
+    const pageNumber = this.currentMovies + 1;
+
+    this.movieService.getMovies(pageNumber).subscribe({
+      next: (response) => {
+        this.movies = response.results;
+        this.totalItems = response.total_results;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading movies', error);
+        this.loading = false;
+      },
+    });
+  }
+
+  setupLazyLoading() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.isInViewport = true;
+        }
+      });
+    }, options);
+
+    document.querySelectorAll('.movie-card').forEach((card) => {
+      observer.observe(card);
+    });
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.pageSize = event.pageSize;
+    this.currentMovies = event.pageIndex;
+    this.loadMovie();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  onScroll() {
+    this.loadMovie();
+  }
+  loadLatestMovies(): void {
+    this.loading = true;
+    this.movieService.getLatestMovies(this.currentMovies).subscribe({
+      next: (response) => {
+        this.latestMovies = response.results;
+        this.totalItems = response.total_results;
+        
+        // this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading new movies', error);
+        // this.loading = false;
+      }
+    });
+  }
+
+  loadLatestSeries(): void {
+    this.movieService.getLatestTvSeries(this.currentMovies).subscribe({
+      next: (response) => {
+        this.latestSeries = response.results;
+      },
+      error: (error) => {
+        console.error('Error loading new series', error);
+      }
+    });
+  }
 
 
 
+
+
+
+
+  //* =============================================================================
 
   //TODO API -  LIBROS
 

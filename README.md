@@ -42,7 +42,7 @@ Nombre del proyecto: **Gestion P.S.L.V** (_Gestion de Peliculas, Series, Libros 
 
 Donde se gestionan los datos multimedia de los usuarios que se registran en la aplicación.
 
-La aplicación está desarrollada en **Angular** y **Typescript**, y utiliza **Supabase** como base de datos.
+La aplicación está desarrollada en **Angular v18** y **Typescript**, y utiliza **Supabase** como base de datos.
 
 
 <br>
@@ -53,6 +53,7 @@ La aplicación está desarrollada en **Angular** y **Typescript**, y utiliza **S
 | :-- | :--------------- | :-------------------------------------------- |
 | ⚙️  | `npm install` | Instala las dependencias del proyecto. |
 | ⚙️  | `npm install @supabase/supabase-js` | Instala el cliente de Supabase. |
+| ⚙️  | `ng add @angular/material` | Instala Angular Material. |
 | ⚙️  | `npm start` o `ng serve` | Lanza un servidor de desarrollo local en  `localhost:4200`.  |
 
 
