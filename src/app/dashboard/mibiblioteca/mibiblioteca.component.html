@@ -20,8 +20,8 @@
         <h3>{{item.contenidos.titulo}}</h3>
         <p>Valoración: {{item.calificacion}}</p>
         <p>Estado: {{item.estado}}</p>
-        <p>Fecha de inicio: {{item.agregado_en | date:'short'}}</p>
-        <p>Fecha de finalización: {{item.finalizado_en | date:'short'}}</p>
+        <p *ngIf="item.agregado_en">Fecha de inicio: {{item.agregado_en | date:'short'}}</p>
+        <p *ngIf="item.finalizado_en">Fecha de finalización: {{item.finalizado_en | date:'short'}}</p>
       </div>
     </div>
   </div>
@@ -29,6 +29,3 @@
     <p>No hay contenido en esta categoría</p>
   </div>
 </section>
-
-
-
