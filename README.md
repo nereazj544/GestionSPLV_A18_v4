@@ -54,6 +54,7 @@ La aplicación está desarrollada en **Angular v18** y **Typescript**, y utiliza
 |     | Comando          | Acción                                        |
 | :-- | :--------------- | :-------------------------------------------- |
 | ⚙️  | `npm install` | Instala las dependencias del proyecto. |
+| ⚙️  | `npm install -g @angular/cli@18` | Instala Angular CLI-18 globalmente. |
 | ⚙️  | `npm install @supabase/supabase-js` | Instala el cliente de Supabase. |
 | ⚙️  | `ng add @angular/material` | Instala Angular Material. |
 | ⚙️  | `npm start` o `ng serve` | Lanza un servidor de desarrollo local en  `localhost:4200`.  |
